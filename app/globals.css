@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #F8F6F2;
+  --beige: #E8E1D8;
+  --taupe: #4A403A;
+  --brown-grey: #7A6F66;
+  --gold: #B8952A;
+  --rose: #D8B7A6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #F8F6F2;
+  color: #4A403A;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  color: #4A403A;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+p {
+  color: #7A6F66;
+  line-height: 1.8;
+}
+
+.gold-line {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #B8952A, transparent);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #C9A84C, #8B6914);
+  color: #F8F6F2;
+  padding: 14px 40px;
+  letter-spacing: 0.15em;
+  font-size: 11px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  box-shadow: 0 4px 20px rgba(184, 149, 42, 0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #8B6914, #C9A84C);
+  box-shadow: 0 6px 28px rgba(184, 149, 42, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border: 1px solid #B8952A;
+  color: #B8952A;
+  padding: 13px 40px;
+  letter-spacing: 0.15em;
+  font-size: 11px;
+  text-transform: uppercase;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.btn-outline:hover {
+  background-color: #B8952A;
+  color: #F8F6F2;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.9s ease forwards;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #F8F6F2; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#C9A84C, #8B6914); }
+
+::selection { background-color: #B8952A; color: #F8F6F2; }
