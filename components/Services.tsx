@@ -28,14 +28,25 @@ export default function Services() {
               className="group flex flex-col overflow-hidden bg-[#F8F6F2] border border-[#E8E1D8] hover:border-[#B8952A] transition-all duration-300 cursor-pointer"
               style={{ boxShadow: '0 2px 20px rgba(74,64,58,0.06)' }}
             >
-              {/* Poza */}
-              <div className="relative h-56 overflow-hidden">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                />
+              {/* Poza / Video */}
+              <div className="relative h-64 overflow-hidden">
+                {service.image.endsWith('.mp4') ? (
+                  <video
+                    src={service.image}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className={`w-full h-full object-cover ${service.imagePosition ?? 'object-center'} group-hover:scale-105 transition-transform duration-700`}
+                  />
+                ) : (
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className={`object-cover ${service.imagePosition ?? 'object-center'} group-hover:scale-105 transition-transform duration-700`}
+                  />
+                )}
                 <div className="absolute inset-0 bg-[#4A403A] opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
               </div>
 

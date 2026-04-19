@@ -32,15 +32,26 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* Hero serviciu */}
       <section className="pt-32 pb-20 px-6 bg-[#E8E1D8]">
-        {/* Poza hero */}
+        {/* Poza / Video hero */}
         <div className="relative h-72 md:h-96 w-full mb-12 overflow-hidden">
-          <Image
-            src={service.image}
-            alt={service.title}
-            fill
-            className="object-cover"
-            priority
-          />
+          {service.image.endsWith('.mp4') ? (
+            <video
+              src={service.image}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Image
+              src={service.image}
+              alt={service.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          )}
           <div className="absolute inset-0 bg-[#4A403A] opacity-40" />
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-5xl md:text-6xl text-[#F8F6F2] text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>

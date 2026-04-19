@@ -6,6 +6,7 @@ export interface Service {
   benefits: string[];
   slug: string;
   image: string;
+  imagePosition?: string;
 }
 
 export interface PriceItem {
@@ -28,7 +29,7 @@ export const services: Service[] = [
     description: 'Protocoale personalizate care combină tehnologii de ultimă generație cu ingrediente premium pentru rezultate vizibile și de durată.',
     benefits: ['Hidratare profundă', 'Reducerea imperfecțiunilor', 'Stimularea colagenului', 'Efect de luminozitate'],
     slug: 'protocoale-faciale',
-    image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop',
+    image: '/images/servicii/protocoale-faciale.jpg',
   },
   {
     id: 'epilare-definitiva',
@@ -46,7 +47,7 @@ export const services: Service[] = [
     description: 'Sistem avansat prin ultrasunet, cavitație, vacuum și radiofrecvență care acționează asupra țesutului adipos și calității pielii.',
     benefits: ['Reducerea grăsimii localizate', 'Diminuarea celulitei', 'Piele mai fermă', 'Remodelare vizibilă'],
     slug: 'remodelare-corporala',
-    image: 'https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=800&auto=format&fit=crop',
+    image: '/images/servicii/remodelare-corporala.webp',
   },
   {
     id: 'electrostimulare',
@@ -55,7 +56,7 @@ export const services: Service[] = [
     description: 'Tehnologie avansată care activează intens musculatura prin contracții profunde imposibil de obținut prin antrenament clasic.',
     benefits: ['Tonifiere și definire musculară', 'Reducerea flacidității', 'Recuperare post-partum', 'Îmbunătățirea circulației'],
     slug: 'electrostimulare',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop',
+    image: '/images/servicii/electrostimulare2.jpg',
   },
   {
     id: 'plasma-fusion',
@@ -64,7 +65,8 @@ export const services: Service[] = [
     description: 'Tehnologie non-invazivă cu plasmă pentru lifting, îndepărtarea imperfecțiunilor și regenerarea pielii cu rezultate de lungă durată.',
     benefits: ['Lifting pleoape și față', 'Eliminarea vergeturilor', 'Tratarea cicatricilor', 'Rezultate de lungă durată'],
     slug: 'plasma-fusion',
-    image: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&auto=format&fit=crop',
+    image: '/images/servicii/plasma-fusion2.jpg',
+    imagePosition: 'object-top',
   },
   {
     id: 'ipl',
@@ -73,7 +75,7 @@ export const services: Service[] = [
     description: 'Tehnologie avansată pentru uniformizarea pielii, reducerea petelor, roșeții și acneei, cu efect de rejuvenare și stimulare a colagenului.',
     benefits: ['Reducerea petelor pigmentare', 'Tratarea roșeții și cupeozei', 'Stimularea colagenului', 'Aplicabil pe față, gât, decolteu, mâini'],
     slug: 'ipl',
-    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&auto=format&fit=crop',
+    image: '/images/servicii/ipl3.jpg',
   },
   {
     id: 'laser-yag',
@@ -82,7 +84,7 @@ export const services: Service[] = [
     description: 'Tratamente laser avansate pentru rejuvenare, acnee, pigmentare și ștergere tatuaje. Rezultate precise cu timp de recuperare minim.',
     benefits: ['Carbon Laser Hollywood Peel', 'Tratament acnee activ', 'Estompare pete pigmentare', 'Ștergere tatuaje progresivă'],
     slug: 'laser-yag',
-    image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&auto=format&fit=crop',
+    image: '/images/servicii/laser-yag2.jpg',
   },
 ];
 

@@ -3,8 +3,21 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-[#F8F6F2] overflow-hidden">
-      {/* Fundal decorativ */}
-      <div className="absolute inset-0">
+
+      {/* MOBIL: poza ca fundal */}
+      <div className="absolute inset-0 md:hidden">
+        <Image
+          src="/images/roxana.jpg"
+          alt="Roxana Ica"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+        <div className="absolute inset-0 bg-[#F8F6F2] opacity-55" />
+      </div>
+
+      {/* DESKTOP: fundal decorativ */}
+      <div className="absolute inset-0 hidden md:block">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#E8E1D8] opacity-40" />
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-[#D8B7A6] opacity-10 blur-3xl" />
       </div>
@@ -20,7 +33,7 @@ export default function Hero() {
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl leading-tight text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl leading-tight text-[#1a1a1a] md:text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
             Roxana Ica<br />
             <span className="italic" style={{ background: 'linear-gradient(135deg, #C9A84C, #8B6914)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Aesthetic
@@ -29,12 +42,12 @@ export default function Hero() {
 
           <div className="gold-line" />
 
-          <p className="text-[#7A6F66] text-lg leading-relaxed max-w-md" style={{ fontFamily: 'var(--font-cormorant)', fontStyle: 'italic' }}>
+          <p className="text-[#2a2a2a] md:text-[#4A403A] text-xl md:text-2xl leading-relaxed max-w-md font-medium md:font-normal" style={{ fontFamily: 'var(--font-cormorant)', fontStyle: 'italic' }}>
             „Diferența Care Se Simte"
           </p>
 
-          <p className="text-[#7A6F66] leading-relaxed max-w-md text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            Tratamente estetice personalizate pentru fața și corpul tău, cu tehnologii de ultimă generație și rezultate reale.
+          <p className="text-[#2a2a2a] md:text-[#7A6F66] leading-relaxed max-w-md text-sm font-medium md:font-light" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+            Tratamente avansate, construite pe expertiză și înțelegerea profundă a pielii, susținute de tehnologii de ultimă generație, pentru rezultate vizibile și o piele care evoluează în timp.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
@@ -61,10 +74,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Imagine Roxana — umbră laterală stânga */}
-        <div className="relative flex justify-center md:justify-end">
+        {/* Imagine Roxana — doar pe desktop */}
+        <div className="relative justify-center md:justify-end hidden md:flex">
           <div
-            className="w-80 h-[480px] md:w-96 md:h-[560px] overflow-hidden relative"
+            className="w-80 h-[520px] md:w-96 md:h-[620px] overflow-hidden relative"
             style={{ boxShadow: '-16px 0 40px rgba(74, 64, 58, 0.2)' }}
           >
             <Image

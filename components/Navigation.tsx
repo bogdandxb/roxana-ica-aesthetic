@@ -19,15 +19,18 @@ export default function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled ? 'bg-[#F8F6F2]/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between pb-4">
 
         {/* Logo */}
-        <Link href="/" className="flex flex-col items-start leading-none">
+        <Link href="/" className="flex flex-col items-start leading-none gap-0.5">
           <span className="text-[#4A403A] tracking-[0.2em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Roxana Ica
           </span>
           <span className="text-[#C6A769] tracking-[0.3em] text-[10px] uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Aesthetic
+          </span>
+          <span className="text-[#7A6F66] tracking-[0.08em] text-[9px] hidden md:block mt-0.5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+            Trainer autorizat · Expert în tratamente avansate de estetică
           </span>
         </Link>
 
@@ -67,7 +70,7 @@ export default function Navigation() {
             )}
           </div>
 
-          {['Despre', 'Contact'].map(item => (
+          {['Despre', 'Recenzii', 'Contact'].map(item => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -83,7 +86,7 @@ export default function Navigation() {
             className="btn-gold text-[10px]"
             style={{ fontFamily: 'var(--font-montserrat)' }}
           >
-            Programare
+            Programează-te
           </a>
         </div>
 
@@ -104,6 +107,9 @@ export default function Navigation() {
         </button>
       </div>
 
+      {/* Separator fin gold */}
+      <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, #C6A769 30%, #C6A769 70%, transparent)', opacity: 0.4 }} />
+
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#F8F6F2] border-t border-[#E8E1D8] px-6 py-6 flex flex-col gap-4">
@@ -120,6 +126,7 @@ export default function Navigation() {
           ))}
           <div className="h-px bg-[#E8E1D8] my-1" />
           <a href="#despre" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Despre</a>
+          <a href="#recenzii" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Recenzii</a>
           <a href="#contact" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Contact</a>
           <a href="#contact" className="btn-gold text-center mt-2 text-[10px]" style={{ fontFamily: 'var(--font-montserrat)' }}>Programare</a>
         </div>
