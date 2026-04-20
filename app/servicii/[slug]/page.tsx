@@ -1,6 +1,7 @@
 import { services, pricesData } from '@/lib/services';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import BeforeAfterCarousel from '@/components/BeforeAfterCarousel';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -103,6 +104,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </section>
+
+      {/* Before & After */}
+      {(slug === 'protocoale-faciale' || slug === 'remodelare-corporala') && <BeforeAfterCarousel slug={slug} />}
 
       {/* Prețuri */}
       {prices && (
