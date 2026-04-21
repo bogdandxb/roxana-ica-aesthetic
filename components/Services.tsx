@@ -30,7 +30,17 @@ export default function Services() {
             >
               {/* Poza / Video */}
               <div className="relative h-64 overflow-hidden">
-                {service.image.endsWith('.mp4') ? (
+                {service.id === 'recuperare-terapie' ? (
+                  <div className="flex h-full">
+                    <div className="relative flex-1 overflow-hidden">
+                      <Image src="/images/servicii/tecar.jpg" alt="Terapie Tecar" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                    <div className="w-px bg-white/40 z-10" />
+                    <div className="relative flex-1 overflow-hidden">
+                      <Image src="/images/servicii/g5.jpg" alt="Masaj G5" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                  </div>
+                ) : service.image.endsWith('.mp4') ? (
                   <video
                     src={service.image}
                     autoPlay

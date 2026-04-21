@@ -78,7 +78,7 @@ export default function About() {
               </p>
             </blockquote>
             <div className="flex flex-wrap gap-6 mt-2">
-              {['Protocoale Faciale', 'Epilare Definitivă', 'Remodelare Corporală', 'Laser & IPL', 'Plasma Fusion'].map(spec => (
+              {['Protocoale Faciale', 'Epilare Definitivă', 'Remodelare Corporală', 'Laser & IPL', 'Plasma Fusion', 'Electrostimulare', 'Recuperare & Terapie'].map(spec => (
                 <span key={spec} className="text-[#7A6F66] text-xs tracking-wide border-b border-[#C6A769] pb-0.5" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   {spec}
                 </span>

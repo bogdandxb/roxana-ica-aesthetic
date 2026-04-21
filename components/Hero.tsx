@@ -62,7 +62,7 @@ export default function Hero() {
           {/* Stats */}
           <div className="flex gap-12 mt-4 pt-8 border-t border-[#E8E1D8] w-full">
             {[
-              { nr: '7+', label: 'Servicii premium' },
+              { nr: '8+', label: 'Servicii premium' },
               { nr: '100%', label: 'Personalizat' },
               { nr: 'Brașov', label: 'Dihamului 16A' },
             ].map(stat => (

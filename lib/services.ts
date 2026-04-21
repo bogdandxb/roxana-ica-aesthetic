@@ -34,9 +34,9 @@ export const services: Service[] = [
   {
     id: 'epilare-definitiva',
     title: 'Epilare Definitivă',
-    subtitle: 'Tehnologie cu 4 lungimi de undă',
-    description: 'Sistem avansat adaptat oricărui tip de piele și fir de păr. Reducere progresivă și vizibilă a pilozității, cu disconfort minim.',
-    benefits: ['Adaptat oricărui tip de piele', 'Rezultate vizibile de la prima ședință', 'Protocol personalizat', 'Siguranță ridicată'],
+    subtitle: 'Diodă Laser cu 4 lungimi de undă',
+    description: 'Tehnologie Diodă Laser cu 4 lungimi de undă, adaptată oricărui tip de piele și fir de păr. Reducere progresivă și vizibilă a pilozității, cu disconfort minim și siguranță maximă.',
+    benefits: ['Diodă Laser cu 4 lungimi de undă', 'Adaptat oricărui tip de piele', 'Rezultate vizibile de la prima ședință', 'Protocol personalizat'],
     slug: 'epilare-definitiva',
     image: '/images/servicii/epilare-definitiva.jpg',
   },
@@ -85,6 +85,16 @@ export const services: Service[] = [
     benefits: ['Carbon Laser Hollywood Peel', 'Tratament acnee activ', 'Estompare pete pigmentare', 'Ștergere tatuaje progresivă'],
     slug: 'laser-yag',
     image: '/images/servicii/laser-yag2.jpg',
+  },
+  {
+    id: 'recuperare-terapie',
+    title: 'Recuperare & Terapie Corporală',
+    subtitle: 'Vindecare profundă prin tehnologii avansate',
+    description: 'Combinație unică între Terapia Tecar cu frecvență de 448 kHz și Masajul Terapeutic cu Vibrații G5 — un protocol complet pentru recuperare, relaxare musculară și remodelare corporală.',
+    benefits: ['Recuperare musculară profundă', 'Reducerea durerilor cronice', 'Stimularea circulației și limfei', 'Tonifiere și remodelare corporală'],
+    slug: 'recuperare-terapie',
+    image: '/images/servicii/tecar.jpg',
+    imagePosition: 'object-center',
   },
 ];
 
@@ -213,6 +223,31 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       { name: 'Laser Skin Rejuvenation', price: '480 lei' },
       { name: 'Pigment Removal Laser', price: '480–550 lei' },
       { name: 'Tattoo Removal', price: 'de la 200 lei / zonă' },
+    ],
+  },
+  'recuperare-terapie': {
+    single: [
+      { name: 'Terapie Tecar – Ședință unică', price: '250 lei', duration: '45 min' },
+      { name: 'Masaj G5 – Ședință unică', price: '150 lei', duration: '30 min' },
+      { name: 'Protocol combinat Tecar + G5', price: '350 lei', duration: '60 min' },
+    ],
+    packages: [
+      {
+        name: 'Pachet Tecar 6 ședințe',
+        discount: '15% reducere',
+        items: [
+          { name: 'Total pachet', price: '1275 lei' },
+          { name: 'Per ședință', price: '212 lei' },
+        ],
+      },
+      {
+        name: 'Pachet G5 6 ședințe',
+        discount: '15% reducere',
+        items: [
+          { name: 'Total pachet', price: '765 lei' },
+          { name: 'Per ședință', price: '127 lei' },
+        ],
+      },
     ],
   },
 };
