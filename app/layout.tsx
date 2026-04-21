@@ -18,6 +18,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'SjwWYG47PlhZ0oF5nUg3Y64maET7pdlG9wDU-wjOKFg',
+  },
   title: "Roxana Ica Aesthetic Brașov | Diferența Care Se Simte",
   description: "Cabinet de estetică premium în Brașov, Str. Dihamului 16A. Epilare definitivă laser, protocoale faciale, remodelare corporală, Plasma Fusion, IPL, Laser Nd:YAG și Terapie Tecar. Programări pe WhatsApp: 0771 569 093.",
   keywords: ["estetică Brașov", "epilare definitivă Brașov", "remodelare corporală Brașov", "Plasma Fusion Brașov", "IPL Brașov", "Roxana Ica Aesthetic", "cabinet estetică Dihamului Brașov", "laser Brașov", "terapie tecar Brașov"],
