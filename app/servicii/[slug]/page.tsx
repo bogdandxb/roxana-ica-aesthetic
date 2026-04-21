@@ -105,7 +105,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               src={service.image}
               alt={service.title}
               fill
-              className="object-cover"
+              className={`object-cover ${service.imagePosition ?? 'object-center'}`}
               priority
             />
           )}
@@ -187,22 +187,29 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   {prices.single.map((item, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between py-4 border-b border-[#D8B7A6] last:border-0 group"
+                      className="flex flex-col py-5 border-b border-[#D8B7A6] last:border-0 gap-2"
                     >
-                      <div className="flex items-center gap-3">
-                        <span className="text-[#C6A769] text-xs">◇</span>
-                        <span className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-                          {item.name}
-                        </span>
-                        {item.duration && (
-                          <span className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                            · {item.duration}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#C6A769] text-xs">◇</span>
+                          <span className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                            {item.name}
                           </span>
-                        )}
+                          {item.duration && (
+                            <span className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                              · {item.duration}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-[#C6A769] font-medium flex-shrink-0 ml-4" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '18px' }}>
+                          {item.price}
+                        </span>
                       </div>
-                      <span className="text-[#C6A769] font-medium text-sm" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '18px' }}>
-                        {item.price}
-                      </span>
+                      {item.description && (
+                        <p className="text-[#7A6F66] text-xs leading-relaxed pl-5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                          {item.description}
+                        </p>
+                      )}
                     </div>
                   ))}
                 </div>

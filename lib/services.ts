@@ -13,6 +13,7 @@ export interface PriceItem {
   name: string;
   price: string;
   duration?: string;
+  description?: string;
 }
 
 export interface PricePackage {
@@ -101,37 +102,55 @@ export const services: Service[] = [
 export const pricesData: Record<string, { single?: PriceItem[]; packages?: PricePackage[] }> = {
   'protocoale-faciale': {
     single: [
-      { name: 'Skin Reset Hydration', price: '420 lei', duration: '50–70 min' },
-      { name: 'Acne Control Protocol', price: '390–480 lei', duration: '50–70 min' },
-      { name: 'Skin Tone Balance', price: '420 lei', duration: '50–70 min' },
-      { name: 'Bio Renewal Peels', price: '480 lei', duration: '50–70 min' },
-      { name: 'Carboxy Revital Therapy', price: '480 lei', duration: '50–70 min' },
-      { name: 'Facial Glow Ritual', price: '200 lei', duration: '50 min' },
-      { name: 'Advanced Microneedling', price: '660 lei', duration: '50–70 min' },
-      { name: 'Eye Revital Boost', price: '390 lei', duration: '50–70 min' },
-      { name: 'Neck Revital Boost', price: '420 lei', duration: '50–70 min' },
-      { name: 'Full Face Revital Boost', price: '1250 lei', duration: '50–70 min' },
-      { name: 'Back Deep Clean Protocol', price: '600–840 lei', duration: '50–70 min' },
-      { name: 'Body Microneedling + BioRePeel', price: '800 lei', duration: '50–70 min' },
-      { name: 'Hair Density Protocol', price: '420 lei', duration: '50–70 min' },
-      { name: 'BioRePeel Face Therapy', price: '480 lei', duration: '50–70 min' },
-      { name: 'Spongilla Bio Microneedling', price: '420 lei', duration: '50–70 min' },
+      { name: 'Skin Reset Hydration', price: '420 lei', duration: '50–70 min', description: 'O hidratare profundă care resetează echilibrul natural al pielii. Tratamentul restabilește nivelul optim de umiditate, lăsând tenul luminos, catifelat și revitalizat de la prima ședință.' },
+      { name: 'Acne Control Protocol', price: '390–480 lei', duration: '50–70 min', description: 'Protocol profesional dedicat tenului acneic, cu acțiune directă asupra cauzelor apariției imperfecțiunilor. Reduce inflamația, purifică porii și reglează secreția de sebum pentru un ten curat și echilibrat.' },
+      { name: 'Skin Tone Balance', price: '420 lei', duration: '50–70 min', description: 'Tratament specializat pentru uniformizarea tonului pielii. Estompează petele pigmentare, hiperpigmentația și discromatozele, redând feței un aspect uniform și natural strălucitor.' },
+      { name: 'Bio Renewal Peels', price: '480 lei', duration: '50–70 min', description: 'Exfoliere chimică bio-activă care stimulează reînnoirea celulară în profunzime. Textura pielii se rafinează vizibil, porii se micșorează, iar fața recapătă prospețimea și fermitatea tinereții.' },
+      { name: 'Carboxy Revital Therapy', price: '480 lei', duration: '50–70 min', description: 'Terapie avansată cu CO₂ care oxigenează țesuturile și stimulează microcirculația. Îmbunătățește elasticitatea pielii, reduce ridurile fine și conferă un efect de lifting natural și de durată.' },
+      { name: 'Facial Glow Ritual', price: '350 lei', duration: '50 min', description: 'Un ritual de înfrumusețare complet care iluminează și revitalizează tenul obosit. Pielea devine instantaneu luminoasă, catifelată și plină de viață — efectul perfect înainte de un eveniment special.' },
+      { name: 'Advanced Microneedling', price: '660 lei', duration: '50–70 min', description: 'Tehnica micro-needling de ultimă generație stimulează producția naturală de colagen și elastină. Reduce ridurile, cicatricile acneice și laxitatea cutanată, oferind un ten ferm, neted și vizibil întinerit.' },
+      { name: 'Eye Revital Boost', price: '390 lei', duration: '50–70 min', description: 'Tratament de recuperare intensivă dedicat zonei periorbitale. Diminuează cearcănele, pungile sub ochi și ridurile de expresie, redând priviri odihnite, tinere și expresive.' },
+      { name: 'Neck Revital Boost', price: '420 lei', duration: '50–70 min', description: 'Tratament intensiv dedicat zonei gâtului, una dintre primele zone care trădează vârsta. Stimulează colagenul, îmbunătățește fermitatea și elasticitatea pielii, reducând vizibil ridurile orizontale și laxitatea cutanată.' },
+      { name: 'Full Face Revital Boost', price: '1250 lei', duration: '50–70 min', description: 'Protocol complet de revitalizare facială care acționează pe mai multe niveluri simultan — hidratare, fermitate, luminozitate și uniformizare. Rezultatul este un ten complet transformat, tânăr și radiant.' },
+      { name: 'Back Deep Clean Protocol', price: '600–840 lei', duration: '50–70 min', description: 'Curățare profundă specializată pentru zona spatelui, predispusă la pori dilatați, puncte negre și erupții. Protocolul purifică în profunzime, reglează sebumul și lasă pielea curată, netedă și oxigenată.' },
+      { name: 'Body Microneedling + BioRePeel', price: '800 lei', duration: '50–70 min', description: 'Combinație de elită între micro-needling și peeling bio-activ pentru corp. Stimulează regenerarea celulară, reduce vergeturile, cicatricile și textura neuniformă, oferind o piele vizibil mai fermă și mai netedă.' },
+      { name: 'Hair Density Protocol', price: '420 lei', duration: '50–70 min', description: 'Protocol avansat pentru stimularea creșterii firului de păr și combaterea căderii acestuia. Activează foliculii piloși, îmbunătățește microcirculația scalpului și redă densitate și vitalitate părului.' },
+      { name: 'BioRePeel Face Therapy', price: '480 lei', duration: '50–70 min', description: 'Terapie cu peeling biochimic de nouă generație, cu acțiune dublă: exfoliantă și biostimulatoare. Îmbunătățește textura, luminozitatea și tonusul pielii, fără timp de recuperare — potrivită pentru orice tip de ten.' },
+      { name: 'Spongilla Bio Microneedling', price: '420 lei', duration: '50–70 min', description: 'Microneedling natural cu spicule din bureți de apă dulce. Stimulează colagenul, tratează acneea, petele și porii dilatați. Fără ace metalice, fără timp de recuperare.' },
     ],
   },
   'epilare-definitiva': {
-    single: [
-      { name: 'Față', price: '150 lei' },
-      { name: 'Mustață', price: '45 lei' },
-      { name: 'Bărbie', price: '65 lei' },
-      { name: 'Axilă', price: '130 lei' },
-      { name: 'Inghinal parțial', price: '130 lei' },
-      { name: 'Inghinal complet', price: '170 lei' },
-      { name: 'Fese', price: '80 lei' },
-      { name: 'Picioare scurt', price: '250 lei' },
-      { name: 'Picioare lung', price: '350 lei' },
-      { name: 'Spate / Piept', price: '160 lei' },
-      { name: 'Abdomen / Lombar', price: '125 lei' },
-      { name: 'Brațe', price: '170 lei' },
+    packages: [
+      {
+        name: 'Femei',
+        items: [
+          { name: 'Față', price: '150 lei' },
+          { name: 'Mustață', price: '45 lei' },
+          { name: 'Bărbie', price: '65 lei' },
+          { name: 'Axilă', price: '130 lei' },
+          { name: 'Inghinal parțial', price: '130 lei' },
+          { name: 'Inghinal complet', price: '170 lei' },
+          { name: 'Fese', price: '80 lei' },
+          { name: 'Picioare scurt', price: '250 lei' },
+          { name: 'Picioare lung', price: '350 lei' },
+          { name: 'Spate / Piept', price: '160 lei' },
+          { name: 'Abdomen / Lombar', price: '125 lei' },
+          { name: 'Brațe', price: '170 lei' },
+          { name: 'Full Body', price: '650 lei' },
+        ],
+      },
+      {
+        name: 'Bărbați',
+        items: [
+          { name: 'Axilă', price: '150 lei' },
+          { name: 'Picioare scurt', price: '300 lei' },
+          { name: 'Picioare lung', price: '450 lei' },
+          { name: 'Spate / Piept', price: '200 lei' },
+          { name: 'Abdomen / Lombar', price: '200 lei' },
+          { name: 'Brațe', price: '250 lei' },
+          { name: 'Full Body', price: '800 lei' },
+        ],
+      },
     ],
   },
   'remodelare-corporala': {
