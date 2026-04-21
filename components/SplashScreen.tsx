@@ -53,7 +53,7 @@ export default function SplashScreen() {
           animation: titleIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
           font-family: 'Cormorant Garamond', Georgia, serif;
           font-weight: 300;
-          font-size: clamp(2rem, 6vw, 4rem);
+          font-size: clamp(2.8rem, 8vw, 5.5rem);
           letter-spacing: 0.12em;
           text-align: center;
           background: linear-gradient(135deg, #D4AF37, #C9A84C, #8B6914);
