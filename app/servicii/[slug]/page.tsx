@@ -10,13 +10,69 @@ export function generateStaticParams() {
   return services.map(s => ({ slug: s.slug }));
 }
 
+const metaDescriptions: Record<string, string> = {
+  'protocoale-faciale': 'Protocoale faciale personalizate în Brașov — hidratare profundă, tratament acnee, microneedling, peeling și rejuvenare. Roxana Ica Aesthetic, Str. Dihamului 16A.',
+  'epilare-definitiva': 'Epilare definitivă cu Diodă Laser 4 lungimi de undă în Brașov. Rezultate vizibile de la prima ședință, adaptat oricărui tip de piele. Roxana Ica Aesthetic.',
+  'remodelare-corporala': 'Remodelare corporală cu LipoShape Pro în Brașov — cavitație, vacuum și radiofrecvență pentru reducerea celulitei și a grăsimii localizate. Roxana Ica Aesthetic.',
+  'electrostimulare': 'Electrostimulare musculară în Brașov — tonifiere și definire profundă, recuperare post-partum, reducerea flacidității. Roxana Ica Aesthetic, Dihamului 16A.',
+  'plasma-fusion': 'Plasma Fusion în Brașov — lifting pleoape, eliminarea vergeturilor, tratarea cicatricilor și petelor pigmentare fără bisturiu. Roxana Ica Aesthetic.',
+  'ipl': 'Tratamente IPL în Brașov — uniformizarea pielii, reducerea petelor pigmentare, roșeții și acneei. Rejuvenare cu lumină pulsată. Roxana Ica Aesthetic.',
+  'laser-yag': 'Laser Nd:YAG în Brașov — Carbon Laser Hollywood Peel, tratament acnee, estompare pete, ștergere tatuaje. Roxana Ica Aesthetic, Str. Dihamului 16A.',
+  'recuperare-terapie': 'Terapie Tecar 448 kHz și Masaj G5 în Brașov — recuperare musculară profundă, reducerea durerilor cronice și remodelare corporală. Roxana Ica Aesthetic.',
+};
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = services.find(s => s.slug === slug);
   if (!service) return {};
   return {
-    title: `${service.title} | Roxana Ica Aesthetic`,
-    description: service.description,
+    title: `${service.title} Brașov | Roxana Ica Aesthetic`,
+    description: metaDescriptions[slug] ?? service.description,
+    keywords: [
+      `${service.title} Brașov`,
+      'estetică Brașov',
+      'Roxana Ica Aesthetic',
+      'Dihamului 16A Brașov',
+      ...( slug === 'protocoale-faciale' ? [
+        'tratament facial Brașov', 'microneedling Brașov', 'peeling chimic Brașov',
+        'hidratare ten Brașov', 'tratament acnee Brașov', 'rejuvenare ten Brașov',
+        'BioRePeel Brașov', 'carboxy terapie Brașov', 'curățare ten Brașov',
+      ] : slug === 'epilare-definitiva' ? [
+        'epilare laser Brașov', 'epilare definitivă laser Brașov', 'diodă laser Brașov',
+        'epilare picioare Brașov', 'epilare axilă Brașov', 'epilare inghinală Brașov',
+        'epilare față Brașov', 'epilare definitivă spate Brașov', 'laser epilare Brașov',
+      ] : slug === 'remodelare-corporala' ? [
+        'remodelare corporală Brașov', 'cavitație Brașov', 'radiofrecvență Brașov',
+        'reducere celulită Brașov', 'slăbit Brașov', 'LipoShape Brașov',
+        'reducere grăsime localizată Brașov', 'vacuum masaj Brașov', 'modelare corp Brașov',
+      ] : slug === 'electrostimulare' ? [
+        'electrostimulare musculară Brașov', 'EMS Brașov', 'tonifiere musculară Brașov',
+        'recuperare post-partum Brașov', 'definire musculară Brașov', 'flaciditate Brașov',
+        'electrostimulare corp Brașov', 'tonifiere abdomen Brașov',
+      ] : slug === 'plasma-fusion' ? [
+        'plasma fusion Brașov', 'lifting pleoape Brașov', 'lifting fără bisturiu Brașov',
+        'eliminare vergeturi Brașov', 'tratament cicatrici Brașov', 'pete pigmentare Brașov',
+        'lifting față Brașov', 'tratament alopecie Brașov', 'plasma pen Brașov',
+      ] : slug === 'ipl' ? [
+        'IPL Brașov', 'lumină pulsată Brașov', 'tratament pete pigmentare Brașov',
+        'tratament roșeață față Brașov', 'cuperoză Brașov', 'rejuvenare IPL Brașov',
+        'tratament acnee IPL Brașov', 'IPL față Brașov', 'uniformizare ten Brașov',
+      ] : slug === 'laser-yag' ? [
+        'laser Nd YAG Brașov', 'carbon laser Brașov', 'Hollywood Peel Brașov',
+        'ștergere tatuaje Brașov', 'tratament acnee laser Brașov', 'laser rejuvenare Brașov',
+        'carbon laser detox Brașov', 'pigment removal Brașov',
+      ] : slug === 'recuperare-terapie' ? [
+        'terapie tecar Brașov', 'masaj G5 Brașov', 'recuperare musculară Brașov',
+        'dureri cronice tratament Brașov', 'masaj terapeutic Brașov', 'tecar 448 khz Brașov',
+        'recuperare lombară Brașov', 'drenaj limfatic Brașov', 'masaj anticelulitic Brașov',
+      ] : []),
+    ],
+    openGraph: {
+      title: `${service.title} | Roxana Ica Aesthetic Brașov`,
+      description: metaDescriptions[slug] ?? service.description,
+      locale: 'ro_RO',
+      type: 'website',
+    },
   };
 }
 

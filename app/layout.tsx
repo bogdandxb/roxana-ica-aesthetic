@@ -18,9 +18,15 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Roxana Ica Aesthetic | Diferența Care Se Simte",
-  description: "Servicii premium de estetică și beauty în Brașov, Dihamului 16A: protocoale faciale, epilare definitivă, remodelare corporală, electrostimulare musculară, Plasma Fusion, IPL și Laser.",
-  keywords: ["estetică Brașov", "epilare definitivă Brașov", "remodelare corporală", "Plasma Fusion", "IPL", "Roxana Ica"],
+  title: "Roxana Ica Aesthetic Brașov | Diferența Care Se Simte",
+  description: "Cabinet de estetică premium în Brașov, Str. Dihamului 16A. Epilare definitivă laser, protocoale faciale, remodelare corporală, Plasma Fusion, IPL, Laser Nd:YAG și Terapie Tecar. Programări pe WhatsApp: 0771 569 093.",
+  keywords: ["estetică Brașov", "epilare definitivă Brașov", "remodelare corporală Brașov", "Plasma Fusion Brașov", "IPL Brașov", "Roxana Ica Aesthetic", "cabinet estetică Dihamului Brașov", "laser Brașov", "terapie tecar Brașov"],
+  openGraph: {
+    title: "Roxana Ica Aesthetic Brașov | Diferența Care Se Simte",
+    description: "Cabinet de estetică premium în Brașov. Epilare definitivă laser, protocoale faciale, remodelare corporală, Plasma Fusion, IPL și Laser.",
+    locale: "ro_RO",
+    type: "website",
+  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
