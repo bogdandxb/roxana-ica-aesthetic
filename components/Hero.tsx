@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="flex flex-col items-start gap-8">
           <div className="flex items-center gap-4">
             <div className="gold-line" />
-            <span className="text-[#B8952A] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <span className="text-[#B8952A] tracking-[0.25em] text-sm uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
               Estetică Premium · Brașov
             </span>
           </div>
@@ -46,7 +46,7 @@ export default function Hero() {
             „Diferența Care Se Simte"
           </p>
 
-          <p className="text-[#2a2a2a] md:text-[#7A6F66] leading-relaxed max-w-md text-sm font-medium md:font-light" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <p className="text-[#2a2a2a] md:text-[#7A6F66] leading-relaxed max-w-md text-base" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             Tratamente avansate, construite pe expertiză și înțelegerea profundă a pielii, susținute de tehnologii de ultimă generație, pentru rezultate vizibile și o piele care evoluează în timp.
           </p>
 
@@ -68,7 +68,7 @@ export default function Hero() {
             ].map(stat => (
               <div key={stat.label} className="flex flex-col gap-1">
                 <span className="text-2xl" style={{ fontFamily: 'var(--font-cormorant)', background: 'linear-gradient(135deg, #C9A84C, #8B6914)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{stat.nr}</span>
-                <span className="text-[#7A6F66] text-xs tracking-wide" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>{stat.label}</span>
+                <span className="text-[#7A6F66] text-sm tracking-wide" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>{stat.label}</span>
               </div>
             ))}
           </div>

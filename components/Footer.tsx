@@ -34,7 +34,7 @@ export default function Footer() {
           <p className="text-[#E8E1D8] text-sm" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '17px' }}>
             „Diferența Care Se Simte."
           </p>
-          <p className="text-[#D8B7A6] text-xs leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <p className="text-[#D8B7A6] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             Tratamente avansate, construite pe expertiză și protocoale personalizate.
           </p>
 
@@ -63,11 +63,11 @@ export default function Footer() {
 
         {/* Coloana 2 — Servicii */}
         <div className="flex flex-col gap-4">
-          <p className="text-[#C6A769] tracking-[0.2em] text-xs uppercase mb-1" style={{ fontFamily: 'var(--font-montserrat)' }}>Servicii</p>
+          <p className="text-[#C6A769] tracking-[0.2em] text-sm uppercase mb-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>Servicii</p>
           {services.map(s => (
             <Link key={s.id} href={`/servicii/${s.slug}`}
-              className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-xs tracking-wide"
-              style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+              className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-sm tracking-wide"
+              style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
               {s.title}
             </Link>
           ))}
@@ -75,15 +75,15 @@ export default function Footer() {
 
         {/* Coloana 3 — Contact */}
         <div className="flex flex-col gap-4">
-          <p className="text-[#C6A769] tracking-[0.2em] text-xs uppercase mb-1" style={{ fontFamily: 'var(--font-montserrat)' }}>Contact</p>
-          <a href="tel:0771569093" className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-xs flex items-center gap-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <p className="text-[#C6A769] tracking-[0.2em] text-sm uppercase mb-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>Contact</p>
+          <a href="tel:0771569093" className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-sm flex items-center gap-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             <span>☎</span> 0771 569 093
           </a>
-          <p className="text-[#D8B7A6] text-xs leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <p className="text-[#D8B7A6] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             Brașov, România<br />
-            <span className="text-[#7A6F66] text-[10px]">Locație dedicată tratamentelor personalizate</span>
+            <span className="text-[#7A6F66] text-xs">Locație dedicată tratamentelor personalizate</span>
           </p>
-          <a href="tel:0771569093" className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-xs flex items-center gap-2 mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <a href="tel:0771569093" className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-sm flex items-center gap-2 mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             WhatsApp: <span className="text-[#C6A769]">0771 569 093</span>
           </a>
         </div>

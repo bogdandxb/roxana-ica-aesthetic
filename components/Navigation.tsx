@@ -19,17 +19,17 @@ export default function Navigation() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled ? 'bg-[#F8F6F2]/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between pb-4">
+      <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between pb-5">
 
         {/* Logo */}
         <Link href="/" className="flex flex-col items-start leading-none gap-0.5">
-          <span className="text-[#4A403A] tracking-[0.2em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          <span className="text-[#4A403A] tracking-[0.2em] text-base uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>
             Roxana Ica
           </span>
-          <span className="text-[#C6A769] tracking-[0.3em] text-[10px] uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          <span className="text-[#C6A769] tracking-[0.3em] text-sm uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>
             Aesthetic
           </span>
-          <span className="text-[#7A6F66] tracking-[0.08em] text-[9px] hidden md:block mt-0.5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <span className="text-[#7A6F66] tracking-[0.08em] text-xs hidden md:block mt-0.5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             Trainer autorizat · Expert în tratamente avansate de estetică
           </span>
         </Link>
@@ -38,7 +38,7 @@ export default function Navigation() {
         <div className="hidden md:flex items-center gap-10">
           <div className="relative group">
             <button
-              className="text-[#4A403A] tracking-[0.12em] text-xs uppercase hover:text-[#C6A769] transition-colors flex items-center gap-1"
+              className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors flex items-center gap-1"
               style={{ fontFamily: 'var(--font-montserrat)' }}
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
@@ -74,8 +74,8 @@ export default function Navigation() {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-[#4A403A] tracking-[0.12em] text-xs uppercase hover:text-[#C6A769] transition-colors"
-              style={{ fontFamily: 'var(--font-montserrat)' }}
+              className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors"
+              style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}
             >
               {item}
             </a>

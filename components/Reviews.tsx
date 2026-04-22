@@ -68,7 +68,7 @@ export default function Reviews() {
             Ce Spun Clientele
           </span>
           <h2 className="text-4xl md:text-5xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
-            Recenzii Reale
+            Recenzii
           </h2>
           <div className="gold-line" />
           <div className="flex gap-1">

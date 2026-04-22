@@ -192,21 +192,21 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <span className="text-[#C6A769] text-xs">◇</span>
-                          <span className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                          <span className="text-[#4A403A] text-base" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
                             {item.name}
                           </span>
                           {item.duration && (
-                            <span className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                            <span className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
                               · {item.duration}
                             </span>
                           )}
                         </div>
-                        <span className="text-[#C6A769] font-medium flex-shrink-0 ml-4" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '18px' }}>
+                        <span className="text-[#C6A769] flex-shrink-0 ml-4" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '22px', fontWeight: 600 }}>
                           {item.price}
                         </span>
                       </div>
                       {item.description && (
-                        <p className="text-[#7A6F66] text-xs leading-relaxed pl-5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                        <p className="text-[#7A6F66] text-sm leading-relaxed pl-5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
                           {item.description}
                         </p>
                       )}

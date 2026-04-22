@@ -8,14 +8,14 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
 
         <div className="flex flex-col items-center text-center gap-5 mb-20">
-          <span className="text-[#B8952A] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          <span className="text-[#B8952A] tracking-[0.25em] text-sm uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
             Ce Oferim
           </span>
           <h2 className="text-4xl md:text-5xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
             Serviciile Noastre
           </h2>
           <div className="gold-line" />
-          <p className="text-[#7A6F66] max-w-xl text-sm leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+          <p className="text-[#7A6F66] max-w-xl text-base leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             Fiecare tratament este personalizat în funcție de nevoile tale, cu tehnologii de ultimă generație.
           </p>
         </div>
@@ -65,10 +65,10 @@ export default function Services() {
                 <h3 className="text-xl text-[#4A403A] group-hover:text-[#B8952A] transition-colors" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 400 }}>
                   {service.title}
                 </h3>
-                <p className="text-[#7A6F66] text-xs leading-relaxed flex-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                <p className="text-[#7A6F66] text-sm leading-relaxed flex-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
                   {service.description}
                 </p>
-                <div className="flex items-center gap-2 text-[#B8952A] text-xs tracking-widest uppercase group-hover:gap-4 transition-all mt-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                <div className="flex items-center gap-2 text-[#B8952A] text-sm tracking-widest uppercase group-hover:gap-4 transition-all mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
                   <span>Detalii & Prețuri</span>
                   <span>→</span>
                 </div>
