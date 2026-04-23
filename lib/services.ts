@@ -97,6 +97,16 @@ export const services: Service[] = [
     image: '/images/servicii/tecar.jpg',
     imagePosition: 'object-center',
   },
+  {
+    id: 'mentorat-cursuri',
+    title: 'Mentorat & Cursuri',
+    subtitle: 'Formare profesională pentru cosmeticieni',
+    description: 'Program intensiv de 6 săptămâni dedicat cosmeticienilor cu diplomă care vor să lucreze corect, sigur și argumentat în cabinet. Înveți să înțelegi pielea în profunzime și să construiești protocoale personalizate pe modele reale.',
+    benefits: ['Analiză și anamneză reală a pielii', 'Protocoale personalizate per client', 'Lucru pe modele reale cu afecțiuni diferite', 'Aparatură de ultimă generație'],
+    slug: 'mentorat-cursuri',
+    image: '/images/servicii/mentorat.jpg',
+    imagePosition: 'object-[center_20%]',
+  },
 ];
 
 export const pricesData: Record<string, { single?: PriceItem[]; packages?: PricePackage[] }> = {
@@ -242,6 +252,11 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       { name: 'Laser Skin Rejuvenation', price: '480 lei' },
       { name: 'Pigment Removal Laser', price: '480–550 lei' },
       { name: 'Tattoo Removal', price: 'de la 200 lei / zonă' },
+    ],
+  },
+  'mentorat-cursuri': {
+    single: [
+      { name: 'Mentorat Profesional – 6 săptămâni', price: 'La cerere', description: 'Program intensiv complet: anatomia pielii, anamneză reală, protocoale personalizate, lucru pe modele reale, aparatură avansată și construirea imaginii profesionale online.' },
     ],
   },
   'recuperare-terapie': {

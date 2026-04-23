@@ -19,6 +19,7 @@ const metaDescriptions: Record<string, string> = {
   'ipl': 'Tratamente IPL în Brașov — uniformizarea pielii, reducerea petelor pigmentare, roșeții și acneei. Rejuvenare cu lumină pulsată. Roxana Ica Aesthetic.',
   'laser-yag': 'Laser Nd:YAG în Brașov — Carbon Laser Hollywood Peel, tratament acnee, estompare pete, ștergere tatuaje. Roxana Ica Aesthetic, Str. Dihamului 16A.',
   'recuperare-terapie': 'Terapie Tecar 448 kHz și Masaj G5 în Brașov — recuperare musculară profundă, reducerea durerilor cronice și remodelare corporală. Roxana Ica Aesthetic.',
+  'mentorat-cursuri': 'Mentorat profesional și cursuri pentru cosmeticieni în Brașov — program intensiv de 6 săptămâni, lucru pe modele reale, protocoale personalizate. Roxana Ica Aesthetic.',
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -65,6 +66,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         'terapie tecar Brașov', 'masaj G5 Brașov', 'recuperare musculară Brașov',
         'dureri cronice tratament Brașov', 'masaj terapeutic Brașov', 'tecar 448 khz Brașov',
         'recuperare lombară Brașov', 'drenaj limfatic Brașov', 'masaj anticelulitic Brașov',
+      ] : slug === 'mentorat-cursuri' ? [
+        'mentorat cosmetică Brașov', 'cursuri cosmetică Brașov', 'formare cosmeticiană Brașov',
+        'mentorat profesional estetică', 'curs microneedling Brașov', 'curs peeling Brașov',
+        'formare cabinet cosmetică', 'mentorat piele Brașov', 'curs tratamente faciale Brașov',
       ] : []),
     ],
     openGraph: {
@@ -139,6 +144,48 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <p className="text-[#7A6F66] max-w-2xl leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
             {service.description}
           </p>
+
+          {slug === 'mentorat-cursuri' && (
+            <div className="max-w-2xl flex flex-col gap-5 text-left mt-4">
+              <p className="text-[#4A403A] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300, fontStyle: 'italic' }}>
+                Ai terminat școala de cosmetică, dar nu te simți pregătită pentru cliente reale? <strong style={{ fontWeight: 600, fontStyle: 'normal' }}>Aici începe diferența.</strong>
+              </p>
+              <p className="text-[#7A6F66] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                Acest mentorat este un <strong style={{ fontWeight: 600 }}>program intensiv</strong>, în care construiești o <strong style={{ fontWeight: 600 }}>înțelegere profundă a pielii</strong> și înveți să lucrezi <strong style={{ fontWeight: 600 }}>corect, sigur și argumentat</strong> în cabinet.
+              </p>
+              <p className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>
+                În 6 săptămâni vei învăța să:
+              </p>
+              <ul className="flex flex-col gap-2">
+                {[
+                  ['înțelegi pielea în profunzime', ': structură, reacții, microbiom'],
+                  ['realizezi corect o anamneză', ' și o analiză reală a pielii'],
+                  ['recunoști și abordezi corect', ': acnee, rozacee, cuperoză, melasmă, deshidratare'],
+                  ['alegi și aplici corect tratamentele', ': peeling-uri, microneedling, terapii de hidratare și glow'],
+                  ['stabilești indicații și contraindicații reale', ', nu generale'],
+                  ['construiești protocoale personalizate', ', în funcție de fiecare tip de ten'],
+                  ['lucrezi pe modele reale', ', cu afecțiuni diferite, sub ghidare directă'],
+                  ['lucrezi cu aparatură de ultimă generație', ', integrată corect în tratamente'],
+                  ['înțelegi cum alegi și folosești aparatura potrivită', ' pentru cabinetul tău'],
+                  ['explici clientelor profesionist', ' fiecare etapă și creezi încredere'],
+                  ['îți construiești prezența în online', ' și bazele unei imagini profesionale'],
+                  ['înțelegi direcția unui website', ' și cum să îți poziționezi serviciile corect'],
+                ].map(([bold, rest], i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-[#7A6F66]" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                    <span className="text-[#C6A769] mt-0.5 flex-shrink-0">–</span>
+                    <span><strong style={{ fontWeight: 600, color: '#4A403A' }}>{bold}</strong>{rest}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-[#7A6F66] leading-relaxed text-sm mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                Este un mentorat <strong style={{ fontWeight: 600 }}>profund</strong>, unde nu acumulezi informație —<br />
+                înveți să o <strong style={{ fontWeight: 600 }}>înțelegi</strong>, să o <strong style={{ fontWeight: 600 }}>aplici</strong> și să o <strong style={{ fontWeight: 600 }}>transformi în rezultate</strong>.
+              </p>
+              <p className="text-[#C6A769] text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                Roxana Ica Aesthetic – Diferența care se simte.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
