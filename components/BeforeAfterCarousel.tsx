@@ -69,8 +69,13 @@ export default function BeforeAfterCarousel({ slug }: { slug: string }) {
         .marquee-ba {
           display: flex;
           gap: 16px;
-          animation: marquee-ba 40s linear infinite;
+          animation: marquee-ba 15s linear infinite;
           width: max-content;
+        }
+        @media (min-width: 768px) {
+          .marquee-ba {
+            animation-duration: 20s;
+          }
         }
         .marquee-ba:hover {
           animation-play-state: paused;

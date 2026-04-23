@@ -94,13 +94,22 @@ export default function Footer() {
         <p className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
           © 2025 Roxana Ica Aesthetic. Toate drepturile rezervate.
         </p>
-        <Link
-          href="/politica-de-confidentialitate"
-          className="text-[#7A6F66] hover:text-[#C6A769] transition-colors text-xs tracking-wide"
-          style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}
-        >
-          Politică de Confidențialitate
-        </Link>
+        <div className="flex gap-6">
+          <Link
+            href="/politica-de-confidentialitate"
+            className="text-[#7A6F66] hover:text-[#C6A769] transition-colors text-xs tracking-wide"
+            style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}
+          >
+            Politică de Confidențialitate
+          </Link>
+          <Link
+            href="/termeni-si-conditii"
+            className="text-[#7A6F66] hover:text-[#C6A769] transition-colors text-xs tracking-wide"
+            style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}
+          >
+            Termeni și Condiții
+          </Link>
+        </div>
       </div>
 
     </footer>
