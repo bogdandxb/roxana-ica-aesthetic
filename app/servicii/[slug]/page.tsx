@@ -252,28 +252,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* CTA */}
-      <section className="py-20 px-6 bg-[#4A403A] text-center">
-        <div className="max-w-xl mx-auto flex flex-col items-center gap-6">
-          <h2 className="text-3xl text-[#F8F6F2]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
-            Programează o consultație
-          </h2>
-          <div className="gold-line" />
-          <p className="text-[#D8B7A6] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            Contactează-mă pentru a stabili cel mai potrivit protocol pentru tine.
-          </p>
-          <a
-            href="https://wa.me/40771569093"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-gold"
-            style={{ fontFamily: 'var(--font-montserrat)' }}
-          >
-            Programare WhatsApp
-          </a>
-        </div>
-      </section>
-
       <Footer />
     </>
   );
