@@ -2,6 +2,7 @@ import { services, pricesData } from '@/lib/services';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BeforeAfterCarousel from '@/components/BeforeAfterCarousel';
+import MentoratPrezentare from '@/components/MentoratPrezentare';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -184,6 +185,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <p className="text-[#C6A769] text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
                 Roxana Ica Aesthetic – Diferența care se simte.
               </p>
+              <MentoratPrezentare />
             </div>
           )}
         </div>
