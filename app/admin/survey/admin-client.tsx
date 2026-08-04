@@ -63,6 +63,63 @@ function SimplePie({ data }: { data: { name: string; value: number }[] }) {
   );
 }
 
+const SURVEY_URL = 'https://www.roxanaicaaesthetic.com/chestionar';
+const SHARE_TEXT = 'Completează chestionarul Roxana Ica Aesthetic — află cât de bine îți cunoști pielea! 🌿';
+
+function ShareButton() {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Chestionar Roxana Ica Aesthetic', text: SHARE_TEXT, url: SURVEY_URL });
+      } catch {
+        // user cancelled
+      }
+    } else {
+      await navigator.clipboard.writeText(`${SHARE_TEXT}\n${SURVEY_URL}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleShare}
+      style={{
+        background: copied ? '#22C55E' : GOLD,
+        color: 'white',
+        border: 'none',
+        padding: '8px 16px',
+        fontSize: 11,
+        fontFamily: 'var(--font-montserrat)',
+        fontWeight: 600,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
+        transition: 'background 0.2s',
+        borderRadius: 0,
+        whiteSpace: 'nowrap',
+      }}
+    >
+      {copied ? (
+        <>✓ Link copiat</>
+      ) : (
+        <>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Trimite chestionar
+        </>
+      )}
+    </button>
+  );
+}
+
 export default function AdminSurveyClient() {
   const [password, setPassword] = useState('');
   const [authed, setAuthed] = useState(false);
@@ -189,12 +246,15 @@ export default function AdminSurveyClient() {
   return (
     <div className="min-h-screen" style={{ background: '#F4F6F9', fontFamily: 'var(--font-montserrat)' }}>
       {/* Header */}
-      <div className="border-b px-6 py-4 flex items-center justify-between" style={{ background: TAUPE }}>
+      <div className="border-b px-4 py-4 flex items-center justify-between gap-3" style={{ background: TAUPE }}>
         <div>
           <p className="text-xs uppercase tracking-widest" style={{ color: GOLD, fontWeight: 500 }}>Roxana Ica Aesthetic</p>
           <h1 className="text-lg text-white" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>Survey Dashboard</h1>
         </div>
-        <a href="/" className="text-xs text-white/60 hover:text-white transition-colors">← Site</a>
+        <div className="flex items-center gap-3">
+          <ShareButton />
+          <a href="/" className="text-xs text-white/60 hover:text-white transition-colors">← Site</a>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
