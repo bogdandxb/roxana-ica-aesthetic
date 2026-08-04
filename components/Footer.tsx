@@ -109,6 +109,13 @@ export default function Footer() {
           >
             Termeni și Condiții
           </Link>
+          <Link
+            href="/admin/survey"
+            className="text-[#7A6F66]/40 hover:text-[#7A6F66] transition-colors text-xs tracking-wide"
+            style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}
+          >
+            Admin
+          </Link>
         </div>
       </div>
 
