@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import SurveyClient from './survey-client';
 
 export const metadata: Metadata = {
-  title: 'Cât de bine îți cunoști pielea? | Roxana Ica Aesthetic',
+  title: 'Cât de bine ai grijă de tine? | Roxana Ica Aesthetic',
   description: 'Un chestionar despre corp, piele și felul în care alegem să avem grijă de noi în timp.',
 };
 

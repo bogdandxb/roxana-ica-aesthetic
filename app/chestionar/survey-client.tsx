@@ -376,7 +376,7 @@ export default function SurveyClient() {
             Chestionar
           </span>
           <h1 className="text-3xl md:text-5xl mb-4" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300, color: '#4A403A' }}>
-            Cât de bine îți cunoști pielea?
+            Cât de bine ai grijă de tine?
           </h1>
           <div className="gold-line mx-auto mb-4" />
           <p className="text-base md:text-lg" style={{ fontFamily: 'var(--font-cormorant)', fontStyle: 'italic', color: '#7A6F66' }}>
