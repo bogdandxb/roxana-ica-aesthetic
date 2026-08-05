@@ -5,7 +5,7 @@ import SurveyClient from './survey-client';
 
 export const metadata: Metadata = {
   title: 'Cât de bine ai grijă de tine? | Roxana Ica Aesthetic',
-  description: 'Un chestionar despre corp, piele și felul în care alegem să avem grijă de noi în timp.',
+  description: 'Completează chestionarul Roxana Ica Aesthetic și descoperă cât de bine ai grijă de pielea ta. Analiză facială gratuită pentru cele care doresc să afle mai multe.',
 };
 
 export default function ChestionarPage() {
