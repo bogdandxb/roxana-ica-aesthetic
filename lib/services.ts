@@ -98,6 +98,16 @@ export const services: Service[] = [
     imagePosition: 'object-center',
   },
   {
+    id: 'skin-analyzer',
+    title: 'Skin Analyzer',
+    subtitle: 'Pielea ta spune mai mult decât vezi în oglindă',
+    description: 'Tehnologie avansată pentru evaluarea pielii — analiză facială precisă care identifică nevoile reale ale pielii tale și stă la baza unui plan personalizat de îngrijire și tratamente.',
+    benefits: ['Evaluare facială precisă și obiectivă', 'Identificarea nevoilor reale ale pielii', 'Plan personalizat de tratamente', 'Mai puține presupuneri, mai multă precizie'],
+    slug: 'skin-analyzer',
+    image: '/images/Skin Analyzer.jpeg',
+    imagePosition: 'object-center',
+  },
+  {
     id: 'mentorat-cursuri',
     title: 'Mentorat & Cursuri',
     subtitle: 'Formare profesională pentru cosmeticieni',

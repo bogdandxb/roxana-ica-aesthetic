@@ -21,6 +21,7 @@ const metaDescriptions: Record<string, string> = {
   'laser-yag': 'Laser Nd:YAG în Brașov — Carbon Laser Hollywood Peel, tratament acnee, estompare pete, ștergere tatuaje. Roxana Ica Aesthetic, Str. Dihamului 16A.',
   'recuperare-terapie': 'Terapie Tecar 448 kHz și Masaj G5 în Brașov — recuperare musculară profundă, reducerea durerilor cronice și remodelare corporală. Roxana Ica Aesthetic.',
   'mentorat-cursuri': 'Mentorat profesional și cursuri pentru cosmeticieni în Brașov — program intensiv de 6 săptămâni, lucru pe modele reale, protocoale personalizate. Roxana Ica Aesthetic.',
+  'skin-analyzer': 'Skin Analyzer în Brașov — analiză facială avansată cu tehnologie de ultimă generație. Descoperă nevoile reale ale pielii tale și primești un plan personalizat de îngrijire. Roxana Ica Aesthetic.',
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -71,6 +72,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         'mentorat cosmetică Brașov', 'cursuri cosmetică Brașov', 'formare cosmeticiană Brașov',
         'mentorat profesional estetică', 'curs microneedling Brașov', 'curs peeling Brașov',
         'formare cabinet cosmetică', 'mentorat piele Brașov', 'curs tratamente faciale Brașov',
+      ] : slug === 'skin-analyzer' ? [
+        'skin analyzer Brașov', 'analiză facială Brașov', 'analiză piele Brașov',
+        'evaluare ten Brașov', 'diagnostic piele Brașov', 'plan ingrijire piele Brașov',
+        'tehnologie analiză ten Brașov', 'cosmetică avansată Brașov',
       ] : []),
     ],
     openGraph: {
@@ -145,6 +150,42 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <p className="text-[#7A6F66] max-w-2xl leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
             {service.description}
           </p>
+
+          {slug === 'skin-analyzer' && (
+            <div className="max-w-2xl flex flex-col gap-6 text-left mt-4">
+              <p className="text-[#4A403A] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300, fontStyle: 'italic' }}>
+                Pielea ta spune mai mult decât vezi în oglindă.
+              </p>
+              <p className="text-[#7A6F66] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                Descoperă noua experiență de analiză facială cu Skin Analyzer – tehnologie avansată pentru evaluarea pielii.
+              </p>
+              <p className="text-[#7A6F66] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                În câteva minute, putem privi pielea mult mai atent decât printr-o simplă examinare vizuală și putem identifica aspecte care nu sunt întotdeauna evidente la suprafață.
+              </p>
+              <div className="border-l-2 border-[#C6A769] pl-5 py-1">
+                <p className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                  Ce înseamnă asta pentru tine?
+                </p>
+                <p className="text-[#C6A769] text-sm mt-1" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.15rem', fontWeight: 400 }}>
+                  Mai puține presupuneri. Mai multă precizie.
+                </p>
+              </div>
+              <p className="text-[#7A6F66] leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                Pe baza analizei, putem înțelege mai bine nevoile reale ale pielii tale și putem construi un <strong style={{ fontWeight: 600, color: '#4A403A' }}>plan personalizat de îngrijire și tratamente</strong>, adaptat punctului din care pornești și obiectivelor tale.
+              </p>
+              <div className="flex flex-col gap-2">
+                <p className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                  Nu alegem un tratament pentru că „sună bine".
+                </p>
+                <p className="text-[#4A403A] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>
+                  Îl alegem pentru că pielea ta ne arată de ce are nevoie.
+                </p>
+              </div>
+              <p className="text-[#C6A769] text-xs tracking-widest uppercase mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                Roxana Ica Aesthetic — diferența care se simte
+              </p>
+            </div>
+          )}
 
           {slug === 'mentorat-cursuri' && (
             <div className="max-w-2xl flex flex-col gap-5 text-left mt-4">
