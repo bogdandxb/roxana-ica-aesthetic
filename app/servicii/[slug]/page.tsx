@@ -306,36 +306,87 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
             )}
 
+            {/* Nota speciala Skin Analyzer */}
+            {slug === 'skin-analyzer' && (
+              <p className="text-center mt-2 mb-8" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.25rem', fontWeight: 400, color: '#C6A769', fontStyle: 'italic' }}>
+                Întâi înțelegem pielea. Apoi alegem tratamentul.
+              </p>
+            )}
+
             {/* Pachete */}
             {prices.packages && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {prices.packages.map((pkg, i) => (
-                  <div key={i} className="bg-[#F8F6F2] p-8 flex flex-col gap-4">
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)' }}>
-                        {pkg.name}
-                      </h3>
-                      {pkg.discount && (
-                        <span className="text-[#C6A769] text-xs tracking-wide border border-[#C6A769] px-2 py-0.5" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                          {pkg.discount}
-                        </span>
-                      )}
-                    </div>
-                    <div className="gold-line" style={{ marginLeft: '0' }} />
-                    <div className="flex flex-col gap-3 mt-2">
-                      {pkg.items.map((item, j) => (
-                        <div key={j} className="flex justify-between items-center">
-                          <span className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-                            {item.name}
-                          </span>
-                          <span className="text-[#C6A769]" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '17px' }}>
-                            {item.price}
-                          </span>
+              <div className="flex flex-col gap-10">
+                {prices.packages.map((pkg, i) => {
+                  // Pachete cu descriere per item → afișate ca secțiune separată (ex: Bioline Jatò)
+                  const hasDescriptions = pkg.items.some(item => item.description);
+                  if (hasDescriptions) {
+                    return (
+                      <div key={i}>
+                        <h3 className="text-2xl text-[#4A403A] mb-2 text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+                          {pkg.name}
+                        </h3>
+                        <div className="gold-line mb-8" />
+                        <div className="flex flex-col">
+                          {pkg.items.map((item, j) => (
+                            <div key={j} className="flex flex-col py-5 border-b border-[#D8B7A6] last:border-0 gap-2">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  <span className="text-[#C6A769] text-xs">◇</span>
+                                  <span className="text-[#4A403A] text-base" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                                    {item.name}
+                                  </span>
+                                  {item.duration && (
+                                    <span className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+                                      · {item.duration}
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="text-[#C6A769] flex-shrink-0 ml-4" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '22px', fontWeight: 600 }}>
+                                  {item.price}
+                                </span>
+                              </div>
+                              {item.description && (
+                                <p className="text-[#7A6F66] text-sm leading-relaxed pl-5" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+                                  {item.description}
+                                </p>
+                              )}
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+                    );
+                  }
+                  // Pachete clasice (prețuri simple, fără descriere) → carduri în grid
+                  return (
+                    <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="bg-[#F8F6F2] p-8 flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)' }}>
+                            {pkg.name}
+                          </h3>
+                          {pkg.discount && (
+                            <span className="text-[#C6A769] text-xs tracking-wide border border-[#C6A769] px-2 py-0.5" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                              {pkg.discount}
+                            </span>
+                          )}
+                        </div>
+                        <div className="gold-line" style={{ marginLeft: '0' }} />
+                        <div className="flex flex-col gap-3 mt-2">
+                          {pkg.items.map((item, j) => (
+                            <div key={j} className="flex justify-between items-center">
+                              <span className="text-[#7A6F66] text-xs" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                                {item.name}
+                              </span>
+                              <span className="text-[#C6A769]" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '17px' }}>
+                                {item.price}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>

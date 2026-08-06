@@ -129,14 +129,25 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       { name: 'Carboxy Revital Therapy', price: '480 lei', duration: '50–70 min', description: 'Terapie avansată cu CO₂ care oxigenează țesuturile și stimulează microcirculația. Îmbunătățește elasticitatea pielii, reduce ridurile fine și conferă un efect de lifting natural și de durată.' },
       { name: 'Facial Glow Ritual', price: '350 lei', duration: '50 min', description: 'Un ritual de înfrumusețare complet care iluminează și revitalizează tenul obosit. Pielea devine instantaneu luminoasă, catifelată și plină de viață — efectul perfect înainte de un eveniment special.' },
       { name: 'Advanced Microneedling', price: '660 lei', duration: '50–70 min', description: 'Tehnica micro-needling de ultimă generație stimulează producția naturală de colagen și elastină. Reduce ridurile, cicatricile acneice și laxitatea cutanată, oferind un ten ferm, neted și vizibil întinerit.' },
+      { name: 'Microneedling Față + Gât', price: '750 lei', duration: '50–70 min', description: 'Microneedling profesional cu substanțe active selectate în funcție de necesitățile tenului. Pentru revitalizare, îmbunătățirea texturii, fermității și calității generale a pielii.' },
       { name: 'Biorevitalizare Eye Boost', price: '390 lei', duration: '50–70 min', description: 'Tratament de recuperare intensivă dedicat zonei periorbitale. Diminuează cearcănele, pungile sub ochi și ridurile de expresie, redând priviri odihnite, tinere și expresive.' },
       { name: 'Biorevitalizare Neck Boost', price: '420 lei', duration: '50–70 min', description: 'Tratament intensiv dedicat zonei gâtului, una dintre primele zone care trădează vârsta. Stimulează colagenul, îmbunătățește fermitatea și elasticitatea pielii, reducând vizibil ridurile orizontale și laxitatea cutanată.' },
       { name: 'Biorevitalizare Full Face Boost', price: '1250 lei', duration: '50–70 min', description: 'Tratament complex de regenerare celulară care acționează în profunzime pentru hidratare, fermitate și uniformizarea pielii. Se bazează pe combinații personalizate de acid hialuronic, vitamine, exosomi sau polinucleotide, alese în funcție de nevoile pielii.' },
+      { name: 'Biorevitalizare Mâini', price: '650 lei', duration: '50–70 min', description: 'Peeling profesional + MicronJet cu substanțe active personalizate în funcție de necesitățile pielii. Pentru revitalizare, hidratare, luminozitate și îmbunătățirea texturii și calității pielii mâinilor.' },
       { name: 'Back Deep Clean Protocol', price: '600–840 lei', duration: '50–70 min', description: 'Curățare profundă specializată pentru zona spatelui, predispusă la pori dilatați, puncte negre și erupții. Protocolul purifică în profunzime, reglează sebumul și lasă pielea curată, netedă și oxigenată.' },
       { name: 'Body Microneedling + BioRePeel', price: '800 lei', duration: '50–70 min', description: 'Combinație de elită între micro-needling și peeling bio-activ pentru corp. Stimulează regenerarea celulară, reduce vergeturile, cicatricile și textura neuniformă, oferind o piele vizibil mai fermă și mai netedă.' },
       { name: 'Hair Density Protocol', price: '420 lei', duration: '50–70 min', description: 'Protocol avansat pentru stimularea creșterii firului de păr și combaterea căderii acestuia. Activează foliculii piloși, îmbunătățește microcirculația scalpului și redă densitate și vitalitate părului.' },
       { name: 'BioRePeel Face Therapy', price: '480 lei', duration: '50–70 min', description: 'Terapie cu peeling biochimic de nouă generație, cu acțiune dublă: exfoliantă și biostimulatoare. Îmbunătățește textura, luminozitatea și tonusul pielii, fără timp de recuperare — potrivită pentru orice tip de ten.' },
       { name: 'Spongilla Bio Microneedling', price: '420 lei', duration: '50–70 min', description: 'Microneedling natural cu spicule din bureți de apă dulce. Stimulează colagenul, tratează acneea, petele și porii dilatați. Fără ace metalice, fără timp de recuperare.' },
+    ],
+    packages: [
+      {
+        name: 'Tratamente Faciale Bioline Jatò',
+        items: [
+          { name: 'VITA+ | Nutriție Intensă & Revitalizare', price: '560 lei', description: 'Tratament profesional pentru pielea uscată, ternă sau devitalizată, pentru nutriție, confort, elasticitate și luminozitate.' },
+          { name: 'ENERGY | Revitalizare & Luminozitate', price: '560 lei', description: 'Tratament profesional pentru pielea obosită și lipsită de vitalitate, cu acțiune revitalizantă și antioxidantă, pentru un aspect mai proaspăt și luminos.' },
+        ],
+      },
     ],
   },
   'epilare-definitiva': {
@@ -262,6 +273,20 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       { name: 'Laser Skin Rejuvenation', price: '480 lei' },
       { name: 'Pigment Removal Laser', price: '480–550 lei' },
       { name: 'Tattoo Removal', price: 'de la 200 lei / zonă' },
+    ],
+  },
+  'skin-analyzer': {
+    single: [
+      {
+        name: 'Analiză Facială Profesională | Skin Analyzer',
+        price: '200 lei',
+        description: 'O evaluare detaliată a pielii, realizată cu Skin Analyzer, pentru a înțelege mai bine nevoile tenului și pentru a putea construi un plan de îngrijire și tratament personalizat.',
+      },
+      {
+        name: 'Inclus gratuit la orice tratament facial',
+        price: '—',
+        description: 'În cazul în care alegi să continui cu un tratament facial, analiza și consultația sunt incluse în acesta, fără cost suplimentar.',
+      },
     ],
   },
   'mentorat-cursuri': {
