@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { SURVEY_QUESTIONS, type SurveyQuestion } from '@/lib/survey-questions';
 
 const GOLD = '#C6A769';
 const TAUPE = '#4A403A';
@@ -8,45 +9,6 @@ const IVORY = '#F8F6F2';
 
 const LEAD_STATUSES = ['Nou', 'Contactată', 'Programată', 'Finalizată', 'Nu răspunde', 'Nu dorește'];
 
-// ─── Question definitions ────────────────────────────────────────────────────
-type QuestionDef = {
-  key: string;
-  nr: number;
-  text: string;
-  multi?: boolean; // multi-select (CSV stored)
-};
-
-const QUESTIONS: QuestionDef[] = [
-  { key: 'q1_varsta', nr: 1, text: 'Ce grupă de vârstă te reprezintă?' },
-  { key: 'q2_copii', nr: 2, text: 'Ai copii?' },
-  { key: 'q3_sport', nr: 3, text: 'Cât de des faci sport sau mișcare?' },
-  { key: 'q4_motiv_sport', nr: 4, text: 'Care este motivul principal pentru care faci sport?' },
-  { key: 'q5_grija_de_mine', nr: 5, text: 'Pe o scară de la 1 la 5, cât de mult consideri că îți acorzi atenție și grijă ție însuți?' },
-  { key: 'q6_alimentatie', nr: 6, text: 'Ești atentă la alimentație?' },
-  { key: 'q7_nutritie', nr: 7, text: 'Urmezi sau ai urmat vreodată un plan de nutriție?' },
-  { key: 'q8_masa_musculara', nr: 8, text: 'Ești mulțumită de masa musculară și de felul în care arată corpul tău?' },
-  { key: 'q9_sport_suficient', nr: 9, text: 'Consideri că sportul pe care îl faci este suficient pentru a-ți menține corpul în formă?' },
-  { key: 'q10_fermitate', nr: 10, text: 'Ai observat o pierdere de fermitate a pielii în ultimii ani?' },
-  { key: 'q11_organ_activ', nr: 11, text: 'Știai că pielea este cel mai mare organ activ al corpului și că are nevoie de îngrijire specializată, la fel ca orice alt organ?' },
-  { key: 'q12_fibroblast', nr: 12, text: 'Ai auzit vreodată de fibroblast și rolul lui în producerea colagenului și elastinei?' },
-  { key: 'q13_fibroblast_colagen', nr: 13, text: 'Știai că stimularea fibroblastului este una dintre cele mai eficiente metode de a regenera pielea și de a reda fermitatea?' },
-  { key: 'q14_fata_greutati', nr: 14, text: 'Dacă ai face exerciții cu greutăți pentru față și gât, crezi că pielea ar deveni mai fermă?' },
-  { key: 'q15_tratamente_fibroblast', nr: 15, text: 'Ce tratamente estetice ai mai făcut sau ai în vedere?', multi: true },
-  { key: 'q16_cunosti_pielea', nr: 16, text: 'Cât de des simți că vrei să schimbi ceva la aspectul tău fizic?' },
-  { key: 'q17_viitor_piele', nr: 17, text: 'Ce ai vrea să îmbunătățești la corpul sau pielea ta?', multi: true },
-  { key: 'q18_sport_piele', nr: 18, text: 'Cât de des faci tratamente faciale profesionale?' },
-  { key: 'q19_fermitate_fata', nr: 19, text: 'Ce tipuri de tratamente faciale ai mai încercat?', multi: true },
-  { key: 'q20_observi', nr: 20, text: 'Câtă atenție acorzi sănătății pielii față de sportul pe care îl practici?' },
-  { key: 'q21_normala', nr: 21, text: 'Ai primit vreodată explicații clare despre ce tip de ten ai și ce are nevoie pielea ta?' },
-  { key: 'q22_problema', nr: 22, text: 'Ai primit vreodată un plan profesional de îngrijire a pielii, pe termen lung?' },
-  { key: 'q23_slabit', nr: 23, text: 'Ce te oprește să investești mai mult în îngrijirea pielii?', multi: true },
-  { key: 'q24_tratamente', nr: 24, text: 'Cât de bine cunoști pielea ta ca organ?' },
-  { key: 'q25_tratament_facial', nr: 25, text: 'În ce momente simți că ai vrea să începi să ai mai multă grijă de tine?', multi: true },
-  { key: 'q26_explicatii', nr: 26, text: 'Cât de consecventă ești cu rutina de îngrijire a pielii acasă?' },
-  { key: 'q27_plan_termen', nr: 27, text: 'Ai fi deschisă să lucrezi cu un specialist care să îți ofere un plan personalizat de îngrijire a pielii?' },
-];
-
-// ─── Types ──────────────────────────────────────────────────────────────────
 type Response = Record<string, string>;
 
 // ─── Helper ─────────────────────────────────────────────────────────────────
@@ -74,7 +36,7 @@ function QuestionCard({
   responses,
   multi,
 }: {
-  question: QuestionDef;
+  question: SurveyQuestion;
   counts: Record<string, number>;
   total: number;
   responses: Response[];
@@ -486,7 +448,7 @@ export default function AdminSurveyClient() {
               Survey Results — {total} răspunsuri
             </p>
             <div className="flex flex-col gap-5">
-              {QUESTIONS.map(q => (
+              {SURVEY_QUESTIONS.map(q => (
                 <QuestionCard
                   key={q.key}
                   question={q}
