@@ -1,22 +1,61 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
-} from 'recharts';
 
 const GOLD = '#C6A769';
 const TAUPE = '#4A403A';
 const IVORY = '#F8F6F2';
-const COLORS = ['#C6A769', '#B8952A', '#D4B896', '#7A6F66', '#4A403A', '#E8E1D8'];
 
 const LEAD_STATUSES = ['Nou', 'Contactată', 'Programată', 'Finalizată', 'Nu răspunde', 'Nu dorește'];
 
-function toChartData(obj: Record<string, number>) {
-  return Object.entries(obj || {}).map(([name, value]) => ({ name, value }));
+// ─── Question definitions ────────────────────────────────────────────────────
+type QuestionDef = {
+  key: string;
+  nr: number;
+  text: string;
+  multi?: boolean; // multi-select (CSV stored)
+};
+
+const QUESTIONS: QuestionDef[] = [
+  { key: 'q1_varsta', nr: 1, text: 'Ce grupă de vârstă te reprezintă?' },
+  { key: 'q2_copii', nr: 2, text: 'Ai copii?' },
+  { key: 'q3_sport', nr: 3, text: 'Cât de des faci sport sau mișcare?' },
+  { key: 'q4_motiv_sport', nr: 4, text: 'Care este motivul principal pentru care faci sport?' },
+  { key: 'q5_grija_de_mine', nr: 5, text: 'Pe o scară de la 1 la 5, cât de mult consideri că îți acorzi atenție și grijă ție însuți?' },
+  { key: 'q6_alimentatie', nr: 6, text: 'Ești atentă la alimentație?' },
+  { key: 'q7_nutritie', nr: 7, text: 'Urmezi sau ai urmat vreodată un plan de nutriție?' },
+  { key: 'q8_masa_musculara', nr: 8, text: 'Ești mulțumită de masa musculară și de felul în care arată corpul tău?' },
+  { key: 'q9_sport_suficient', nr: 9, text: 'Consideri că sportul pe care îl faci este suficient pentru a-ți menține corpul în formă?' },
+  { key: 'q10_fermitate', nr: 10, text: 'Ai observat o pierdere de fermitate a pielii în ultimii ani?' },
+  { key: 'q11_organ_activ', nr: 11, text: 'Știai că pielea este cel mai mare organ activ al corpului și că are nevoie de îngrijire specializată, la fel ca orice alt organ?' },
+  { key: 'q12_fibroblast', nr: 12, text: 'Ai auzit vreodată de fibroblast și rolul lui în producerea colagenului și elastinei?' },
+  { key: 'q13_fibroblast_colagen', nr: 13, text: 'Știai că stimularea fibroblastului este una dintre cele mai eficiente metode de a regenera pielea și de a reda fermitatea?' },
+  { key: 'q14_fata_greutati', nr: 14, text: 'Dacă ai face exerciții cu greutăți pentru față și gât, crezi că pielea ar deveni mai fermă?' },
+  { key: 'q15_tratamente_fibroblast', nr: 15, text: 'Ce tratamente estetice ai mai făcut sau ai în vedere?', multi: true },
+  { key: 'q16_cunosti_pielea', nr: 16, text: 'Cât de des simți că vrei să schimbi ceva la aspectul tău fizic?' },
+  { key: 'q17_viitor_piele', nr: 17, text: 'Ce ai vrea să îmbunătățești la corpul sau pielea ta?', multi: true },
+  { key: 'q18_sport_piele', nr: 18, text: 'Cât de des faci tratamente faciale profesionale?' },
+  { key: 'q19_fermitate_fata', nr: 19, text: 'Ce tipuri de tratamente faciale ai mai încercat?', multi: true },
+  { key: 'q20_observi', nr: 20, text: 'Câtă atenție acorzi sănătății pielii față de sportul pe care îl practici?' },
+  { key: 'q21_normala', nr: 21, text: 'Ai primit vreodată explicații clare despre ce tip de ten ai și ce are nevoie pielea ta?' },
+  { key: 'q22_problema', nr: 22, text: 'Ai primit vreodată un plan profesional de îngrijire a pielii, pe termen lung?' },
+  { key: 'q23_slabit', nr: 23, text: 'Ce te oprește să investești mai mult în îngrijirea pielii?', multi: true },
+  { key: 'q24_tratamente', nr: 24, text: 'Cât de bine cunoști pielea ta ca organ?' },
+  { key: 'q25_tratament_facial', nr: 25, text: 'În ce momente simți că ai vrea să începi să ai mai multă grijă de tine?', multi: true },
+  { key: 'q26_explicatii', nr: 26, text: 'Cât de consecventă ești cu rutina de îngrijire a pielii acasă?' },
+  { key: 'q27_plan_termen', nr: 27, text: 'Ai fi deschisă să lucrezi cu un specialist care să îți ofere un plan personalizat de îngrijire a pielii?' },
+];
+
+// ─── Types ──────────────────────────────────────────────────────────────────
+type Response = Record<string, string>;
+
+// ─── Helper ─────────────────────────────────────────────────────────────────
+function pct(count: number, total: number) {
+  if (total === 0) return 0;
+  return Math.round((count / total) * 100);
 }
 
+// ─── StatCard ───────────────────────────────────────────────────────────────
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
     <div className="bg-white border border-[#E8E1D8] p-5 flex flex-col gap-1" style={{ boxShadow: '0 1px 8px rgba(74,64,58,0.05)' }}>
@@ -27,42 +66,185 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   );
 }
 
-function ChartCard({ title, children }: { title: string; children: React.ReactNode }) {
+// ─── QuestionCard ────────────────────────────────────────────────────────────
+function QuestionCard({
+  question,
+  counts,
+  total,
+  responses,
+  multi,
+}: {
+  question: QuestionDef;
+  counts: Record<string, number>;
+  total: number;
+  responses: Response[];
+  multi?: boolean;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [filterOption, setFilterOption] = useState<string | null>(null);
+
+  const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  const maxCount = entries[0]?.[1] || 1;
+
+  // For multi-select, effective total is total responses (not sum of options)
+  const effectiveTotal = multi ? total : total;
+
+  // People who responded to this question (non-empty)
+  const respondents = responses.filter(r => {
+    const val = r[question.key] ?? '';
+    return val.trim() !== '';
+  });
+
+  // Filter by clicked bar option
+  const filteredByOption = filterOption
+    ? respondents.filter(r => {
+        const val = r[question.key] ?? '';
+        if (multi) {
+          return val.split(',').map(s => s.trim()).includes(filterOption);
+        }
+        return val === filterOption;
+      })
+    : respondents;
+
   return (
-    <div className="bg-white border border-[#E8E1D8] p-5" style={{ boxShadow: '0 1px 8px rgba(74,64,58,0.05)' }}>
-      <p className="text-sm mb-4 uppercase tracking-widest" style={{ fontFamily: 'var(--font-montserrat)', color: TAUPE, fontWeight: 500 }}>{title}</p>
-      {children}
+    <div className="bg-white border border-[#E8E1D8]" style={{ boxShadow: '0 1px 8px rgba(74,64,58,0.05)' }}>
+      {/* Header */}
+      <div className="px-5 pt-5 pb-3 border-b border-[#F1F5F9]">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-start gap-2">
+            <span className="text-xs font-semibold shrink-0 mt-0.5" style={{ color: GOLD, fontFamily: 'var(--font-montserrat)' }}>
+              {question.nr}.
+            </span>
+            <p className="text-sm leading-snug" style={{ fontFamily: 'var(--font-montserrat)', color: TAUPE, fontWeight: 500 }}>
+              {question.text}
+            </p>
+          </div>
+          <span className="text-xs shrink-0" style={{ color: '#9CA3AF', fontFamily: 'var(--font-montserrat)' }}>
+            {respondents.length} răsp.
+          </span>
+        </div>
+        {multi && (
+          <p className="mt-2 text-xs" style={{ fontFamily: 'var(--font-montserrat)', color: '#6B7280' }}>
+            Răspuns multiplu — procentele pot depăși 100% cumulat
+          </p>
+        )}
+      </div>
+
+      {/* Bars */}
+      <div className="px-5 py-4 flex flex-col gap-2">
+        {entries.length === 0 && (
+          <p className="text-xs py-2" style={{ color: '#9CA3AF', fontFamily: 'var(--font-montserrat)' }}>Nu există răspunsuri încă.</p>
+        )}
+        {entries.map(([option, count]) => {
+          const barPct = pct(count, effectiveTotal);
+          const barWidth = pct(count, maxCount);
+          const isActive = filterOption === option;
+          return (
+            <button
+              key={option}
+              type="button"
+              onClick={() => {
+                setFilterOption(isActive ? null : option);
+                setExpanded(true);
+              }}
+              className="w-full text-left group"
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <span
+                  className="text-xs leading-snug flex-1"
+                  style={{
+                    fontFamily: 'var(--font-montserrat)',
+                    color: isActive ? TAUPE : '#4B5563',
+                    fontWeight: isActive ? 600 : 400,
+                  }}
+                >
+                  {option}
+                </span>
+                <span className="text-xs shrink-0" style={{ fontFamily: 'var(--font-montserrat)', color: isActive ? TAUPE : '#9CA3AF', minWidth: 48, textAlign: 'right' }}>
+                  {count} ({barPct}%)
+                </span>
+              </div>
+              <div style={{ height: 8, background: '#F1F5F9', borderRadius: 4, overflow: 'hidden' }}>
+                <div
+                  style={{
+                    height: '100%',
+                    width: `${barWidth}%`,
+                    background: isActive ? TAUPE : GOLD,
+                    borderRadius: 4,
+                    transition: 'width 0.4s ease, background 0.2s',
+                  }}
+                />
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Toggle individual responses */}
+      <div className="px-5 pb-4">
+        <button
+          type="button"
+          onClick={() => { setExpanded(e => !e); if (expanded) setFilterOption(null); }}
+          className="text-xs uppercase tracking-wide transition-colors"
+          style={{ fontFamily: 'var(--font-montserrat)', color: expanded ? '#9CA3AF' : GOLD, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+        >
+          {expanded ? '↑ Ascunde răspunsurile' : '↓ Vezi răspunsurile individuale'}
+        </button>
+      </div>
+
+      {/* Individual responses table */}
+      {expanded && (
+        <div className="border-t border-[#F1F5F9]">
+          {filterOption && (
+            <div className="px-5 py-2 flex items-center gap-2" style={{ background: '#FBF7F0' }}>
+              <span className="text-xs" style={{ fontFamily: 'var(--font-montserrat)', color: TAUPE }}>
+                Filtrat: <strong>{filterOption}</strong>
+              </span>
+              <button
+                type="button"
+                onClick={() => setFilterOption(null)}
+                className="text-xs ml-auto"
+                style={{ fontFamily: 'var(--font-montserrat)', color: '#9CA3AF', background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                × Șterge filtru
+              </button>
+            </div>
+          )}
+          <table className="w-full">
+            <thead>
+              <tr style={{ background: '#F8FAFC' }}>
+                <th className="px-5 py-2 text-left text-xs uppercase tracking-wide" style={{ color: '#94A3B8', fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>Nume</th>
+                <th className="px-5 py-2 text-left text-xs uppercase tracking-wide" style={{ color: '#94A3B8', fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>Răspuns</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredByOption.length === 0 && (
+                <tr>
+                  <td colSpan={2} className="px-5 py-4 text-xs text-center" style={{ color: '#9CA3AF', fontFamily: 'var(--font-montserrat)' }}>
+                    Nicio persoană cu acest răspuns.
+                  </td>
+                </tr>
+              )}
+              {filteredByOption.map((resp, i) => (
+                <tr key={resp.id || i} style={{ borderTop: '1px solid #F8FAFC' }} className="hover:bg-[#FDFCFB] transition-colors">
+                  <td className="px-5 py-2 text-sm" style={{ color: TAUPE, fontFamily: 'var(--font-montserrat)', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                    {resp.nume || '—'}
+                  </td>
+                  <td className="px-5 py-2 text-sm" style={{ color: '#4B5563', fontFamily: 'var(--font-montserrat)' }}>
+                    {resp[question.key] || '—'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
 
-function SimpleBar({ data }: { data: { name: string; value: number }[] }) {
-  return (
-    <ResponsiveContainer width="100%" height={200}>
-      <BarChart data={data} layout="vertical" margin={{ left: 8, right: 24 }}>
-        <XAxis type="number" tick={{ fontSize: 11, fontFamily: 'var(--font-montserrat)' }} />
-        <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fontFamily: 'var(--font-montserrat)' }} width={130} />
-        <Tooltip contentStyle={{ fontFamily: 'var(--font-montserrat)', fontSize: 12 }} />
-        <Bar dataKey="value" fill={GOLD} radius={[0, 3, 3, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
-  );
-}
-
-function SimplePie({ data }: { data: { name: string; value: number }[] }) {
-  return (
-    <ResponsiveContainer width="100%" height={220}>
-      <PieChart>
-        <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label={({ name, percent }) => `${name ?? ''} ${(((percent as number) ?? 0) * 100).toFixed(0)}%`} labelLine={false}>
-          {data.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
-        </Pie>
-        <Tooltip contentStyle={{ fontFamily: 'var(--font-montserrat)', fontSize: 12 }} />
-        <Legend wrapperStyle={{ fontFamily: 'var(--font-montserrat)', fontSize: 11 }} />
-      </PieChart>
-    </ResponsiveContainer>
-  );
-}
-
+// ─── ShareButton ─────────────────────────────────────────────────────────────
 const SURVEY_URL = 'https://www.roxanaicaaesthetic.com/chestionar';
 const SHARE_TEXT = 'Completează chestionarul Roxana Ica Aesthetic — află cât de bine îți cunoști pielea! 🌿';
 
@@ -120,6 +302,7 @@ function ShareButton() {
   );
 }
 
+// ─── Main ─────────────────────────────────────────────────────────────────────
 export default function AdminSurveyClient() {
   const [password, setPassword] = useState('');
   const [authed, setAuthed] = useState(false);
@@ -182,23 +365,19 @@ export default function AdminSurveyClient() {
 
   const handleExport = (leadsOnly: boolean) => {
     const url = `/api/admin/export${leadsOnly ? '?leads=true' : ''}`;
-    const a = document.createElement('a');
-    a.href = url;
-    a.setAttribute('x-admin-password', password);
-    // Folosim fetch pentru a trimite header-ul
     fetch(url, { headers: { 'x-admin-password': password } })
       .then(r => r.blob())
       .then(blob => {
         const u = URL.createObjectURL(blob);
-        const a2 = document.createElement('a');
-        a2.href = u;
-        a2.download = leadsOnly ? 'leads-analiza.csv' : 'survey-raspunsuri.csv';
-        a2.click();
+        const a = document.createElement('a');
+        a.href = u;
+        a.download = leadsOnly ? 'leads-analiza.csv' : 'survey-raspunsuri.csv';
+        a.click();
         URL.revokeObjectURL(u);
       });
   };
 
-  // ─── Login ──────────────────────────────────────────────────────────────
+  // ─── Login ─────────────────────────────────────────────────────────────────
   if (!authed) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ background: IVORY }}>
@@ -234,6 +413,7 @@ export default function AdminSurveyClient() {
   const tracking = (data?.tracking as Record<string, number>) || {};
   const leadsInfo = (data?.leads as Record<string, number>) || {};
   const insights = (data?.insights as string[]) || [];
+  const responses = (data?.responses as Response[]) || [];
   const total = (data?.total as number) || 0;
 
   const tabs = [
@@ -257,7 +437,7 @@ export default function AdminSurveyClient() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Filtre perioadă */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {[['all', 'Total'], ['7d', 'Ultimele 7 zile'], ['30d', 'Ultimele 30 zile']].map(([val, label]) => (
@@ -290,6 +470,7 @@ export default function AdminSurveyClient() {
 
         {loading && <p className="text-center py-16 text-sm" style={{ color: '#9CA3AF' }}>Se încarcă...</p>}
 
+        {/* ── DASHBOARD ── */}
         {!loading && activeTab === 'dashboard' && (
           <>
             {/* Stats principale */}
@@ -300,42 +481,26 @@ export default function AdminSurveyClient() {
               <StatCard label="Analiză solicitată" value={tracking.analysisRequested || 0} sub={`${tracking.conversionRate || 0}% din completări`} />
             </div>
 
-            {/* Grafice */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <ChartCard title="Distribuție vârstă">
-                <SimplePie data={toChartData(charts.varsta)} />
-              </ChartCard>
-              <ChartCard title="Frecvență sport">
-                <SimpleBar data={toChartData(charts.sport)} />
-              </ChartCard>
-              <ChartCard title="Motiv principal sport">
-                <SimpleBar data={toChartData(charts.motivSport)} />
-              </ChartCard>
-              <ChartCard title="Atenție la alimentație">
-                <SimplePie data={toChartData(charts.alimentatie)} />
-              </ChartCard>
-              <ChartCard title="Cunoaștere fibroblast (Q12)">
-                <SimplePie data={toChartData(charts.fibroblast)} />
-              </ChartCard>
-              <ChartCard title="Față/gât - pierdere fermitate (Q19)">
-                <SimplePie data={toChartData(charts.fermitataFata)} />
-              </ChartCard>
-              <ChartCard title="Ce observi la piele (Q20)">
-                <SimpleBar data={toChartData(charts.observi)} />
-              </ChartCard>
-              <ChartCard title="Tratamente faciale profesionale (Q24)">
-                <SimplePie data={toChartData(charts.tratamente)} />
-              </ChartCard>
-              <ChartCard title="Bariere tratamente (Q28)">
-                <SimpleBar data={toChartData(charts.bariere)} />
-              </ChartCard>
-              <ChartCard title="Ce lipsește din plan (Q30)">
-                <SimpleBar data={toChartData(charts.lipseste)} />
-              </ChartCard>
+            {/* Survey Results — toate întrebările */}
+            <p className="text-xs uppercase tracking-widest mb-4" style={{ color: GOLD, fontWeight: 500 }}>
+              Survey Results — {total} răspunsuri
+            </p>
+            <div className="flex flex-col gap-5">
+              {QUESTIONS.map(q => (
+                <QuestionCard
+                  key={q.key}
+                  question={q}
+                  counts={charts[q.key] || {}}
+                  total={total}
+                  responses={responses}
+                  multi={q.multi}
+                />
+              ))}
             </div>
           </>
         )}
 
+        {/* ── LEADS ── */}
         {!loading && activeTab === 'leads' && (
           <div className="bg-white border border-[#E8E1D8] overflow-hidden">
             <div className="px-5 py-4 border-b border-[#F1F5F9] flex items-center justify-between">
@@ -391,6 +556,7 @@ export default function AdminSurveyClient() {
           </div>
         )}
 
+        {/* ── INSIGHTS ── */}
         {!loading && activeTab === 'insights' && (
           <div className="flex flex-col gap-4">
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: GOLD, fontWeight: 500 }}>
@@ -407,7 +573,7 @@ export default function AdminSurveyClient() {
                 <button
                   onClick={() => navigator.clipboard.writeText(insight)}
                   className="mt-3 text-xs uppercase tracking-wide"
-                  style={{ color: GOLD, fontFamily: 'var(--font-montserrat)' }}
+                  style={{ color: GOLD, fontFamily: 'var(--font-montserrat)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                 >
                   Copiază →
                 </button>
@@ -416,12 +582,13 @@ export default function AdminSurveyClient() {
           </div>
         )}
 
+        {/* ── EXPORT ── */}
         {!loading && activeTab === 'export' && (
           <div className="flex flex-col gap-4 max-w-md">
             <p className="text-xs uppercase tracking-widest mb-2" style={{ color: GOLD, fontWeight: 500 }}>Export date</p>
             <div className="bg-white border border-[#E8E1D8] p-6">
               <p className="text-sm font-medium mb-1" style={{ color: TAUPE }}>Toate răspunsurile</p>
-              <p className="text-xs mb-4" style={{ color: '#9CA3AF' }}>Un rând per participantă, toate cele 30 de întrebări.</p>
+              <p className="text-xs mb-4" style={{ color: '#9CA3AF' }}>Un rând per participantă, toate cele 27 de întrebări.</p>
               <button onClick={() => handleExport(false)} className="btn-gold text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 Export CSV complet
               </button>
@@ -435,6 +602,12 @@ export default function AdminSurveyClient() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="text-center py-6">
+        <a href="/admin/survey" className="text-xs" style={{ color: '#7A6F66', opacity: 0.4, fontFamily: 'var(--font-montserrat)', textDecoration: 'none' }}>
+          admin
+        </a>
       </div>
     </div>
   );
