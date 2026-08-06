@@ -229,7 +229,11 @@ export default function SurveyClient() {
     const e: Record<string, string> = {};
     if (step === 0) {
       if (!answers.nume.trim()) e.nume = 'Numele este obligatoriu';
-      if (!answers.telefon.trim()) e.telefon = 'Telefonul este obligatoriu';
+      if (!answers.telefon.trim()) {
+        e.telefon = 'Telefonul este obligatoriu';
+      } else if (!/^(\+4|004)?07\d{8}$/.test(answers.telefon.replace(/\s/g, ''))) {
+        e.telefon = 'Număr de telefon invalid (ex: 07xx xxx xxx)';
+      }
       if (!answers.gdpr_consent) e.gdpr = 'Acordul este obligatoriu pentru a continua';
     }
     if (step === 1) {
