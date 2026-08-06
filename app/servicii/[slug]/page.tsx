@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BeforeAfterCarousel from '@/components/BeforeAfterCarousel';
 import MentoratPrezentare from '@/components/MentoratPrezentare';
+import SkinAssessment from '@/components/SkinAssessment';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -392,6 +393,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </div>
         </section>
       )}
+
+      {slug === 'skin-analyzer' && <SkinAssessment />}
 
       <Footer />
     </>
