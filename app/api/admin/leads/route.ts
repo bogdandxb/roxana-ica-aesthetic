@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
   const { data, error } = await supabaseAdmin
     .from('survey_responses')
     .select('id, nume, telefon, doreste_analiza, analiza_consent_at, created_at, lead_status, q1_varsta, q30_lipseste')
-    .eq('doreste_analiza', true)
     .order('created_at', { ascending: false });
 
   if (error) return NextResponse.json({ error: 'Eroare' }, { status: 500 });

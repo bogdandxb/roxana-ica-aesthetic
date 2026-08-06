@@ -339,7 +339,7 @@ export default function AdminSurveyClient() {
         {!loading && activeTab === 'leads' && (
           <div className="bg-white border border-[#E8E1D8] overflow-hidden">
             <div className="px-5 py-4 border-b border-[#F1F5F9] flex items-center justify-between">
-              <p className="text-sm font-medium" style={{ color: TAUPE }}>{leadsInfo.count || 0} persoane au solicitat analiza facială gratuită</p>
+              <p className="text-sm font-medium" style={{ color: TAUPE }}>{leads.length} persoane au completat · {leadsInfo.count || 0} au solicitat analiza gratuită</p>
               <button onClick={() => handleExport(true)} className="text-xs px-4 py-2 border border-[#E8E1D8] hover:border-[#C6A769] transition-all" style={{ color: TAUPE }}>
                 Export leads CSV
               </button>
@@ -348,7 +348,7 @@ export default function AdminSurveyClient() {
               <table className="w-full">
                 <thead>
                   <tr style={{ borderBottom: '1px solid #F1F5F9', background: '#F8FAFC' }}>
-                    {['Nume', 'Telefon', 'Data', 'Status'].map(h => (
+                    {['Nume', 'Telefon', 'Analiză', 'Data', 'Status'].map(h => (
                       <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-wide" style={{ color: '#94A3B8' }}>{h}</th>
                     ))}
                   </tr>
@@ -360,6 +360,11 @@ export default function AdminSurveyClient() {
                       <td className="px-4 py-3 text-sm font-medium" style={{ color: TAUPE }}>{lead.nume}</td>
                       <td className="px-4 py-3 text-sm" style={{ color: '#64748B' }}>
                         <a href={`tel:${lead.telefon}`} className="hover:underline" style={{ color: GOLD }}>{lead.telefon}</a>
+                      </td>
+                      <td className="px-4 py-3 text-sm">
+                        {lead.doreste_analiza
+                          ? <span style={{ color: '#16A34A', fontWeight: 600, fontSize: 11 }}>✓ DA</span>
+                          : <span style={{ color: '#9CA3AF', fontSize: 11 }}>Nu</span>}
                       </td>
                       <td className="px-4 py-3 text-sm" style={{ color: '#64748B' }}>
                         {new Date(lead.created_at).toLocaleDateString('ro-RO', { day: '2-digit', month: 'short', year: 'numeric' })}
@@ -378,7 +383,7 @@ export default function AdminSurveyClient() {
                     </tr>
                   ))}
                   {leads.length === 0 && (
-                    <tr><td colSpan={4} className="px-4 py-12 text-center text-sm" style={{ color: '#9CA3AF' }}>Nu există lead-uri încă.</td></tr>
+                    <tr><td colSpan={5} className="px-4 py-12 text-center text-sm" style={{ color: '#9CA3AF' }}>Nu există răspunsuri încă.</td></tr>
                   )}
                 </tbody>
               </table>
