@@ -710,6 +710,161 @@ function SurveyAdmin({ password, data, leads, loading, onUpdateLead, onExport }:
   );
 }
 
+// ─── AUDIT FISA ──────────────────────────────────────────────────────────────
+const NIVEL_DOMENII = [
+  { key: 'nivel_biologie_pielii', label: 'Biologia pielii' },
+  { key: 'nivel_bariera_cutanata', label: 'Bariera cutanată' },
+  { key: 'nivel_microbiom', label: 'Microbiom' },
+  { key: 'nivel_inflamatie_cutanata', label: 'Inflamație cutanată' },
+  { key: 'nivel_acnee', label: 'Acnee' },
+  { key: 'nivel_rozacee', label: 'Rozacee' },
+  { key: 'nivel_melasma', label: 'Melasma' },
+  { key: 'nivel_peelinguri', label: 'Peelinguri' },
+  { key: 'nivel_microneedling', label: 'Microneedling' },
+  { key: 'nivel_consultatie_analiza', label: 'Consultație și analiză' },
+  { key: 'nivel_construire_protocoale', label: 'Construire protocoale' },
+  { key: 'nivel_recomandare_homecare', label: 'Recomandare homecare' },
+];
+
+function AuditSection({ title }: { title: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '28px 0 16px', borderBottom: `2px solid ${GOLD}`, paddingBottom: 8 }}>
+      <h3 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.2rem', color: TAUPE, margin: 0 }}>{title}</h3>
+    </div>
+  );
+}
+
+function AuditRow({ label, value }: { label: string; value: unknown }) {
+  if (!value || value === '—') return null;
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <p style={{ fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: 'var(--font-montserrat)', marginBottom: 4 }}>{label}</p>
+      <p style={{ fontSize: 13, color: TAUPE, fontFamily: 'var(--font-montserrat)', lineHeight: 1.6 }}>{String(value)}</p>
+    </div>
+  );
+}
+
+function AuditFisa({ record: r, onBack }: { record: Record<string, unknown>; onBack: () => void }) {
+  const servicii = r.servicii as Record<string, { pret: string; nr_cliente: string }> | null;
+  const dificultati = r.dificultati_social_media as string[] | null;
+
+  return (
+    <div>
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-montserrat)', padding: 0, marginBottom: 20 }}>← Înapoi la listă</button>
+
+      {/* Header */}
+      <div className="bg-white border border-[#E8E1D8] p-6 mb-4">
+        <p style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: GOLD, fontWeight: 700, fontFamily: 'var(--font-montserrat)', marginBottom: 6 }}>Audit Profesional 360°</p>
+        <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.8rem', color: TAUPE, fontWeight: 400, margin: '0 0 16px' }}>{r.nume as string}</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12 }}>
+          {[['Telefon', r.telefon], ['Email', r.email], ['Oraș', r.oras], ['Experiență', r.ani_experienta], ['Tip activitate', r.tip_lucru], ['Venit lunar', r.venit_lunar], ['Data completării', fmt(r.created_at as string)]].map(([l, v]) => v ? (
+            <div key={l as string}>
+              <p style={{ fontSize: 10, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-montserrat)' }}>{l as string}</p>
+              <p style={{ fontSize: 13, color: TAUPE, fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>{v as string}</p>
+            </div>
+          ) : null)}
+        </div>
+      </div>
+
+      <div className="bg-white border border-[#E8E1D8] p-6">
+
+        {/* 02 Servicii */}
+        <AuditSection title="02 Servicii și profitabilitate" />
+        {servicii && (
+          <div style={{ overflowX: 'auto', marginBottom: 16 }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
+              <thead>
+                <tr style={{ background: TAUPE }}>
+                  <th style={{ padding: '8px 12px', textAlign: 'left', color: GOLD, fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>Serviciu</th>
+                  <th style={{ padding: '8px 12px', textAlign: 'left', color: GOLD, fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>Preț (lei)</th>
+                  <th style={{ padding: '8px 12px', textAlign: 'left', color: GOLD, fontFamily: 'var(--font-montserrat)', fontWeight: 600 }}>Cliente/lună</th>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.entries(servicii).filter(([, v]) => v.pret || v.nr_cliente).map(([s, v], i) => (
+                  <tr key={s} style={{ background: i % 2 === 0 ? 'white' : '#FAF8F5', borderBottom: '1px solid #F1F5F9' }}>
+                    <td style={{ padding: '8px 12px', color: TAUPE, fontFamily: 'var(--font-montserrat)' }}>{s}</td>
+                    <td style={{ padding: '8px 12px', color: TAUPE, fontFamily: 'var(--font-montserrat)' }}>{v.pret || '—'}</td>
+                    <td style={{ padding: '8px 12px', color: TAUPE, fontFamily: 'var(--font-montserrat)' }}>{v.nr_cliente || '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        <AuditRow label="Serviciul care aduce cei mai mulți bani" value={r.serviciu_mai_multi_bani} />
+        <AuditRow label="Cel mai ușor de vândut" value={r.serviciu_cel_mai_usor} />
+        <AuditRow label="Cel mai greu de vândut" value={r.serviciu_cel_mai_greu} />
+        <AuditRow label="Consumă cel mai mult timp" value={r.serviciu_cel_mai_mult_timp} />
+        <AuditRow label="Cea mai mare marjă de profit" value={r.serviciu_marja_mare} />
+
+        {/* 03 Oportunitati */}
+        <AuditSection title="03 Oportunități pierdute" />
+        <AuditRow label="Procedură cerută și neofertă" value={r.procedura_ceruta_neoferta} />
+        <AuditRow label="Procedură de introdus" value={r.procedura_de_introdus} />
+        <AuditRow label="Tip clientă neajutată" value={r.tip_clienta_neajutata} />
+        <AuditRow label="Cazuri refuzate" value={r.cazuri_refuzate} />
+        <AuditRow label="Cazuri acceptate fără încredere deplină" value={r.cazuri_fara_incredere} />
+
+        {/* 04 Nivel profesional */}
+        <AuditSection title="04 Nivel profesional" />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 8, marginBottom: 16 }}>
+          {NIVEL_DOMENII.map(d => {
+            const val = r[d.key] as number | null;
+            if (!val) return null;
+            return (
+              <div key={d.key} style={{ background: '#FAF8F5', border: '1px solid #E8E1D8', borderRadius: 8, padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span style={{ fontSize: 12, color: TAUPE, fontFamily: 'var(--font-montserrat)' }}>{d.label}</span>
+                <span style={{ fontSize: 18, fontWeight: 700, color: GOLD, fontFamily: 'var(--font-cormorant)' }}>{val}<span style={{ fontSize: 11, color: '#9CA3AF', fontWeight: 400 }}>/10</span></span>
+              </div>
+            );
+          })}
+        </div>
+        <AuditRow label="Subiect evitat" value={r.subiect_evitat} />
+        <AuditRow label="Procedură fără curaj să o promoveze" value={r.procedura_fara_curaj} />
+
+        {/* 05 Diferentiere */}
+        <AuditSection title="05 Diferențiere" />
+        <AuditRow label="De ce te aleg clientele" value={r.de_ce_te_aleg} />
+        <AuditRow label="Ce te diferențiază" value={r.ce_te_diferentiaza} />
+        <AuditRow label="Expertiza dorită" value={r.expertiza_dorita} />
+        <AuditRow label="Ce să spună clientele" value={r.ce_sa_spuna_clientele} />
+
+        {/* 06 Social Media */}
+        <AuditSection title="06 Social Media & Exposure" />
+        <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap', marginBottom: 12 }}>
+          {[['Instagram', r.instagram_urmatori], ['Facebook', r.facebook_urmatori], ['TikTok', r.tiktok_urmatori]].map(([p, v]) => v ? (
+            <div key={p as string} style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: 10, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-montserrat)' }}>{p as string}</p>
+              <p style={{ fontSize: 20, fontWeight: 300, color: TAUPE, fontFamily: 'var(--font-cormorant)' }}>{v as string}</p>
+            </div>
+          ) : null)}
+        </div>
+        <AuditRow label="Website" value={r.are_website === true ? 'Da' : r.are_website === false ? 'Nu' : null} />
+        <AuditRow label="Google Business" value={r.are_google_business === true ? 'Da' : r.are_google_business === false ? 'Nu' : null} />
+        <AuditRow label="Frecvența postare" value={r.frecventa_postare} />
+        {dificultati && dificultati.length > 0 && <AuditRow label="Dificultăți social media" value={dificultati.join(', ')} />}
+        <AuditRow label="Impact postare constantă" value={r.impact_postare_constanta} />
+
+        {/* 07 Viziune */}
+        <AuditSection title="07 Viziune" />
+        <AuditRow label="Unde vrei să fii peste 12 luni" value={r.viziune_12_luni} />
+        <AuditRow label="Procedură de stăpânit" value={r.procedura_de_stapanit} />
+        <AuditRow label="Venit considerat succes" value={r.venit_succes} />
+        <AuditRow label="Tip clientele dorite" value={r.tip_clientele_dorite} />
+        <AuditRow label="Următorul nivel profesional" value={r.urmatorul_nivel} />
+
+        {/* 08 Gap Analysis */}
+        <AuditSection title="08 Gap Analysis" />
+        <AuditRow label="Ce funcționează bine" value={r.ce_functioneaza_bine} />
+        <AuditRow label="Ce limitează creșterea" value={r.ce_limiteaza_cresterea} />
+        <AuditRow label="Limita în 3 ani" value={r.limita_3_ani} />
+        <AuditRow label="Abilitate cu cel mai mare impact" value={r.abilitate_impact} />
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function AdminSurveyClient() {
   const [password, setPassword] = useState('');
@@ -719,7 +874,11 @@ export default function AdminSurveyClient() {
   const [leads, setLeads] = useState<Record<string, string>[]>([]);
   const [loading, setLoading] = useState(false);
   const [period, setPeriod] = useState('all');
-  const [mainTab, setMainTab] = useState<'skin-assessment' | 'survey'>('skin-assessment');
+  const [mainTab, setMainTab] = useState<'skin-assessment' | 'survey' | 'audit'>('skin-assessment');
+  const [auditRecords, setAuditRecords] = useState<Record<string, unknown>[]>([]);
+  const [auditSearch, setAuditSearch] = useState('');
+  const [auditSelected, setAuditSelected] = useState<Record<string, unknown> | null>(null);
+  const [auditLoading, setAuditLoading] = useState(false);
 
   const fetchData = useCallback(async (pwd: string, p: string) => {
     setLoading(true);
@@ -756,6 +915,20 @@ export default function AdminSurveyClient() {
   useEffect(() => {
     if (authed) fetchData(password, period);
   }, [period, authed, password, fetchData]);
+
+  const fetchAudit = useCallback(async (search = '') => {
+    setAuditLoading(true);
+    try {
+      const res = await fetch(`/api/audit-profesional/admin?search=${encodeURIComponent(search)}`, { headers: { 'x-admin-password': password } });
+      const json = await res.json();
+      setAuditRecords(json.records || []);
+    } catch { /* ignore */ } finally {
+      setAuditLoading(false); }
+  }, [password]);
+
+  useEffect(() => {
+    if (authed && mainTab === 'audit') fetchAudit(auditSearch);
+  }, [authed, mainTab, auditSearch, fetchAudit]);
 
   const handleExport = (leadsOnly: boolean) => {
     const url = `/api/admin/export${leadsOnly ? '?leads=true' : ''}`;
@@ -814,9 +987,9 @@ export default function AdminSurveyClient() {
         )}
 
         {/* Main tabs */}
-        <div className="flex border-b-2 border-[#E8E1D8] mb-8">
-          {[['skin-assessment', '✦ Skin Assessment'], ['survey', 'Survey — Cât de bine ai grijă de tine?']].map(([k, l]) => (
-            <button key={k} onClick={() => setMainTab(k as 'skin-assessment' | 'survey')}
+        <div className="flex border-b-2 border-[#E8E1D8] mb-8 flex-wrap">
+          {[['skin-assessment', '✦ Skin Assessment'], ['survey', 'Survey'], ['audit', '◈ Audit Profesional 360°']].map(([k, l]) => (
+            <button key={k} onClick={() => setMainTab(k as 'skin-assessment' | 'survey' | 'audit')}
               className="px-6 py-4 text-xs uppercase tracking-wide transition-all border-b-2 -mb-0.5"
               style={{ borderColor: mainTab === k ? GOLD : 'transparent', color: mainTab === k ? TAUPE : '#9CA3AF', fontWeight: mainTab === k ? 600 : 400, background: mainTab === k ? 'white' : 'transparent' }}>
               {l}
@@ -835,6 +1008,65 @@ export default function AdminSurveyClient() {
             onUpdateLead={(id, status) => setLeads(prev => prev.map(l => l.id === id ? { ...l, lead_status: status } : l))}
             onExport={handleExport}
           />
+        )}
+
+        {mainTab === 'audit' && (
+          <div>
+            {auditSelected ? (
+              <AuditFisa record={auditSelected} onBack={() => setAuditSelected(null)} />
+            ) : (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <p className="text-xs uppercase tracking-widest" style={{ color: GOLD, fontWeight: 500 }}>Audit Profesional 360° — {auditRecords.length} completări</p>
+                  <a href="/audit-profesional" target="_blank" className="text-xs px-4 py-2 border" style={{ borderColor: GOLD, color: GOLD, textDecoration: 'none', fontFamily: 'var(--font-montserrat)' }}>
+                    ↗ Link audit
+                  </a>
+                </div>
+                <input type="text" placeholder="Caută după nume, telefon, oraș..." value={auditSearch}
+                  onChange={e => setAuditSearch(e.target.value)}
+                  className="w-full px-4 py-2 border text-xs outline-none mb-4"
+                  style={{ fontFamily: 'var(--font-montserrat)', borderColor: '#E8E1D8', borderRadius: 0, color: TAUPE }} />
+                {auditLoading && <p className="text-center py-10 text-sm" style={{ color: '#9CA3AF' }}>Se încarcă...</p>}
+                {!auditLoading && auditRecords.length === 0 && (
+                  <div className="bg-white border border-[#E8E1D8] p-10 text-center">
+                    <p className="text-sm" style={{ color: '#9CA3AF' }}>Niciun audit completat încă.</p>
+                  </div>
+                )}
+                {!auditLoading && auditRecords.length > 0 && (
+                  <div className="bg-white border border-[#E8E1D8] overflow-hidden">
+                    <table className="w-full">
+                      <thead>
+                        <tr style={{ background: '#F8FAFC', borderBottom: '1px solid #F1F5F9' }}>
+                          {['Nume', 'Oraș', 'Experiență', 'Venit lunar', 'Data', ''].map(h => (
+                            <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-wide" style={{ color: '#94A3B8', fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {auditRecords.map((r, i) => (
+                          <tr key={r.id as string} style={{ borderBottom: '1px solid #F1F5F9', background: i % 2 === 0 ? 'white' : '#FAFAFA' }}>
+                            <td className="px-4 py-3">
+                              <p className="text-sm font-medium" style={{ color: TAUPE }}>{r.nume as string}</p>
+                              <p className="text-xs" style={{ color: '#9CA3AF' }}>{r.telefon as string || '—'}</p>
+                            </td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.oras as string || '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.ani_experienta as string || '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.venit_lunar as string || '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: '#9CA3AF' }}>{fmt(r.created_at as string)}</td>
+                            <td className="px-4 py-3">
+                              <button onClick={() => setAuditSelected(r)} className="text-xs px-3 py-1 border" style={{ borderColor: GOLD, color: GOLD, background: 'none', cursor: 'pointer', fontFamily: 'var(--font-montserrat)' }}>
+                                Vezi →
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         )}
       </div>
 
