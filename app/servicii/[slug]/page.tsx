@@ -227,6 +227,37 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <p className="text-[#C6A769] text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
                 Roxana Ica Aesthetic – Diferența care se simte.
               </p>
+
+              {/* Audit Profesional 360° */}
+              <div className="w-full mt-8 border border-[#C6A769] bg-[#F8F6F2] p-8 flex flex-col gap-5">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[#C6A769] text-xs tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                    Înainte de mentorat
+                  </span>
+                  <h3 className="text-3xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+                    Audit Profesional 360°
+                  </h3>
+                  <p className="text-[#7A6F66] text-sm leading-relaxed mt-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                    Analiza completă a practicii tale de cosmetică — servicii, profitabilitate, nivel profesional, prezență online și viziune. Un diagnostic real al businessului tău, înainte de a construi împreună un plan de dezvoltare.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {['Situația ta actuală — venit, tip activitate, clientele', 'Servicii și profitabilitate reală', 'Oportunități pe care le pierzi acum', 'Nivelul tău profesional pe 12 domenii', 'Prezența ta în social media', 'Viziunea și obiectivele tale'].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3 text-sm text-[#7A6F66]" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                      <span className="text-[#C6A769] mt-0.5 flex-shrink-0">◇</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href="/audit-profesional"
+                  className="self-start flex items-center gap-3 px-8 py-4 bg-[#4A403A] text-white text-xs tracking-widest uppercase hover:bg-[#C6A769] transition-all duration-300"
+                  style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}
+                >
+                  Completează auditul gratuit →
+                </Link>
+              </div>
+
               <MentoratPrezentare />
             </div>
           )}
