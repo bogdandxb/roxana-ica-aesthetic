@@ -1018,9 +1018,7 @@ export default function AdminSurveyClient() {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xs uppercase tracking-widest" style={{ color: GOLD, fontWeight: 500 }}>Audit Profesional 360° — {auditRecords.length} completări</p>
-                  <a href="/audit-profesional" target="_blank" className="text-xs px-4 py-2 border" style={{ borderColor: GOLD, color: GOLD, textDecoration: 'none', fontFamily: 'var(--font-montserrat)' }}>
-                    ↗ Link audit
-                  </a>
+                  <ShareButton url="https://www.roxanaicaaesthetic.com/audit-profesional" text="Completează Auditul Profesional 360° Roxana Ica Aesthetic — analiza completă a practicii tale de cosmetică. ✦" />
                 </div>
                 <input type="text" placeholder="Caută după nume, telefon, oraș..." value={auditSearch}
                   onChange={e => setAuditSearch(e.target.value)}
