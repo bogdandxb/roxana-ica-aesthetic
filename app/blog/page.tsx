@@ -115,9 +115,19 @@ function ArticleCard({ article }: { article: Article }) {
     <Link href={`/blog/${article.slug}`} className="group flex flex-col bg-white border border-[#E8E1D8] hover:border-[#C6A769] transition-all duration-300 hover:shadow-md">
       {/* Image */}
       <div className="relative w-full aspect-[4/3] bg-[#E8E1D8] overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[#C6A769] opacity-30 text-5xl" style={{ fontFamily: 'var(--font-cormorant)' }}>✦</span>
-        </div>
+        {article.image && !article.image.includes('placeholder') ? (
+          <Image
+            src={article.image}
+            alt={article.imageAlt}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[#C6A769] opacity-30 text-5xl" style={{ fontFamily: 'var(--font-cormorant)' }}>✦</span>
+          </div>
+        )}
         {/* Category badge */}
         <span
           className="absolute top-4 left-4 px-3 py-1 text-[10px] tracking-[0.15em] uppercase bg-[#C6A769] text-white z-10"

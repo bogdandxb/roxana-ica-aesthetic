@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { articles, getArticleBySlug, getRelatedArticles, CATEGORY_SLUGS } from '@/lib/blog';
 import Navigation from '@/components/Navigation';
@@ -90,12 +91,25 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </header>
 
-      {/* Article image placeholder */}
+      {/* Article image */}
       <div className="px-6 mb-12 bg-[#F8F6F2]">
         <div className="max-w-3xl mx-auto">
-          <div className="w-full aspect-[16/7] bg-[#E8E1D8] flex items-center justify-center">
-            <span className="text-[#C6A769] opacity-20 text-8xl" style={{ fontFamily: 'var(--font-cormorant)' }}>✦</span>
-          </div>
+          {article.image && !article.image.includes('placeholder') ? (
+            <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#E8E1D8]">
+              <Image
+                src={article.image}
+                alt={article.imageAlt}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div className="w-full aspect-[16/7] bg-[#E8E1D8] flex items-center justify-center">
+              <span className="text-[#C6A769] opacity-20 text-8xl" style={{ fontFamily: 'var(--font-cormorant)' }}>✦</span>
+            </div>
+          )}
           {article.imageAlt && (
             <p className="text-center text-[10px] text-[#7A6F66] mt-2 tracking-wide" style={{ fontFamily: 'var(--font-montserrat)' }}>
               {article.imageAlt}
