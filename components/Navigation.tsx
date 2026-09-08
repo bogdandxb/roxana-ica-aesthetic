@@ -8,6 +8,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [blogOpen, setBlogOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -36,7 +37,9 @@ export default function Navigation() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-10">
-          <div className="relative group">
+
+          {/* Servicii dropdown */}
+          <div className="relative">
             <button
               className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors flex items-center gap-1"
               style={{ fontFamily: 'var(--font-montserrat)' }}
@@ -49,7 +52,6 @@ export default function Navigation() {
               </svg>
             </button>
 
-            {/* Dropdown */}
             {servicesOpen && (
               <div
                 className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#F8F6F2] border border-[#E8E1D8] shadow-lg py-3"
@@ -66,6 +68,52 @@ export default function Navigation() {
                     {s.title}
                   </Link>
                 ))}
+              </div>
+            )}
+          </div>
+
+          {/* Blog dropdown */}
+          <div className="relative">
+            <button
+              className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors flex items-center gap-1"
+              style={{ fontFamily: 'var(--font-montserrat)' }}
+              onMouseEnter={() => setBlogOpen(true)}
+              onMouseLeave={() => setBlogOpen(false)}
+            >
+              Blog
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {blogOpen && (
+              <div
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#F8F6F2] border border-[#E8E1D8] shadow-lg py-4 px-6"
+                onMouseEnter={() => setBlogOpen(true)}
+                onMouseLeave={() => setBlogOpen(false)}
+              >
+                <Link href="/blog" className="flex flex-col gap-0.5 hover:opacity-80 transition-opacity">
+                  <span
+                    className="text-[#4A403A] text-sm tracking-[0.15em] uppercase"
+                    style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 400, fontSize: '1.1rem' }}
+                  >
+                    The Skin Edit
+                  </span>
+                  <span
+                    className="text-[#7A6F66] text-[10px] tracking-[0.1em]"
+                    style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}
+                  >
+                    Piele. Estetică. Tehnologie. Explicate simplu.
+                  </span>
+                </Link>
+                <div className="h-px bg-[#E8E1D8] my-3" />
+                <Link
+                  href="/blog"
+                  className="block text-[#7A6F66] hover:text-[#C6A769] transition-colors text-xs tracking-wide py-1"
+                  style={{ fontFamily: 'var(--font-montserrat)' }}
+                >
+                  Toate articolele
+                </Link>
               </div>
             )}
           </div>
@@ -133,6 +181,14 @@ export default function Navigation() {
             </Link>
           ))}
           <div className="h-px bg-[#E8E1D8] my-1" />
+          <Link
+            href="/blog"
+            className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors"
+            style={{ fontFamily: 'var(--font-montserrat)' }}
+            onClick={() => setMenuOpen(false)}
+          >
+            Blog — The Skin Edit
+          </Link>
           <Link href="/chestionar" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Chestionar</Link>
           <a href="#despre" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Despre</a>
           <a href="#recenzii" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Recenzii</a>

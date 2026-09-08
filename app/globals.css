@@ -94,3 +94,90 @@ p {
 ::-webkit-scrollbar-thumb { background: linear-gradient(#C9A84C, #8B6914); }
 
 ::selection { background-color: #B8952A; color: #F8F6F2; }
+
+/* Blog article typography */
+.prose-blog {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 0.9375rem;
+  line-height: 1.85;
+  color: #4A403A;
+}
+
+.prose-blog p {
+  color: #4A403A;
+  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.85;
+}
+
+.prose-blog h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: #4A403A;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.03em;
+}
+
+.prose-blog h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: #4A403A;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-blog strong {
+  font-weight: 500;
+  color: #4A403A;
+}
+
+.prose-blog ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.prose-blog ul li {
+  padding-left: 1.25rem;
+  position: relative;
+  color: #4A403A;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9375rem;
+}
+
+.prose-blog ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: #C6A769;
+}
+
+.prose-blog ol {
+  counter-reset: list;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.prose-blog ol li {
+  counter-increment: list;
+  padding-left: 1.75rem;
+  position: relative;
+  color: #4A403A;
+  margin-bottom: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9375rem;
+}
+
+.prose-blog ol li::before {
+  content: counter(list) '.';
+  position: absolute;
+  left: 0;
+  color: #C6A769;
+  font-weight: 500;
+}
