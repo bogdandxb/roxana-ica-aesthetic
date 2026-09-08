@@ -15,12 +15,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage({
+export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: { categorie?: string };
+  searchParams: Promise<{ categorie?: string }>;
 }) {
-  const activeSlug = searchParams?.categorie ?? '';
+  const { categorie } = await searchParams;
+  const activeSlug = categorie ?? '';
   const activeCategory = CATEGORIES.find(c => CATEGORY_SLUGS[c] === activeSlug) ?? null;
   const filtered = activeCategory ? articles.filter(a => a.category === activeCategory) : articles;
   const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
