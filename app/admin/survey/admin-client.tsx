@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { SURVEY_QUESTIONS, type SurveyQuestion } from '@/lib/survey-questions';
+import { SECTIONS as AC_SECTIONS, SCALE_LABELS as AC_SCALE_LABELS, nivelFromMedie } from '@/lib/audit-cosmetica';
 
 const GOLD = '#C6A769';
 const TAUPE = '#4A403A';
@@ -865,6 +866,109 @@ function AuditFisa({ record: r, onBack }: { record: Record<string, unknown>; onB
   );
 }
 
+// ─── AUDIT COSMETICĂ FIȘA ────────────────────────────────────────────────────
+function AuditCosmeticaFisa({ record: r, onBack }: { record: Record<string, unknown>; onBack: () => void }) {
+  const scoruri = (r.scor_pe_sectiuni ?? {}) as Record<string, number>;
+
+  return (
+    <div>
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: GOLD, fontSize: 12, cursor: 'pointer', fontFamily: 'var(--font-montserrat)', padding: 0, marginBottom: 20 }}>← Înapoi la listă</button>
+
+      {/* Header */}
+      <div className="bg-white border border-[#E8E1D8] p-6 mb-4">
+        <p style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.1em', color: GOLD, fontWeight: 700, fontFamily: 'var(--font-montserrat)', marginBottom: 6 }}>Audit: Nivelul de pregătire în cosmetică</p>
+        <h2 style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.8rem', color: TAUPE, fontWeight: 400, margin: '0 0 16px' }}>{r.nume as string}</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12 }}>
+          {[
+            ['Telefon', r.telefon], ['Email', r.email],
+            ['Curs terminat', r.terminat_curs], ['Lucrează cu cliente', r.lucreaza_cu_cliente],
+            ['Scor general', r.scor_general != null ? `${r.scor_general} / 5` : null],
+            ['Data completării', fmt(r.created_at as string)],
+          ].map(([l, v]) => v ? (
+            <div key={l as string}>
+              <p style={{ fontSize: 10, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'var(--font-montserrat)' }}>{l as string}</p>
+              <p style={{ fontSize: 13, color: TAUPE, fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>{v as string}</p>
+            </div>
+          ) : null)}
+        </div>
+      </div>
+
+      {/* Scoruri pe secțiuni */}
+      {Object.keys(scoruri).length > 0 && (
+        <div className="bg-white border border-[#E8E1D8] p-6 mb-4">
+          <AuditSection title="Nivel pe competențe" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {AC_SECTIONS.filter(s => s.scored).map(s => {
+              const medie = scoruri[String(s.nr)];
+              if (medie == null) return null;
+              const niv = nivelFromMedie(medie);
+              return (
+                <div key={s.nr}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5, gap: 10 }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: TAUPE, fontFamily: 'var(--font-montserrat)' }}>{s.title}</span>
+                    <span style={{ fontSize: 11, color: niv.color, fontWeight: 600, fontFamily: 'var(--font-montserrat)', flexShrink: 0 }}>{medie} · {niv.label}</span>
+                  </div>
+                  <div style={{ height: 7, background: '#E8E1D8', borderRadius: 4, overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${(medie / 5) * 100}%`, background: niv.color, borderRadius: 4 }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Toate răspunsurile, pe secțiuni */}
+      <div className="bg-white border border-[#E8E1D8] p-6">
+        {AC_SECTIONS.map(section => {
+          // sar peste secțiunea 0 (datele sunt deja în header) dar arăt proceduri
+          const rows: React.ReactNode[] = [];
+          for (const q of section.questions) {
+            if (['nume', 'telefon', 'email', 'terminat_curs', 'lucreaza_cu_cliente'].includes(q.key)) continue;
+
+            if (q.type === 'scale') {
+              const val = r[q.key] as number | null;
+              const txt = q.textKey ? (r[q.textKey] as string | null) : null;
+              if (val == null && !txt) continue;
+              rows.push(
+                <div key={q.key} style={{ marginBottom: 14 }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-montserrat)', marginBottom: 4 }}>
+                    {q.nr}. {q.text}
+                  </p>
+                  {val != null && (
+                    <p style={{ fontSize: 13, color: GOLD, fontWeight: 700, fontFamily: 'var(--font-montserrat)' }}>
+                      {val} / 5 <span style={{ color: '#9A8F84', fontWeight: 400, fontSize: 12 }}>— {AC_SCALE_LABELS[val]}</span>
+                    </p>
+                  )}
+                  {txt && <p style={{ fontSize: 13, color: TAUPE, fontFamily: 'var(--font-montserrat)', lineHeight: 1.6, marginTop: 3 }}>{txt}</p>}
+                </div>
+              );
+            } else {
+              const val = r[q.key];
+              if (!val) continue;
+              rows.push(
+                <div key={q.key} style={{ marginBottom: 14 }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'var(--font-montserrat)', marginBottom: 4 }}>
+                    {q.nr ? `${q.nr}. ` : ''}{q.text}
+                  </p>
+                  <p style={{ fontSize: 13, color: TAUPE, fontFamily: 'var(--font-montserrat)', lineHeight: 1.6 }}>{String(val)}</p>
+                </div>
+              );
+            }
+          }
+          if (rows.length === 0) return null;
+          return (
+            <div key={section.nr}>
+              <AuditSection title={section.nr === 0 ? 'Date participantă' : `${String(section.nr).padStart(2, '0')} ${section.title}`} />
+              {rows}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
 export default function AdminSurveyClient() {
   const [password, setPassword] = useState('');
@@ -874,11 +978,15 @@ export default function AdminSurveyClient() {
   const [leads, setLeads] = useState<Record<string, string>[]>([]);
   const [loading, setLoading] = useState(false);
   const [period, setPeriod] = useState('all');
-  const [mainTab, setMainTab] = useState<'skin-assessment' | 'survey' | 'audit'>('skin-assessment');
+  const [mainTab, setMainTab] = useState<'skin-assessment' | 'survey' | 'audit' | 'audit-cosmetica'>('skin-assessment');
   const [auditRecords, setAuditRecords] = useState<Record<string, unknown>[]>([]);
   const [auditSearch, setAuditSearch] = useState('');
   const [auditSelected, setAuditSelected] = useState<Record<string, unknown> | null>(null);
   const [auditLoading, setAuditLoading] = useState(false);
+  const [acRecords, setAcRecords] = useState<Record<string, unknown>[]>([]);
+  const [acSearch, setAcSearch] = useState('');
+  const [acSelected, setAcSelected] = useState<Record<string, unknown> | null>(null);
+  const [acLoading, setAcLoading] = useState(false);
 
   const fetchData = useCallback(async (pwd: string, p: string) => {
     setLoading(true);
@@ -929,6 +1037,21 @@ export default function AdminSurveyClient() {
   useEffect(() => {
     if (authed && mainTab === 'audit') fetchAudit(auditSearch);
   }, [authed, mainTab, auditSearch, fetchAudit]);
+
+  const fetchAuditCosmetica = useCallback(async (search = '') => {
+    setAcLoading(true);
+    try {
+      const res = await fetch(`/api/audit-cosmetica/admin?search=${encodeURIComponent(search)}`, { headers: { 'x-admin-password': password } });
+      const json = await res.json();
+      setAcRecords(json.records || []);
+    } catch { /* ignore */ } finally {
+      setAcLoading(false);
+    }
+  }, [password]);
+
+  useEffect(() => {
+    if (authed && mainTab === 'audit-cosmetica') fetchAuditCosmetica(acSearch);
+  }, [authed, mainTab, acSearch, fetchAuditCosmetica]);
 
   const handleExport = (leadsOnly: boolean) => {
     const url = `/api/admin/export${leadsOnly ? '?leads=true' : ''}`;
@@ -988,8 +1111,8 @@ export default function AdminSurveyClient() {
 
         {/* Main tabs */}
         <div className="flex border-b-2 border-[#E8E1D8] mb-8 flex-wrap">
-          {[['skin-assessment', '✦ Skin Assessment'], ['survey', 'Survey'], ['audit', '◈ Audit Profesional 360°']].map(([k, l]) => (
-            <button key={k} onClick={() => setMainTab(k as 'skin-assessment' | 'survey' | 'audit')}
+          {[['skin-assessment', '✦ Skin Assessment'], ['survey', 'Survey'], ['audit', '◈ Audit Profesional 360°'], ['audit-cosmetica', '◆ Audit Nivel Cosmetică']].map(([k, l]) => (
+            <button key={k} onClick={() => setMainTab(k as 'skin-assessment' | 'survey' | 'audit' | 'audit-cosmetica')}
               className="px-6 py-4 text-xs uppercase tracking-wide transition-all border-b-2 -mb-0.5"
               style={{ borderColor: mainTab === k ? GOLD : 'transparent', color: mainTab === k ? TAUPE : '#9CA3AF', fontWeight: mainTab === k ? 600 : 400, background: mainTab === k ? 'white' : 'transparent' }}>
               {l}
@@ -1053,6 +1176,63 @@ export default function AdminSurveyClient() {
                             <td className="px-4 py-3 text-xs" style={{ color: '#9CA3AF' }}>{fmt(r.created_at as string)}</td>
                             <td className="px-4 py-3">
                               <button onClick={() => setAuditSelected(r)} className="text-xs px-3 py-1 border" style={{ borderColor: GOLD, color: GOLD, background: 'none', cursor: 'pointer', fontFamily: 'var(--font-montserrat)' }}>
+                                Vezi →
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {mainTab === 'audit-cosmetica' && (
+          <div>
+            {acSelected ? (
+              <AuditCosmeticaFisa record={acSelected} onBack={() => setAcSelected(null)} />
+            ) : (
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <p className="text-xs uppercase tracking-widest" style={{ color: GOLD, fontWeight: 500 }}>Audit Nivel Cosmetică — {acRecords.length} completări</p>
+                  <ShareButton url="https://www.roxanaicaaesthetic.com/audit-cosmetica" text="Descoperă unde te afli profesional — Audit: Nivelul de pregătire în cosmetică. Roxana Ica Aesthetic. ◆" />
+                </div>
+                <input type="text" placeholder="Caută după nume, telefon, email..." value={acSearch}
+                  onChange={e => setAcSearch(e.target.value)}
+                  className="w-full px-4 py-2 border text-xs outline-none mb-4"
+                  style={{ fontFamily: 'var(--font-montserrat)', borderColor: '#E8E1D8', borderRadius: 0, color: TAUPE }} />
+                {acLoading && <p className="text-center py-10 text-sm" style={{ color: '#9CA3AF' }}>Se încarcă...</p>}
+                {!acLoading && acRecords.length === 0 && (
+                  <div className="bg-white border border-[#E8E1D8] p-10 text-center">
+                    <p className="text-sm" style={{ color: '#9CA3AF' }}>Niciun audit completat încă.</p>
+                  </div>
+                )}
+                {!acLoading && acRecords.length > 0 && (
+                  <div className="bg-white border border-[#E8E1D8] overflow-hidden">
+                    <table className="w-full">
+                      <thead>
+                        <tr style={{ background: '#F8FAFC', borderBottom: '1px solid #F1F5F9' }}>
+                          {['Nume', 'Curs terminat', 'Cu cliente', 'Scor general', 'Data', ''].map(h => (
+                            <th key={h} className="px-4 py-3 text-left text-xs uppercase tracking-wide" style={{ color: '#94A3B8', fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {acRecords.map((r, i) => (
+                          <tr key={r.id as string} style={{ borderBottom: '1px solid #F1F5F9', background: i % 2 === 0 ? 'white' : '#FAFAFA' }}>
+                            <td className="px-4 py-3">
+                              <p className="text-sm font-medium" style={{ color: TAUPE }}>{r.nume as string}</p>
+                              <p className="text-xs" style={{ color: '#9CA3AF' }}>{r.telefon as string || '—'}</p>
+                            </td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.terminat_curs as string || '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.lucreaza_cu_cliente as string || '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: TAUPE }}>{r.scor_general != null ? `${r.scor_general} / 5` : '—'}</td>
+                            <td className="px-4 py-3 text-xs" style={{ color: '#9CA3AF' }}>{fmt(r.created_at as string)}</td>
+                            <td className="px-4 py-3">
+                              <button onClick={() => setAcSelected(r)} className="text-xs px-3 py-1 border" style={{ borderColor: GOLD, color: GOLD, background: 'none', cursor: 'pointer', fontFamily: 'var(--font-montserrat)' }}>
                                 Vezi →
                               </button>
                             </td>

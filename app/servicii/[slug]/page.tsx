@@ -258,6 +258,40 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </Link>
               </div>
 
+              {/* Audit: Nivelul de pregătire în cosmetică */}
+              <div className="w-full mt-2 border border-[#C6A769] bg-[#F8F6F2] p-8 flex flex-col gap-5">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[#C6A769] text-xs tracking-[0.2em] uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                    Pentru cosmeticiene la început de drum
+                  </span>
+                  <h3 className="text-3xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+                    Audit: Nivelul de pregătire în cosmetică
+                  </h3>
+                  <p className="text-[#7A6F66] text-sm leading-relaxed mt-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                    Ai terminat un curs de cosmetică și vrei să știi exact unde te afli? Acest audit nu este un examen — este un instrument prin care identifici ce stăpânești deja, ce trebuie aprofundat și ce ai nevoie să dezvolți pentru a lucra cu siguranță: biologia pielii, consultație, afecțiuni, ingrediente, peelinguri și microneedling.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {[
+                    '8 secțiuni · autoevaluare pe competențe · caz practic',
+                    'Rezultat cu nivelul tău pe fiecare arie și prioritățile de dezvoltare',
+                    'Se completează de pe telefon în ~15 minute',
+                  ].map((item) => (
+                    <div key={item} className="flex items-start gap-3 text-sm text-[#4A403A]" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                      <span className="text-[#C6A769] mt-0.5 flex-shrink-0">◇</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  href="/audit-cosmetica"
+                  className="self-start flex items-center gap-3 px-8 py-4 bg-[#4A403A] text-white text-xs tracking-widest uppercase hover:bg-[#C6A769] transition-all duration-300"
+                  style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}
+                >
+                  Verifică-ți nivelul →
+                </Link>
+              </div>
+
               <MentoratPrezentare />
             </div>
           )}
