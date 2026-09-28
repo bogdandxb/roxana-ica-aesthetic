@@ -108,6 +108,65 @@ const metaDescriptions: Record<string, string> = {
   'skin-analyzer': 'Skin Analyzer în Brașov — analiză facială avansată cu tehnologie de ultimă generație. Descoperă nevoile reale ale pielii tale și primești un plan personalizat de îngrijire. Roxana Ica Aesthetic.',
 };
 
+// Servicii înrudite per pagină — internal linking contextual, grupate logic
+// (tratamente faciale între ele, tratamente corporale între ele).
+const relatedServicesMap: Record<string, { slug: string; text: string }[]> = {
+  'protocoale-faciale': [
+    { slug: 'skin-analyzer', text: 'Nu știi exact ce are nevoie tenul tău? Descoperă Skin Analyzer — analiză facială avansată înainte de a alege tratamentul.' },
+    { slug: 'ipl', text: 'Pentru pete pigmentare sau roșeață persistentă, vezi și tratamentele IPL.' },
+  ],
+  'skin-analyzer': [
+    { slug: 'protocoale-faciale', text: 'Ai rezultatele analizei? Vezi Protocoalele Faciale potrivite pentru tenul tău.' },
+  ],
+  'ipl': [
+    { slug: 'protocoale-faciale', text: 'Pentru îngrijire completă a tenului, descoperă și Protocoalele Faciale.' },
+    { slug: 'laser-yag', text: 'Pentru acnee activă sau pete mai persistente, vezi și Laser Nd:YAG.' },
+  ],
+  'laser-yag': [
+    { slug: 'protocoale-faciale', text: 'Pentru un plan complet de îngrijire a tenului, vezi și Protocoalele Faciale.' },
+    { slug: 'ipl', text: 'Pentru uniformizarea generală a tenului, descoperă și tratamentele IPL.' },
+  ],
+  'plasma-fusion': [
+    { slug: 'protocoale-faciale', text: 'Pentru regenerarea și hidratarea tenului, vezi și Protocoalele Faciale.' },
+  ],
+  'remodelare-corporala': [
+    { slug: 'electrostimulare', text: 'Pentru tonifiere musculară în completare, descoperă și Electrostimularea.' },
+    { slug: 'recuperare-terapie', text: 'Pentru recuperare și relaxare musculară, vezi și Recuperare & Terapie Corporală.' },
+  ],
+  'electrostimulare': [
+    { slug: 'remodelare-corporala', text: 'Pentru reducerea grăsimii localizate, vezi și Remodelarea Corporală.' },
+  ],
+  'recuperare-terapie': [
+    { slug: 'remodelare-corporala', text: 'Pentru remodelare corporală vizibilă, descoperă și tratamentele LipoShape Pro.' },
+  ],
+};
+
+function RelatedServices({ slug }: { slug: string }) {
+  const items = relatedServicesMap[slug];
+  if (!items || items.length === 0) return null;
+
+  return (
+    <div className="py-10 px-6 bg-[#F8F6F2] text-center border-t border-[#E8E1D8]">
+      <div className="max-w-2xl mx-auto flex flex-col gap-3">
+        {items.map(item => {
+          const relatedService = services.find(s => s.slug === item.slug);
+          if (!relatedService) return null;
+          const parts = item.text.split(relatedService.title);
+          return (
+            <p key={item.slug} className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+              {parts[0]}
+              <Link href={`/servicii/${item.slug}`} className="text-[#C6A769] hover:text-[#4A403A] transition-colors underline underline-offset-4">
+                {relatedService.title}
+              </Link>
+              {parts[1]}
+            </p>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const service = services.find(s => s.slug === slug);
@@ -251,7 +310,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="absolute inset-0 bg-[#4A403A] opacity-40" />
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="text-5xl md:text-6xl text-[#F8F6F2] text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }} aria-hidden="true">
-              {service.title}
+              {service.title} în Brașov
             </p>
           </div>
         </div>
@@ -270,7 +329,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </span>
 
           <h1 className="text-5xl md:text-6xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
-            {service.title}
+            {service.title} în Brașov
           </h1>
 
           <div className="gold-line" />
@@ -444,29 +503,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Link intern: Protocoale Faciale <-> Skin Analyzer */}
-      {slug === 'protocoale-faciale' && (
-        <div className="py-10 px-6 bg-[#F8F6F2] text-center border-t border-[#E8E1D8]">
-          <p className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            Nu știi exact ce are nevoie tenul tău?{' '}
-            <Link href="/servicii/skin-analyzer" className="text-[#C6A769] hover:text-[#4A403A] transition-colors underline underline-offset-4">
-              Descoperă Skin Analyzer
-            </Link>{' '}
-            — analiză facială avansată înainte de a alege tratamentul.
-          </p>
-        </div>
-      )}
-      {slug === 'skin-analyzer' && (
-        <div className="py-10 px-6 bg-[#F8F6F2] text-center border-t border-[#E8E1D8]">
-          <p className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            Ai rezultatele analizei?{' '}
-            <Link href="/servicii/protocoale-faciale" className="text-[#C6A769] hover:text-[#4A403A] transition-colors underline underline-offset-4">
-              Vezi Protocoalele Faciale
-            </Link>{' '}
-            potrivite pentru tenul tău.
-          </p>
-        </div>
-      )}
+      {/* Servicii înrudite — internal linking contextual */}
+      <RelatedServices slug={slug} />
 
       {/* Before & After */}
       {(slug === 'protocoale-faciale' || slug === 'remodelare-corporala') && <BeforeAfterCarousel slug={slug} />}
