@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="absolute inset-0 md:hidden">
         <Image
           src="/images/roxana.jpg"
-          alt="Roxana Ica"
+          alt="Roxana Ica, specialist în estetică — cabinet Roxana Ica Aesthetic, Brașov"
           fill
           className="object-cover object-top"
           priority
@@ -82,7 +82,7 @@ export default function Hero() {
           >
             <Image
               src="/images/roxana.jpg"
-              alt="Roxana Ica"
+              alt="Roxana Ica, specialist în estetică — cabinet Roxana Ica Aesthetic, Brașov"
               fill
               className="object-cover object-top"
               priority

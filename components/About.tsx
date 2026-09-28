@@ -8,7 +8,7 @@ export default function About() {
       <div className="relative md:hidden min-h-screen flex items-end">
         <Image
           src="/images/roxana-about2.jpg"
-          alt="Roxana Ica"
+          alt="Roxana Ica, fondatoarea cabinetului de estetică Roxana Ica Aesthetic din Brașov"
           fill
           className="object-cover object-center"
           style={{ filter: 'brightness(1.15) contrast(1.05)' }}
@@ -45,7 +45,7 @@ export default function About() {
               <div className="w-96 h-[650px] overflow-hidden relative">
                 <Image
                   src="/images/roxana-about2.jpg"
-                  alt="Roxana Ica"
+                  alt="Roxana Ica, fondatoarea cabinetului de estetică Roxana Ica Aesthetic din Brașov"
                   fill
                   className="object-cover object-center"
                   style={{ filter: 'brightness(1.15) contrast(1.05)' }}

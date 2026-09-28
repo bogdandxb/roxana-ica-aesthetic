@@ -12,6 +12,89 @@ export function generateStaticParams() {
   return services.map(s => ({ slug: s.slug }));
 }
 
+const faqData: Record<string, { question: string; answer: string }[]> = {
+  'epilare-definitiva': [
+    {
+      question: 'Câte ședințe de epilare definitivă sunt necesare?',
+      answer: 'Numărul de ședințe diferă de la o persoană la alta, în funcție de zona tratată, culoarea și grosimea firului de păr, precum și de ciclul natural de creștere a pilozității. La consultația inițială, stabilim împreună un protocol personalizat și o estimare realistă a numărului de ședințe.',
+    },
+    {
+      question: 'Este epilarea definitivă potrivită pentru toate tipurile de piele?',
+      answer: 'Tehnologia Diodă Laser cu 4 lungimi de undă este adaptată oricărui tip de piele și fir de păr. La consultație evaluăm tenul și tipul de pilozitate pentru a stabili parametrii potriviți fiecărei ședințe.',
+    },
+    {
+      question: 'Cât durează o ședință de epilare definitivă?',
+      answer: 'Durata variază în funcție de zona tratată — de la câteva minute pentru zone mici (axilă, buză superioară) până la 30-45 de minute pentru zone extinse (picioare, spate).',
+    },
+    {
+      question: 'Ce trebuie să fac înainte și după o ședință de epilare?',
+      answer: 'Recomandările de pregătire și îngrijire post-ședință sunt explicate în detaliu la consultație, adaptate zonei tratate și tipului tău de piele.',
+    },
+  ],
+  'protocoale-faciale': [
+    {
+      question: 'Cum aleg tratamentul facial potrivit pentru tenul meu?',
+      answer: 'Fiecare protocol facial este personalizat în funcție de nevoile reale ale pielii tale. Recomandăm o analiză prealabilă — fie prin consultație directă, fie cu Skin Analyzer — pentru a identifica exact ce are nevoie tenul tău înainte de a alege tratamentul.',
+    },
+    {
+      question: 'Este necesară o analiză a pielii înainte de tratament?',
+      answer: 'Da, o evaluare corectă a pielii este esențială pentru a alege protocolul potrivit. Poți opta pentru o consultație clasică sau pentru o analiză detaliată cu Skin Analyzer, tehnologie disponibilă în cabinet.',
+    },
+    {
+      question: 'Pentru ce probleme ale pielii sunt potrivite protocoalele faciale?',
+      answer: 'Protocoalele noastre sunt construite pentru hidratare profundă, reducerea imperfecțiunilor, stimularea colagenului și un efect vizibil de luminozitate a tenului, adaptate fiecărui tip de piele.',
+    },
+    {
+      question: 'Cât de des este recomandat un tratament facial?',
+      answer: 'Frecvența depinde de tipul de protocol ales și de obiectivul urmărit. La consultație primești un plan personalizat, cu recomandări clare privind intervalul dintre ședințe.',
+    },
+  ],
+};
+
+function FAQSection({ slug }: { slug: string }) {
+  const items = faqData[slug];
+  if (!items) return null;
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
+  return (
+    <section className="py-20 px-6 bg-[#F8F6F2]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-3xl text-[#4A403A] mb-12 text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+          Întrebări frecvente
+        </h2>
+        <div className="flex flex-col gap-8">
+          {items.map((item, i) => (
+            <div key={i} className="border-b border-[#E8E1D8] pb-8 last:border-0">
+              <h3 className="text-[#4A403A] text-lg mb-3" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 500 }}>
+                {item.question}
+              </h3>
+              <p className="text-[#7A6F66] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                {item.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const metaDescriptions: Record<string, string> = {
   'protocoale-faciale': 'Protocoale faciale personalizate în Brașov — hidratare profundă, tratament acnee, microneedling, peeling și rejuvenare. Roxana Ica Aesthetic, Str. Dihamului 16A.',
   'epilare-definitiva': 'Epilare definitivă cu Diodă Laser 4 lungimi de undă în Brașov. Rezultate vizibile de la prima ședință, adaptat oricărui tip de piele. Roxana Ica Aesthetic.',
@@ -29,9 +112,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = services.find(s => s.slug === slug);
   if (!service) return {};
+  const pageUrl = `https://www.roxanaicaaesthetic.com/servicii/${slug}`;
   return {
     title: `${service.title} Brașov | Roxana Ica Aesthetic`,
     description: metaDescriptions[slug] ?? service.description,
+    alternates: {
+      canonical: pageUrl,
+    },
     keywords: [
       `${service.title} Brașov`,
       'estetică Brașov',
@@ -82,10 +169,49 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${service.title} | Roxana Ica Aesthetic Brașov`,
       description: metaDescriptions[slug] ?? service.description,
+      url: pageUrl,
       locale: 'ro_RO',
       type: 'website',
+      images: [
+        {
+          url: service.image.endsWith('.mp4') ? '/images/roxana.jpg' : service.image,
+          alt: service.title,
+        },
+      ],
     },
   };
+}
+
+function ServiceSchema({ service, slug }: { service: (typeof services)[number]; slug: string }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: service.title,
+    name: `${service.title} — Roxana Ica Aesthetic`,
+    description: metaDescriptions[slug] ?? service.description,
+    url: `https://www.roxanaicaaesthetic.com/servicii/${slug}`,
+    areaServed: {
+      '@type': 'City',
+      name: 'Brașov',
+    },
+    provider: {
+      '@type': 'BeautySalon',
+      name: 'Roxana Ica Aesthetic',
+      telephone: '+40771569093',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Strada Dihamului 16A',
+        addressLocality: 'Brașov',
+        addressCountry: 'RO',
+      },
+    },
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -97,6 +223,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <ServiceSchema service={service} slug={slug} />
       <Navigation />
 
       {/* Hero serviciu */}
@@ -123,9 +250,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           )}
           <div className="absolute inset-0 bg-[#4A403A] opacity-40" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <h1 className="text-5xl md:text-6xl text-[#F8F6F2] text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+            <p className="text-5xl md:text-6xl text-[#F8F6F2] text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }} aria-hidden="true">
               {service.title}
-            </h1>
+            </p>
           </div>
         </div>
 
@@ -317,6 +444,30 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
+      {/* Link intern: Protocoale Faciale <-> Skin Analyzer */}
+      {slug === 'protocoale-faciale' && (
+        <div className="py-10 px-6 bg-[#F8F6F2] text-center border-t border-[#E8E1D8]">
+          <p className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+            Nu știi exact ce are nevoie tenul tău?{' '}
+            <Link href="/servicii/skin-analyzer" className="text-[#C6A769] hover:text-[#4A403A] transition-colors underline underline-offset-4">
+              Descoperă Skin Analyzer
+            </Link>{' '}
+            — analiză facială avansată înainte de a alege tratamentul.
+          </p>
+        </div>
+      )}
+      {slug === 'skin-analyzer' && (
+        <div className="py-10 px-6 bg-[#F8F6F2] text-center border-t border-[#E8E1D8]">
+          <p className="text-[#7A6F66] text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+            Ai rezultatele analizei?{' '}
+            <Link href="/servicii/protocoale-faciale" className="text-[#C6A769] hover:text-[#4A403A] transition-colors underline underline-offset-4">
+              Vezi Protocoalele Faciale
+            </Link>{' '}
+            potrivite pentru tenul tău.
+          </p>
+        </div>
+      )}
+
       {/* Before & After */}
       {(slug === 'protocoale-faciale' || slug === 'remodelare-corporala') && <BeforeAfterCarousel slug={slug} />}
 
@@ -460,6 +611,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       )}
 
       {slug === 'skin-analyzer' && <SkinAssessment />}
+
+      <FAQSection slug={slug} />
 
       <Footer />
     </>

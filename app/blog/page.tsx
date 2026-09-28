@@ -8,6 +8,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'The Skin Edit — Blog | Roxana Ica Aesthetic Brașov',
   description: 'Articole despre îngrijirea pielii, tratamente estetice și tehnologii moderne. Piele. Estetică. Tehnologie. Explicate simplu.',
+  alternates: {
+    canonical: 'https://www.roxanaicaaesthetic.com/blog',
+  },
   openGraph: {
     title: 'The Skin Edit — Blog de estetică și skin care',
     description: 'Piele. Estetică. Tehnologie. Explicate simplu.',
