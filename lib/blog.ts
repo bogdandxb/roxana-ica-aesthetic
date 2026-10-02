@@ -151,6 +151,36 @@ export const articles: Article[] = [
 <p>Microneedling-ul realizat profesional, cu protocoale adaptate tipului tău de piele, este un investiție pe termen lung în calitatea pielii tale.</p>
     `.trim(),
   },
+  {
+    slug: 'cate-sedinte-epilare-definitiva',
+    title: 'Câte ședințe sunt necesare pentru epilarea definitivă?',
+    seoTitle: 'Câte ședințe de epilare definitivă sunt necesare? | Roxana Ica Aesthetic Brașov',
+    metaDescription: 'Află de ce numărul de ședințe de epilare definitivă diferă de la o persoană la alta și ce factori influențează rezultatul. Roxana Ica Aesthetic, Brașov.',
+    category: 'Epilare Definitivă',
+    date: '2026-10-02',
+    image: '/blog/placeholder.jpg',
+    imageAlt: 'Ședință de epilare definitivă cu laser diodă',
+    excerpt: 'Este una dintre cele mai frecvente întrebări la prima consultație. Răspunsul corect nu este un număr fix, ci depinde de câțiva factori clari pe care îi explicăm aici.',
+    readingTime: 4,
+    relatedServices: ['epilare-definitiva'],
+    content: `
+<p>„Câte ședințe am nevoie?" este, de departe, cea mai des întâlnită întrebare la o primă consultație de epilare definitivă. Răspunsul corect și onest este: depinde — dar depinde de factori clari, pe care îi poți înțelege ușor.</p>
+
+<h2>De ce nu există un număr fix de ședințe</h2>
+<p>Firul de păr trece prin cicluri naturale de creștere, iar la un moment dat doar o parte din foliculii dintr-o zonă sunt activi și vizibili la suprafață. Tehnologia laser acționează eficient doar pe firul aflat în faza activă de creștere, de aceea tratamentul se face în etape, la interval de câteva săptămâni, pentru a acoperi progresiv toți foliculii.</p>
+
+<h2>Ce factori influențează numărul de ședințe</h2>
+<p>Zona tratată, culoarea și grosimea firului de păr, densitatea pilozității și tipul de piele sunt principalii factori care diferențiază un protocol de la o persoană la alta. Tehnologia Diodă Laser cu 4 lungimi de undă, folosită la Roxana Ica Aesthetic, este adaptată acestor variabile, dar numărul exact de ședințe rămâne individual.</p>
+
+<h2>Cum se stabilește protocolul potrivit</h2>
+<p>La consultația inițială se evaluează tenul și tipul de pilozitate, iar pe baza acestei evaluări se construiește un protocol personalizat, cu o estimare realistă a numărului de ședințe și a intervalului dintre ele. Progresul se urmărește de la o ședință la alta, iar protocolul poate fi ajustat pe parcurs.</p>
+
+<h2>Ce poți observa pe parcurs</h2>
+<p>Reducerea pilozității este progresivă — rezultatele devin tot mai vizibile de la o ședință la alta, pe măsură ce tot mai mulți foliculi sunt tratați în faza lor activă. Consecvența la intervalele recomandate contează la fel de mult ca tehnologia folosită.</p>
+
+<p>Dacă vrei să afli protocolul potrivit pentru tine, cel mai sigur pas este o consultație — acolo primești o estimare adaptată real zonei și tipului tău de piele, nu un număr general valabil pentru oricine.</p>
+    `.trim(),
+  },
 ];
 
 export function getArticlesByCategory(category: Category): Article[] {
