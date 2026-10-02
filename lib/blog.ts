@@ -158,7 +158,7 @@ export const articles: Article[] = [
     metaDescription: 'Află de ce numărul de ședințe de epilare definitivă diferă de la o persoană la alta și ce factori influențează rezultatul. Roxana Ica Aesthetic, Brașov.',
     category: 'Epilare Definitivă',
     date: '2026-10-02',
-    image: '/blog/placeholder.jpg',
+    image: '/images/servicii/epilare-definitiva.jpg',
     imageAlt: 'Ședință de epilare definitivă cu laser diodă',
     excerpt: 'Este una dintre cele mai frecvente întrebări la prima consultație. Răspunsul corect nu este un număr fix, ci depinde de câțiva factori clari pe care îi explicăm aici.',
     readingTime: 4,
