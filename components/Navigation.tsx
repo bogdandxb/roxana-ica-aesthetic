@@ -88,10 +88,11 @@ export default function Navigation() {
 
             {blogOpen && (
               <div
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#F8F6F2] border border-[#E8E1D8] shadow-lg py-4 px-6"
+                className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64"
                 onMouseEnter={() => setBlogOpen(true)}
                 onMouseLeave={() => setBlogOpen(false)}
               >
+              <div className="bg-[#F8F6F2] border border-[#E8E1D8] shadow-lg py-4 px-6">
                 <Link href="/blog" className="flex flex-col gap-0.5 hover:opacity-80 transition-opacity">
                   <span
                     className="text-[#4A403A] text-sm tracking-[0.15em] uppercase"
@@ -114,6 +115,7 @@ export default function Navigation() {
                 >
                   Toate articolele
                 </Link>
+              </div>
               </div>
             )}
           </div>
