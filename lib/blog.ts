@@ -181,6 +181,66 @@ export const articles: Article[] = [
 <p>Dacă vrei să afli protocolul potrivit pentru tine, cel mai sigur pas este o consultație — acolo primești o estimare adaptată real zonei și tipului tău de piele, nu un număr general valabil pentru oricine.</p>
     `.trim(),
   },
+  {
+    slug: 'celulita-tratamente-eficiente',
+    title: 'Celulita — ce tratamente chiar funcționează',
+    seoTitle: 'Tratament celulită Brașov — ce funcționează cu adevărat | Roxana Ica Aesthetic',
+    metaDescription: 'Celulita are cauze multiple și nu se tratează printr-o singură metodă. Află ce combinații de tratamente profesionale dau rezultate reale. Roxana Ica Aesthetic, Brașov.',
+    category: 'Body & Wellness',
+    date: '2026-10-02',
+    image: '/images/servicii/remodelare-corporala.webp',
+    imageAlt: 'Tratament profesional de remodelare corporală pentru celulită',
+    excerpt: 'Celulita afectează majoritatea femeilor, indiferent de greutate sau nivel de activitate fizică. Vestea bună: cu tratamentul potrivit, textura pielii se poate îmbunătăți vizibil.',
+    readingTime: 6,
+    relatedServices: ['remodelare-corporala', 'electrostimulare', 'recuperare-terapie'],
+    content: `
+<p>Celulita nu este o problemă de greutate — este o problemă de structură a țesutului conjunctiv și circulație. De aceea apare și la femei slabe, active, și de aceea cremele singure nu o pot rezolva.</p>
+
+<h2>De ce apare celulita?</h2>
+<p>Sub piele, celulele adipoase sunt separate prin benzi de țesut conjunctiv. Când aceste benzi se întăresc sau circulația locală scade, pielea capătă acel aspect neuniform, de „coajă de portocală". Factori hormonali, genetici, sedentarismul și retenția de lichide pot accentua fenomenul.</p>
+
+<h2>De ce o singură metodă nu e suficientă</h2>
+<p>Pentru că celulita are mai multe cauze simultane — țesut adipos, circulație, fermitate a pielii — un tratament care acționează doar pe unul din aceste aspecte are efect limitat. Rezultatele vizibile vin, de regulă, din combinarea mai multor tehnologii.</p>
+
+<h2>Ce combinații funcționează</h2>
+<p>Remodelarea corporală cu cavitație, vacuum și radiofrecvență acționează direct asupra țesutului adipos și calității pielii. Electrostimularea musculară completează procesul prin tonifiere și îmbunătățirea circulației locale. Terapia Tecar și masajul G5 ajută la stimularea circulației și a drenajului limfatic, reducând retenția de lichide care accentuează aspectul de celulită.</p>
+
+<h2>Cât durează până vezi rezultate</h2>
+<p>Ca la orice tratament corporal, rezultatele sunt progresive, nu instante. Consecvența la ședințe și intervalul recomandat dintre ele contează la fel de mult ca tehnologia folosită. La consultație se stabilește un protocol adaptat zonei și gradului de celulită.</p>
+
+<p>Dacă ai încercat creme și masaje fără rezultat vizibil, probabil nu lipsa de efort e problema — ci faptul că nu a fost abordată cauza reală. Un protocol profesional, personalizat, face diferența.</p>
+    `.trim(),
+  },
+  {
+    slug: 'slow-aging-de-unde-incepi',
+    title: 'Slow aging: ce înseamnă și de unde începi',
+    seoTitle: 'Slow Aging — ce înseamnă și cum începi | Roxana Ica Aesthetic Brașov',
+    metaDescription: 'Slow aging nu este despre a opri timpul, ci despre a îmbătrâni sănătos și cu încredere. Află de unde începi, pas cu pas. Roxana Ica Aesthetic, Brașov.',
+    category: 'Slow Aging',
+    date: '2026-10-02',
+    image: '/blog/slow-aging.png',
+    imageAlt: 'Comparație piele tânără și piele matură — prevenție și slow aging',
+    excerpt: 'Slow aging nu înseamnă să lupți cu timpul, ci să-l întâmpini pregătită. Este o filozofie de prevenție, nu o reacție la primele semne vizibile.',
+    readingTime: 5,
+    relatedServices: ['protocoale-faciale', 'skin-analyzer'],
+    content: `
+<p>„Slow aging" a devenit un termen folosit des, dar sensul lui real e simplu: în loc să aștepți să apară semnele vizibile ale îmbătrânirii și apoi să reacționezi, alegi să susții pielea constant, din timp, astfel încât procesul natural să fie cât mai lin.</p>
+
+<h2>Slow aging nu înseamnă anti-aging</h2>
+<p>Diferența e de abordare. Anti-aging reacționează — tratează ce a apărut deja. Slow aging previne — susține colagenul, elastina și barieră cutanată înainte ca pierderile să devină vizibile. Nu oprești timpul, dar îmbătrânești în ritmul tău natural, nu accelerat de factori pe care îi poți controla.</p>
+
+<h2>De unde începe, de fapt, procesul de îmbătrânire a pielii</h2>
+<p>Producția naturală de colagen scade treptat începând din a doua jumătate a vieții adulte. La asta se adaugă factori externi — expunerea la soare, poluarea, stresul cronic și somnul insuficient — care accelerează procesul mult mai mult decât trecerea timpului în sine.</p>
+
+<h2>Pașii de bază, cu care chiar poți începe</h2>
+<p>Protecția solară zilnică este, de departe, cel mai important pas — mai important decât orice tratament sau produs. Alături de ea: o rutină de curățare blândă, hidratare constantă și evitarea supraexfolierii, care slăbește bariera cutanată în loc s-o protejeze.</p>
+
+<h2>Ce poate aduce în plus un tratament profesional</h2>
+<p>Protocoalele faciale personalizate pot stimula producția de colagen și susține fermitatea pielii, cu rezultate mai vizibile și mai rapide decât îngrijirea de acasă singură. O analiză corectă a pielii — printr-o consultație sau cu Skin Analyzer — arată exact unde se află pielea ta acum și ce merită prioritizat.</p>
+
+<p>Slow aging nu este o cursă contra timp. Este o decizie de a avea grijă de pielea ta constant, nu doar atunci când observi o schimbare care te deranjează.</p>
+    `.trim(),
+  },
 ];
 
 export function getArticlesByCategory(category: Category): Article[] {
