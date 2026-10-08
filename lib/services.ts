@@ -130,15 +130,14 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       { name: 'Facial Glow Ritual', price: '350 lei', duration: '50 min', description: 'Un ritual de înfrumusețare complet care iluminează și revitalizează tenul obosit. Pielea devine instantaneu luminoasă, catifelată și plină de viață — efectul perfect înainte de un eveniment special.' },
       { name: 'Advanced Microneedling', price: '660 lei', duration: '50–70 min', description: 'Tehnica micro-needling de ultimă generație stimulează producția naturală de colagen și elastină. Reduce ridurile, cicatricile acneice și laxitatea cutanată, oferind un ten ferm, neted și vizibil întinerit.' },
       { name: 'Microneedling Față + Gât', price: '750 lei', duration: '50–70 min', description: 'Microneedling profesional cu substanțe active selectate în funcție de necesitățile tenului. Pentru revitalizare, îmbunătățirea texturii, fermității și calității generale a pielii.' },
-      { name: 'Biorevitalizare Eye Boost', price: '390 lei', duration: '50–70 min', description: 'Tratament de recuperare intensivă dedicat zonei periorbitale. Diminuează cearcănele, pungile sub ochi și ridurile de expresie, redând priviri odihnite, tinere și expresive.' },
-      { name: 'Biorevitalizare Neck Boost', price: '420 lei', duration: '50–70 min', description: 'Tratament intensiv dedicat zonei gâtului, una dintre primele zone care trădează vârsta. Stimulează colagenul, îmbunătățește fermitatea și elasticitatea pielii, reducând vizibil ridurile orizontale și laxitatea cutanată.' },
-      { name: 'Biorevitalizare Full Face Boost', price: '1250 lei', duration: '50–70 min', description: 'Tratament complex de regenerare celulară care acționează în profunzime pentru hidratare, fermitate și uniformizarea pielii. Se bazează pe combinații personalizate de acid hialuronic, vitamine, exosomi sau polinucleotide, alese în funcție de nevoile pielii.' },
       { name: 'Biorevitalizare Mâini', price: '650 lei', duration: '50–70 min', description: 'Peeling profesional + MicronJet cu substanțe active personalizate în funcție de necesitățile pielii. Pentru revitalizare, hidratare, luminozitate și îmbunătățirea texturii și calității pielii mâinilor.' },
       { name: 'Back Deep Clean Protocol', price: '600–840 lei', duration: '50–70 min', description: 'Curățare profundă specializată pentru zona spatelui, predispusă la pori dilatați, puncte negre și erupții. Protocolul purifică în profunzime, reglează sebumul și lasă pielea curată, netedă și oxigenată.' },
       { name: 'Body Microneedling + BioRePeel', price: '800 lei', duration: '50–70 min', description: 'Combinație de elită între micro-needling și peeling bio-activ pentru corp. Stimulează regenerarea celulară, reduce vergeturile, cicatricile și textura neuniformă, oferind o piele vizibil mai fermă și mai netedă.' },
       { name: 'Hair Density Protocol', price: '420 lei', duration: '50–70 min', description: 'Protocol avansat pentru stimularea creșterii firului de păr și combaterea căderii acestuia. Activează foliculii piloși, îmbunătățește microcirculația scalpului și redă densitate și vitalitate părului.' },
       { name: 'BioRePeel Face Therapy', price: '480 lei', duration: '50–70 min', description: 'Terapie cu peeling biochimic de nouă generație, cu acțiune dublă: exfoliantă și biostimulatoare. Îmbunătățește textura, luminozitatea și tonusul pielii, fără timp de recuperare — potrivită pentru orice tip de ten.' },
-      { name: 'Spongilla Bio Microneedling', price: '420 lei', duration: '50–70 min', description: 'Microneedling natural cu spicule din bureți de apă dulce. Stimulează colagenul, tratează acneea, petele și porii dilatați. Fără ace metalice, fără timp de recuperare.' },
+      { name: 'Dermaplaning Premium', price: '660 lei', duration: '90 min', description: 'Ritual complet pentru o piele fină, luminoasă și vizibil mai uniformă. Combină curățarea și pregătirea pielii, HydraFacial, dermaplaning pentru îndepărtarea delicată a celulelor cornoase și a pufului facial, urmat de BioRePeel pentru revitalizare și îmbunătățirea texturii. Rezultat: piele incredibil de netedă, luminoasă, cu textură rafinată și efect de „glass skin".' },
+      { name: 'Spongilla Fusion', price: '460 lei', duration: '50–70 min', description: 'Bio-microneedling cu spicule, recomandat în special pielii mai rezistente, cu exces de sebum, pori dilatați, textură neuniformă și semne post-acneice. O stimulare mai intensă pentru o piele mai fină, mai uniformă și cu aspect vizibil revitalizat.' },
+      { name: 'Spongilla Fusion Duo', price: '460 lei', duration: '50–70 min', description: 'Bio-microneedling cu spicule liofilizate, activate în momentul tratamentului într-o formulă cu ingrediente calmante și reparatoare. Ideal pentru regenerarea și îmbunătățirea texturii unei pieli mai sensibile sau reactive, care necesită o abordare mai atentă.' },
     ],
     packages: [
       {
@@ -146,6 +145,22 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
         items: [
           { name: 'VITA+ | Nutriție Intensă & Revitalizare', price: '560 lei', description: 'Tratament profesional pentru pielea uscată, ternă sau devitalizată, pentru nutriție, confort, elasticitate și luminozitate.' },
           { name: 'ENERGY | Revitalizare & Luminozitate', price: '560 lei', description: 'Tratament profesional pentru pielea obosită și lipsită de vitalitate, cu acțiune revitalizantă și antioxidantă, pentru un aspect mai proaspăt și luminos.' },
+        ],
+      },
+      {
+        name: 'Biorevitalizare Personalizată',
+        items: [
+          { name: 'Ochi', price: '390 lei', description: 'Cocktail biorevitalizant ales în funcție de nevoile pielii. Fiole profesionale cu ingrediente active selectate pentru hidratare, revitalizare, elasticitate, luminozitate și îmbunătățirea calității pielii.' },
+          { name: 'Gât', price: '460 lei' },
+          { name: 'Full Face + Gât', price: '1250 lei' },
+        ],
+      },
+      {
+        name: 'Biorevitalizare | Exozomi + Polinucleotide',
+        items: [
+          { name: 'Ochi', price: '460 lei', description: 'Protocol cu exozomi și polinucleotide, orientat spre regenerare, hidratare, elasticitate și îmbunătățirea texturii și calității pielii.' },
+          { name: 'Gât', price: '550 lei' },
+          { name: 'Full Face + Gât', price: '1500 lei' },
         ],
       },
     ],
