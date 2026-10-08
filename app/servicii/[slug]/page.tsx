@@ -580,7 +580,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                         <h3 className="text-2xl text-[#4A403A] mb-2 text-center" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
                           {pkg.name}
                         </h3>
-                        <div className="gold-line mb-8" />
+                        <div className="gold-line mb-6" />
+                        {pkg.description && (
+                          <p className="text-[#7A6F66] text-sm leading-relaxed text-center max-w-2xl mx-auto mb-8" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+                            {pkg.description}
+                          </p>
+                        )}
                         <div className="flex flex-col">
                           {pkg.items.map((item, j) => (
                             <div key={j} className="flex flex-col py-5 border-b border-[#D8B7A6] last:border-0 gap-2">

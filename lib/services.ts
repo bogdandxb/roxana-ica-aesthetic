@@ -18,6 +18,7 @@ export interface PriceItem {
 
 export interface PricePackage {
   name: string;
+  description?: string;
   discount?: string;
   items: PriceItem[];
 }
@@ -149,16 +150,18 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
       },
       {
         name: 'Biorevitalizare Personalizată',
+        description: 'Cocktail biorevitalizant ales în funcție de nevoile pielii. Fiole profesionale cu ingrediente active selectate pentru hidratare, revitalizare, elasticitate, luminozitate și îmbunătățirea calității pielii.',
         items: [
-          { name: 'Ochi', price: '390 lei', description: 'Cocktail biorevitalizant ales în funcție de nevoile pielii. Fiole profesionale cu ingrediente active selectate pentru hidratare, revitalizare, elasticitate, luminozitate și îmbunătățirea calității pielii.' },
+          { name: 'Ochi', price: '390 lei' },
           { name: 'Gât', price: '460 lei' },
           { name: 'Full Face + Gât', price: '1250 lei' },
         ],
       },
       {
         name: 'Biorevitalizare | Exozomi + Polinucleotide',
+        description: 'Protocol cu exozomi și polinucleotide, orientat spre regenerare, hidratare, elasticitate și îmbunătățirea texturii și calității pielii.',
         items: [
-          { name: 'Ochi', price: '460 lei', description: 'Protocol cu exozomi și polinucleotide, orientat spre regenerare, hidratare, elasticitate și îmbunătățirea texturii și calității pielii.' },
+          { name: 'Ochi', price: '460 lei' },
           { name: 'Gât', price: '550 lei' },
           { name: 'Full Face + Gât', price: '1500 lei' },
         ],
