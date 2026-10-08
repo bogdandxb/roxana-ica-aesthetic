@@ -572,8 +572,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {prices.packages && (
               <div className="flex flex-col gap-10">
                 {prices.packages.map((pkg, i) => {
-                  // Pachete cu descriere per item → afișate ca secțiune separată (ex: Bioline Jatò)
-                  const hasDescriptions = pkg.items.some(item => item.description);
+                  // Pachete cu descriere (pe pachet sau pe item) → afișate ca secțiune separată, pe toată lățimea
+                  const hasDescriptions = Boolean(pkg.description) || pkg.items.some(item => item.description);
                   if (hasDescriptions) {
                     return (
                       <div key={i}>
