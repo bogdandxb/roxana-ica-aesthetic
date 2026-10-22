@@ -1,5 +1,6 @@
 'use client';
 
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { GOOGLE_REVIEW_URL } from '@/lib/google-review';
 
 const reviews = [
@@ -30,12 +31,76 @@ const reviews = [
   { name: 'Elena Royal', text: 'Profesionalism, dedicare, implicare și mai ales calitatea produselor pentru un ten sensibil, mă face întotdeauna recunoscătoare și fericită datorită Roxanei. Mulțumesc infinit!' },
 ];
 
-function ReviewCard({ review }: { review: { name: string; text: string } }) {
+// Recenzii Google (transcrise din Google Maps). Cele care se termină în „…” sunt trunchiate în Google ("More").
+const googleReviews = [
+  { name: 'Andre Sonya', text: 'Merg la Roxana din august și pot spune sincer că experiența e la cu totul alt nivel. Am făcut epilare definitivă, remodelare corporală și tratamente faciale, iar rezultatele și modul în care mă simt după fiecare ședință sunt peste așteptări. Roxana nu oferă doar servicii, ci creează o experiență. De fiecare dată când ajung la ea, parcă intru într-o altă lume — una în care mă pot relaxa complet, unde sunt răsfățată, ascultată și îngrijită cu atenție reală. Se vede pasiunea ei pentru ceea ce face, profesionalismul și grija pentru detalii. Nu e doar despre estetică, ci despre starea pe care o ai când pleci de acolo: mai încrezătoare, mai relaxată și cu un boost de energie. O recomand din toată inima oricui vrea mai mult decât un simplu tratament — o experiență care chiar face diferența.' },
+  { name: 'Magdalena Mogos Oratie', text: 'Am mers la Roxana ceva timp și la mai multe proceduri și pot spune sincer că, experiența este de fiecare dată peste așteptări. Roxana este extrem de profesionistă, atentă la detalii și știe exact cum să identifice zonele tensionate și să le …' },
+  { name: 'Anca Cojocaru', text: 'Merg la Roxana de câteva luni bune și pot spune cu mâna pe inimă că este una dintre cele mai bune decizii pe care le-am luat pentru mine. De fiecare dată când ies din cabinet mă simt mai tânără, mai relaxată și mai …' },
+  { name: 'Denisa Ungureanu', text: 'Merg la Roxana de mulți ani și cred că asta spune deja tot 😄 Între timp am ajuns să îi las fața mea în custodie fără emoții pentru tot felul de tratamente, pentru că are foarte multă atenție la detalii și se vede că știe …' },
+  { name: 'Ioana Burciu', text: 'O recomand pe Roxana din tot sufletul! Merg la ea de aproape 3 ani pentru tratamente corporale, faciale și epilare definitivă, iar experiența a fost mereu minunată. Dincolo de profesionalism și de cât de atentă este la tot ce face, Roxana …' },
+  { name: 'Georgiana Bejan', text: 'Am avut un tratament facial la Roxana Ica Aesthetic cu Roxana si a fost o experienta foarte placuta de la inceput pana la sfarsit. Roxana este foarte atenta, delicata si profesionista, ceea te face sa te simti confortabil imediat. …' },
+  { name: 'Mari Pascu', text: 'merg cu drag de fiecare data sa ma las rasfatata indiferent ca este tratament facial sau drenaj limfatic! am ajuns sa am atata incredere incat nici nu o mai intreb ce tratament imi face. diferenta dupa nici 6 luni este foarte mare: pielea …' },
+  { name: 'Elena Galynska', text: 'O experiență foarte plăcută! Roxana mi-a explicat fiecare pas al procedurii. M-am simțit răsfățată. Recomand cu drag' },
+  { name: 'Bitay Julia', text: 'Recomand cu drag! Servicii de calitate și multă profesionalitate. Orice tratament mi-a făcut a fost explicat pe înțelesul meu, astfel încât să înțeleg întregul proces. Abia astept să revin luna viitoare !' },
+  { name: 'MaX XaM', text: 'Am avut ieri sedinta de epilare cu laser la Roxana Ica Aesthetic si a fost o experienta absolut minunata. Din momentul in care am ajuns, Roxana m-a primit cu multa caldura si m-a facut sa ma simt imediat confortabil. Atmosfera din salon …' },
+  { name: 'Maria Mocanu', text: 'Merg lunar la tratamente cosmetice desi am 73 de ani pentru ca am vazut pielea mai luminoasa si hidratata. Imi pare rau ca nu am dat importanta mai devreme. Roxana este incredibil de atenta si are foarte multe cu cunostinte si explica …' },
+  { name: 'Simona Tudo', text: 'Tenul meu este mai luminos, mai hidratat! Cautam de mult un specialist care sa-mi aduca prospetime fetei! Un moment de rasfat la care orice femeie viseaza!' },
+  { name: 'Mirela Ciobota', text: 'Am fost la Roxana pentru epilare definitivă și pot spune că, începând cu a treia ședință, rezultatele chiar s-au simțit – părul a crescut vizibil mai rar și mai fin. …' },
+  { name: 'Karla Zamfir', text: 'Roxana este o cosmeticiană foarte bună, cu cunoștințe solide atât în cosmetică, cât și în medicină.' },
+  { name: 'Raluca Danca', text: 'Experiența avută de fiecare dată când intru în cabinetul Roxanei este la superlativ, profesionalismul este la un nivel foarte înalt, îmi plac foarte mult produsele și tehnica pe care o folosește la tratamentele faciale, este prima cosmeticiana la care nu mă doare absolut nimic în timpul tratamentelor faciale. Rezultatele la epilarea definitivă se văd de la prima ședință, are cele mai performante și moderne aparate. Revin de fiecare dată cu drag.' },
+  { name: 'Mirela Kornfeld', text: 'Roxy, draga mea, vreau să-ți spun cât de încântată am fost de experiența mea la tine! 💖 Pe lângă faptul că ai o mână incredibil de ușoară, mi-a plăcut foarte mult grija cu care ai făcut totul. Faptul că mi-ai aplicat crema anestezică înainte a făcut ca procedura să fie pentru mine absolut fără durere. Nu am simțit nimic, nimic, nimic! 😂💖 Nici când ai introdus acul, nici soluția. Iar rezultatul m-a încântat și mai mult! 💖 Am plecat de la tine foarte mulțumită, iar faptul că după aproximativ două ore aproape că nu se mai vedea nimic din inflamația provocată de ace m-a surprins plăcut. Îți mulțumesc pentru delicatețea, răbdarea și atenția cu care lucrezi! Se vede că pui suflet în ceea ce faci și, mai ales, că îți pasă ca omul din fața ta să se simtă bine și în siguranță. 🥰' },
+  { name: 'Maria Clinciu', text: 'Am 66 de ani și vin cu drag la Roxana de ceva timp. Sunt foarte mulțumită de tratamente și de rezultatele pe care le văd. Am încredere în recomandările ei și revin de fiecare dată cu drag.' },
+  { name: 'Andrada Vilcu', text: 'Vreau să îți mulțumesc din suflet pentru tot ceea ce faci și pentru modul în care reușești să transmiți informația. Cursul tău nu este doar despre cosmetică, ci despre încredere, profesionalism și atenția la detalii care fac cu adevărat diferența. Am avut extrem de multe de învățat de la tine, iar fiecare sesiune mi-a oferit claritate, inspirație și motivația de a deveni mai bună în ceea ce fac. Modul tău de a explica este nu doar profesionist, ci și foarte cald și autentic, ceea ce face ca tot procesul de învățare să fie plăcut și eficient. Se vede pasiunea ta pentru acest domeniu în fiecare detaliu, iar dedicarea ta este cu adevărat remarcabilă. Pentru mine, acest curs a fost mai mult decât o experiență de învățare a fost un pas important în dezvoltarea mea. Îți sunt recunoscătoare pentru tot și mă bucur enorm că am avut ocazia să învăț de la tine. 🤍' },
+  { name: 'Roxana', text: 'Am întâlnit-o pe Roxana la sală, mi-a oferit ajutorul ei și mi-am dat seama cu timpul că este o femeie devotată, disciplinată și plină de pasiune, care nu se dă bătută. Îmi pun încrederea în ea la fiecare ședință și mă face să înțeleg că orice se poate, dacă îți dorești si crezi în propriile puteri. Nu te naști cu încrederea de sine, ci o dobândești cu fiecare efort pe care îl depui pentru tine. 🫶' },
+];
+
+type Review = { name: string; text: string; source: 'Facebook' | 'Google' };
+
+// Alternează Facebook / Google în bandă, ca sursele să fie amestecate.
+const fb: Review[] = reviews.map(r => ({ ...r, source: 'Facebook' }));
+const gg: Review[] = googleReviews.map(r => ({ ...r, source: 'Google' }));
+const allReviews: Review[] = [];
+for (let i = 0; i < Math.max(fb.length, gg.length); i++) {
+  if (fb[i]) allReviews.push(fb[i]);
+  if (gg[i]) allReviews.push(gg[i]);
+}
+
+function ReviewCard({ review, onOpen }: { review: Review; onOpen: (r: Review) => void }) {
+  // Textul e limitat vizual la 8 rânduri; dacă nu încape, apare „Citește tot” cu recenzia completă.
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [overflows, setOverflows] = useState(false);
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    const check = () => setOverflows(el.scrollHeight > el.clientHeight + 1);
+    check();
+    document.fonts?.ready.then(check);
+  }, [review.text]);
+
   return (
     <div
       className="flex-shrink-0 w-80 bg-white p-6 flex flex-col gap-4 border border-[#E8E1D8]"
       style={{ boxShadow: '0 2px 20px rgba(74,64,58,0.06)' }}
     >
+      <ReviewHeader review={review} />
+      <p ref={textRef} className="text-[#7A6F66] leading-relaxed italic line-clamp-[8]" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '15px' }}>
+        „{review.text}"
+      </p>
+      {overflows && (
+        <button
+          onClick={() => onOpen(review)}
+          className="mt-auto self-start text-[#C6A769] hover:text-[#8B6914] text-[10px] uppercase tracking-[0.15em] transition-colors"
+          style={{ fontFamily: 'var(--font-montserrat)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+        >
+          Citește tot →
+        </button>
+      )}
+    </div>
+  );
+}
+
+function ReviewHeader({ review }: { review: Review }) {
+  return (
       <div className="flex items-center gap-3 pb-3 border-b border-[#E8E1D8]">
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs font-medium"
@@ -48,19 +113,60 @@ function ReviewCard({ review }: { review: { name: string; text: string } }) {
             {review.name}
           </p>
           <p className="text-[#C6A769] text-[10px] mt-0.5" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            Facebook · ★★★★★
+            {review.source} · ★★★★★
           </p>
         </div>
       </div>
-      <p className="text-[#7A6F66] leading-relaxed italic flex-1" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '15px' }}>
-        „{review.text}"
-      </p>
+  );
+}
+
+function ReviewModal({ review, onClose }: { review: Review; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      style={{ background: 'rgba(74,64,58,0.55)' }}
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Recenzie ${review.name}`}
+    >
+      <div
+        className="relative bg-white w-full max-w-lg max-h-[85vh] overflow-y-auto p-8 flex flex-col gap-5 border border-[#E8E1D8]"
+        style={{ boxShadow: '0 10px 40px rgba(74,64,58,0.2)' }}
+        onClick={e => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          aria-label="Închide"
+          className="absolute top-3 right-4 text-[#C6A769] hover:text-[#8B6914] text-2xl leading-none transition-colors"
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          ×
+        </button>
+        <ReviewHeader review={review} />
+        <p className="text-[#7A6F66] leading-relaxed italic" style={{ fontFamily: 'var(--font-cormorant)', fontSize: '17px' }}>
+          „{review.text}"
+        </p>
+      </div>
     </div>
   );
 }
 
 export default function Reviews() {
-  const doubled = [...reviews, ...reviews];
+  const doubled = [...allReviews, ...allReviews];
+  const [openReview, setOpenReview] = useState<Review | null>(null);
+  const closeModal = useCallback(() => setOpenReview(null), []);
 
   return (
     <section id="recenzii" className="py-24 bg-[#F8F6F2] overflow-hidden">
@@ -87,7 +193,7 @@ export default function Reviews() {
         .marquee-track {
           display: flex;
           gap: 24px;
-          animation: marquee 60s linear infinite;
+          animation: marquee 105s linear infinite;
           width: max-content;
         }
         .marquee-track:hover {
@@ -98,7 +204,7 @@ export default function Reviews() {
       <div className="overflow-hidden">
         <div className="marquee-track">
           {doubled.map((review, i) => (
-            <ReviewCard key={i} review={review} />
+            <ReviewCard key={i} review={review} onOpen={setOpenReview} />
           ))}
         </div>
       </div>
@@ -114,6 +220,8 @@ export default function Reviews() {
           ⭐ Lasă o recenzie pe Google
         </a>
       </div>
+
+      {openReview && <ReviewModal review={openReview} onClose={closeModal} />}
     </section>
   );
 }
