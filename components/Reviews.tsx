@@ -1,5 +1,7 @@
 'use client';
 
+import { GOOGLE_REVIEW_URL } from '@/lib/google-review';
+
 const reviews = [
   { name: 'Carmen Laura Rebei', text: 'Recomand cu căldură serviciile Roxanei deoarece rezultatele s-au văzut încă de la prima ședință de epilare. Pielea a devenit din ce în ce mai fină și pot spune că am scăpat de foliculită. Profesionalismul și pasiunea de care dă dovadă, mă motivează să revin cu plăcere, de fiecare dată!' },
   { name: 'Andrada Vîlcu', text: 'A fost una dintre cele mai bune decizii pe care le-am luat pentru mine. Acum pot spune că mă bucur de o piele mult mai fină, fără grija epilatului constant, fără iritații și fără stres. Recomand cu drag oricărei persoane care își dorește confort și mai multă încredere în sine.' },
@@ -99,6 +101,18 @@ export default function Reviews() {
             <ReviewCard key={i} review={review} />
           ))}
         </div>
+      </div>
+
+      <div className="flex justify-center mt-14 px-6">
+        <a
+          href={GOOGLE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-gold text-center"
+          style={{ fontFamily: 'var(--font-montserrat)' }}
+        >
+          ⭐ Lasă o recenzie pe Google
+        </a>
       </div>
     </section>
   );
