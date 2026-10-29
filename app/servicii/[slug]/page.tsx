@@ -310,8 +310,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </p>
             </div>
             <div className="flex justify-center md:justify-end">
-              <div className="relative w-full max-w-[280px] md:max-w-[330px]">
-                <div className="absolute -inset-3 border border-[#C6A769]/50" aria-hidden="true" />
+              <div className="relative w-full md:max-w-[330px]">
+                <div className="absolute -inset-2 md:-inset-3 border border-[#C6A769]/50" aria-hidden="true" />
                 <video
                   src={service.heroVideo}
                   poster={service.heroVideoPoster}
