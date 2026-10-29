@@ -287,7 +287,47 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* Hero serviciu */}
       <section className="pt-32 pb-20 px-6 bg-[#E8E1D8]">
-        {/* Poza / Video hero */}
+        {service.heroVideo ? (
+          /* Hero cu video vertical: text în stânga, video în dreapta (pe telefon: video sus, text dedesubt) */
+          <div className="max-w-6xl mx-auto mt-4 md:mt-10 mb-12 grid gap-10 md:gap-16 md:grid-cols-2 items-center">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
+              <Link
+                href="/#servicii"
+                className="text-[#C6A769] text-xs tracking-widest uppercase flex items-center gap-2 hover:gap-4 transition-all"
+                style={{ fontFamily: 'var(--font-montserrat)' }}
+              >
+                ← Înapoi la servicii
+              </Link>
+              <span className="text-[#C6A769] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                {service.subtitle}
+              </span>
+              <h1 className="text-5xl md:text-6xl text-[#4A403A] leading-tight" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+                {service.title} în Brașov
+              </h1>
+              <div className="gold-line" />
+              <p className="text-[#7A6F66] max-w-md leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                {service.description}
+              </p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <div className="relative w-full max-w-[280px] md:max-w-[330px]">
+                <div className="absolute -inset-3 border border-[#C6A769]/50" aria-hidden="true" />
+                <video
+                  src={service.heroVideo}
+                  poster={service.heroVideoPoster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={`Video: ${service.title} la Roxana Ica Aesthetic`}
+                  className="relative block w-full aspect-[9/16] object-cover shadow-[0_20px_50px_rgba(74,64,58,0.25)]"
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+        /* Poza / Video hero */
         <div className="relative h-72 md:h-96 w-full mb-12 overflow-hidden">
           {service.image.endsWith('.mp4') ? (
             <video
@@ -314,29 +354,34 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </p>
           </div>
         </div>
+        )}
 
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-6">
-          <Link
-            href="/#servicii"
-            className="text-[#C6A769] text-xs tracking-widest uppercase flex items-center gap-2 hover:gap-4 transition-all"
-            style={{ fontFamily: 'var(--font-montserrat)' }}
-          >
-            ← Înapoi la servicii
-          </Link>
+          {!service.heroVideo && (
+            <>
+              <Link
+                href="/#servicii"
+                className="text-[#C6A769] text-xs tracking-widest uppercase flex items-center gap-2 hover:gap-4 transition-all"
+                style={{ fontFamily: 'var(--font-montserrat)' }}
+              >
+                ← Înapoi la servicii
+              </Link>
 
-          <span className="text-[#C6A769] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            {service.subtitle}
-          </span>
+              <span className="text-[#C6A769] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                {service.subtitle}
+              </span>
 
-          <h1 className="text-5xl md:text-6xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
-            {service.title} în Brașov
-          </h1>
+              <h1 className="text-5xl md:text-6xl text-[#4A403A]" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+                {service.title} în Brașov
+              </h1>
 
-          <div className="gold-line" />
+              <div className="gold-line" />
 
-          <p className="text-[#7A6F66] max-w-2xl leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            {service.description}
-          </p>
+              <p className="text-[#7A6F66] max-w-2xl leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+                {service.description}
+              </p>
+            </>
+          )}
 
           {slug === 'skin-analyzer' && (
             <div className="max-w-2xl flex flex-col gap-6 text-left mt-4">

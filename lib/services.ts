@@ -7,6 +7,9 @@ export interface Service {
   slug: string;
   image: string;
   imagePosition?: string;
+  // Video vertical afișat în partea de sus a paginii serviciului (în dreapta titlului)
+  heroVideo?: string;
+  heroVideoPoster?: string;
 }
 
 export interface PriceItem {
@@ -32,6 +35,8 @@ export const services: Service[] = [
     benefits: ['Hidratare profundă', 'Reducerea imperfecțiunilor', 'Stimularea colagenului', 'Efect de luminozitate'],
     slug: 'protocoale-faciale',
     image: '/images/servicii/protocoale-faciale.jpg',
+    heroVideo: '/videos/protocoale-faciale.mp4',
+    heroVideoPoster: '/images/servicii/protocoale-faciale-poster.jpg',
   },
   {
     id: 'epilare-definitiva',
