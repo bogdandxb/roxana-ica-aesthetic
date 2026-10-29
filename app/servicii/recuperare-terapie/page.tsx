@@ -13,36 +13,40 @@ export default function RecuperareTerapiePage() {
     <>
       <Navigation />
 
-      {/* Hero principal cu două poze */}
+      {/* Hero cu video vertical: text în stânga, video în dreapta (la fel ca celelalte pagini de servicii) */}
       <section className="pt-32 pb-0 bg-[#E8E1D8]">
-        <div className="relative h-72 md:h-96 w-full overflow-hidden">
-          <div className="absolute inset-0 grid grid-cols-2">
-            <div className="relative overflow-hidden">
-              <Image src="/images/servicii/tecar.jpg" alt="Terapie Tecar" fill className="object-cover object-center" priority />
-            </div>
-            <div className="relative overflow-hidden">
-              <Image src="/images/servicii/g5.jpg" alt="Masaj G5" fill className="object-cover object-center" priority />
-            </div>
-          </div>
-          <div className="absolute inset-0 bg-[#1a1a1a] opacity-55" />
-          <div className="absolute inset-0 flex items-center justify-center flex-col gap-3">
-            <h1 className="text-4xl md:text-6xl text-white text-center px-6" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300, textShadow: '0 4px 24px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.8)' }}>
-              Recuperare & Terapie Corporală
-            </h1>
-            <div style={{ height: '1px', width: '60px', background: 'linear-gradient(90deg, transparent, #C6A769, transparent)' }} />
-            <p className="text-[#C6A769] text-xs tracking-[0.25em] uppercase text-center" style={{ fontFamily: 'var(--font-montserrat)', textShadow: '0 2px 12px rgba(0,0,0,0.9)' }}>
+        <div className="max-w-6xl mx-auto mt-4 md:mt-10 mb-16 px-6 grid gap-10 md:gap-16 md:grid-cols-2 items-center">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
+            <Link href="/#servicii" className="text-[#C6A769] text-xs tracking-widest uppercase flex items-center gap-2 hover:gap-4 transition-all" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              ← Înapoi la servicii
+            </Link>
+            <span className="text-[#C6A769] tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
               Tecar · G5 Vibrații
+            </span>
+            <h1 className="text-5xl md:text-6xl text-[#4A403A] leading-tight" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 300 }}>
+              Recuperare & Terapie Corporală în Brașov
+            </h1>
+            <div className="gold-line" />
+            <p className="text-[#7A6F66] max-w-md leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
+              Două tehnologii de vârf, un singur scop — recuperare profundă, relaxare musculară și remodelare corporală. Alege protocolul potrivit nevoilor tale.
             </p>
           </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-4 py-12 px-6">
-          <Link href="/#servicii" className="text-[#C6A769] text-xs tracking-widest uppercase flex items-center gap-2 hover:gap-4 transition-all" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            ← Înapoi la servicii
-          </Link>
-          <p className="text-[#7A6F66] max-w-2xl leading-relaxed text-sm" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 300 }}>
-            Două tehnologii de vârf, un singur scop — recuperare profundă, relaxare musculară și remodelare corporală. Alege protocolul potrivit nevoilor tale.
-          </p>
+          <div className="flex justify-center md:justify-end">
+            <div className="relative w-full md:max-w-[520px]">
+              <div className="absolute -inset-2 md:-inset-3 border border-[#C6A769]/50" aria-hidden="true" />
+              <video
+                src="/videos/recuperare-terapie.mp4"
+                poster="/images/servicii/recuperare-terapie-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Video: Recuperare & Terapie Corporală la Roxana Ica Aesthetic"
+                className="relative block w-full aspect-[9/16] md:aspect-[4/5] object-cover shadow-[0_20px_50px_rgba(74,64,58,0.25)]"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Navigare rapidă spre cele două categorii */}

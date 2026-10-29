@@ -46,6 +46,8 @@ export const services: Service[] = [
     benefits: ['Diodă Laser cu 4 lungimi de undă', 'Adaptat oricărui tip de piele', 'Rezultate vizibile de la prima ședință', 'Protocol personalizat'],
     slug: 'epilare-definitiva',
     image: '/images/servicii/epilare-definitiva.jpg',
+    heroVideo: '/videos/epilare-definitiva.mp4',
+    heroVideoPoster: '/images/servicii/epilare-definitiva-poster.jpg',
   },
   {
     id: 'remodelare-corporala',
@@ -55,6 +57,8 @@ export const services: Service[] = [
     benefits: ['Reducerea grăsimii localizate', 'Diminuarea celulitei', 'Piele mai fermă', 'Remodelare vizibilă'],
     slug: 'remodelare-corporala',
     image: '/images/servicii/remodelare-corporala.webp',
+    heroVideo: '/videos/remodelare-corporala.mp4',
+    heroVideoPoster: '/images/servicii/remodelare-corporala-poster.jpg',
   },
   {
     id: 'electrostimulare',
@@ -64,6 +68,8 @@ export const services: Service[] = [
     benefits: ['Tonifiere și definire musculară', 'Reducerea flacidității', 'Recuperare post-partum', 'Îmbunătățirea circulației'],
     slug: 'electrostimulare',
     image: '/images/servicii/electrostimulare2.jpg',
+    heroVideo: '/videos/electrostimulare.mp4',
+    heroVideoPoster: '/images/servicii/electrostimulare-poster.jpg',
   },
   {
     id: 'plasma-fusion',
@@ -73,6 +79,8 @@ export const services: Service[] = [
     benefits: ['Lifting pleoape și față', 'Eliminarea vergeturilor', 'Tratarea cicatricilor', 'Rezultate de lungă durată'],
     slug: 'plasma-fusion',
     image: '/images/servicii/plasma-fusion2.jpg',
+    heroVideo: '/videos/plasma-fusion.mp4',
+    heroVideoPoster: '/images/servicii/plasma-fusion-poster.jpg',
     imagePosition: 'object-top',
   },
   {
@@ -83,6 +91,8 @@ export const services: Service[] = [
     benefits: ['Reducerea petelor pigmentare', 'Tratarea roșeții și cupeozei', 'Stimularea colagenului', 'Aplicabil pe față, gât, decolteu, mâini'],
     slug: 'ipl',
     image: '/images/servicii/ipl3.jpg',
+    heroVideo: '/videos/ipl.mp4',
+    heroVideoPoster: '/images/servicii/ipl-poster.jpg',
   },
   {
     id: 'laser-yag',
@@ -92,6 +102,8 @@ export const services: Service[] = [
     benefits: ['Carbon Laser Hollywood Peel', 'Tratament acnee activ', 'Estompare pete pigmentare', 'Ștergere tatuaje progresivă'],
     slug: 'laser-yag',
     image: '/images/servicii/laser-yag2.jpg',
+    heroVideo: '/videos/laser-yag.mp4',
+    heroVideoPoster: '/images/servicii/laser-yag-poster.jpg',
   },
   {
     id: 'recuperare-terapie',
@@ -101,6 +113,8 @@ export const services: Service[] = [
     benefits: ['Recuperare musculară profundă', 'Reducerea durerilor cronice', 'Stimularea circulației și limfei', 'Tonifiere și remodelare corporală'],
     slug: 'recuperare-terapie',
     image: '/images/servicii/tecar.jpg',
+    heroVideo: '/videos/recuperare-terapie.mp4',
+    heroVideoPoster: '/images/servicii/recuperare-terapie-poster.jpg',
     imagePosition: 'object-center',
   },
   {
@@ -111,6 +125,8 @@ export const services: Service[] = [
     benefits: ['Evaluare facială precisă și obiectivă', 'Identificarea nevoilor reale ale pielii', 'Plan personalizat de tratamente', 'Mai puține presupuneri, mai multă precizie'],
     slug: 'skin-analyzer',
     image: '/images/Skin Analyzer.jpeg',
+    heroVideo: '/videos/skin-analyzer.mp4',
+    heroVideoPoster: '/images/servicii/skin-analyzer-poster.jpg',
     imagePosition: 'object-center',
   },
   {
