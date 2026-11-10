@@ -172,12 +172,16 @@ export default function ChatPanel({ open, onClose }: { open: boolean; onClose: (
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && typeof data.reply === 'string') {
+        const bookingService = typeof data.bookingService === 'string' ? data.bookingService : null;
+        // Butonul general de WhatsApp nu se repetă la mesaje consecutive (cel de programare apare mereu)
+        const lastReply = [...messages].reverse().find(m => m.role === 'assistant');
+        const repeatContact = bookingService === null && !!lastReply?.showContact;
         reply = {
           role: 'assistant',
           content: data.reply,
-          showContact: !!data.showContact,
+          showContact: !!data.showContact && !repeatContact,
           showInstagram: !!data.showInstagram,
-          bookingService: typeof data.bookingService === 'string' ? data.bookingService : null,
+          bookingService,
         };
       } else if (res.status === 429) {
         reply = { role: 'assistant', content: 'Ai trimis multe mesaje într-un timp scurt. Te rog încearcă din nou peste un minut sau scrie-i direct Roxanei pe WhatsApp.', showContact: true, local: true };
