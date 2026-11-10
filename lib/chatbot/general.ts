@@ -73,7 +73,8 @@ async function loadSections(): Promise<Section[]> {
   }
   const sections: Section[] = [];
   for (const f of files) {
-    const raw = await fs.readFile(path.join(GENERAL_DIR, f), 'utf8');
+    // Pe Windows git poate transforma capetele de rând în CRLF — le normalizăm ca regex-urile pe rânduri să funcționeze
+    const raw = (await fs.readFile(path.join(GENERAL_DIR, f), 'utf8')).replace(/\r\n/g, '\n');
     const [header, ...parts] = raw.split(/^## /m);
     const title = header.match(/^# (.+)$/m)?.[1]?.trim() ?? f;
     const keywords = header.match(/^cuvinte cheie:\s*(.+)$/m)?.[1] ?? '';
