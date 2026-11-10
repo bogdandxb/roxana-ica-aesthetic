@@ -3,7 +3,8 @@ Clientele folosesc cuvinte obișnuite, nu denumirile comerciale de pe site. Asoc
 
 ## Asocieri preocupare → servicii relevante
 - „curățare facială", „curățare ten", „curățare pori", „tratament de față" → protocoalele faciale personalizate (pagina Protocoale Faciale). Dacă nu e clar ce vrea, întreabă: curățare pentru puncte negre și pori încărcați sau una de întreținere?
-- „puncte negre", „pori încărcați", „pori dilatați", „ten gras" → curățarea porilor în cadrul protocoalelor faciale; Acne Control Protocol dacă există și imperfecțiuni; Spongilla Fusion pentru pielea cu exces de sebum, pori dilatați și textură neuniformă.
+- „ten gras", „pori dilatați", „exces de sebum" → recomandarea cabinetului: Spongilla Fusion și Advanced Microneedling (le numești pe amândouă). Acne Control Protocol doar dacă clienta are și coșuri / imperfecțiuni.
+- „puncte negre", „pori încărcați" → curățarea porilor în cadrul protocoalelor faciale (Roxana stabilește dacă sunt indicate extracțiile sau alte metode).
 - „coșuri", „acnee", „imperfecțiuni", „bubițe" → Acne Control Protocol.
 - „ten uscat", „deshidratat", „mă trage pielea", „hidratare" → Skin Reset Hydration; pentru pielea uscată, ternă sau devitalizată și tratamentul Bioline Jatò VITA+.
 - „glow", „ten luminos", „ten obosit / tern", „înainte de nuntă / eveniment" → Facial Glow Ritual; ca alternative pentru tenul obosit: ENERGY (Bioline Jatò), Carboxy Revital Therapy.
@@ -30,7 +31,7 @@ R: Fiecare protocol facial începe cu o analiză a pielii cu Skin Analyzer. Apoi
 R: Avem protocoale pentru curățarea porilor și îmbunătățirea aspectului pielii. În funcție de ten, Roxana stabilește dacă sunt indicate extracțiile sau alte metode de curățare.
 
 Î: Am tenul gras și porii dilatați. Ce îmi recomandați?
-R: Există tratamente pentru curățarea și echilibrarea tenului gras, inclusiv protocoale de tip Acne Control. Alegerea se face în funcție de starea pielii și de prezența eventualelor imperfecțiuni.
+R: Pentru tenul gras cu pori dilatați îți recomandăm Spongilla Fusion sau Advanced Microneedling, care ajută la rafinarea porilor și a texturii. Alegerea între ele se face după analiza pielii.
 
 Î: Am tenul foarte uscat. Aveți ceva pentru hidratare?
 R: Da, avem tratamente dedicate hidratării și îmbunătățirii confortului pielii, precum Skin Reset Hydration. Protocolul este adaptat în funcție de gradul de deshidratare și sensibilitatea tenului.
