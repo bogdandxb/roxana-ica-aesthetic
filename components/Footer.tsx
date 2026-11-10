@@ -83,6 +83,10 @@ export default function Footer() {
             Brașov, România<br />
             <span className="text-[#7A6F66] text-xs">Locație dedicată tratamentelor personalizate</span>
           </p>
+          <p className="text-[#D8B7A6] text-sm leading-relaxed" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+            Luni – Vineri: 09:00 – 17:00<br />
+            <span className="text-[#7A6F66] text-xs">Sâmbătă – Duminică: închis</span>
+          </p>
           <a href="tel:0771569093" className="text-[#D8B7A6] hover:text-[#C6A769] transition-colors text-sm flex items-center gap-2 mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
             WhatsApp: <span className="text-[#C6A769]">0771 569 093</span>
           </a>

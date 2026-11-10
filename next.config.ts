@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Documentele din knowledge/ (inclusiv knowledge/general/) sunt citite la rulare de asistentul virtual — trebuie incluse în funcția de pe Vercel
+  outputFileTracingIncludes: {
+    '/api/chat': ['./knowledge/**/*'],
+  },
 };
 
 export default nextConfig;

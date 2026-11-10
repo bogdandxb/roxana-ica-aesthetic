@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -82,6 +83,14 @@ const localBusinessSchema = {
     addressLocality: "Brașov",
     addressCountry: "RO",
   },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "17:00",
+    },
+  ],
   areaServed: {
     "@type": "City",
     name: "Brașov",
@@ -107,6 +116,7 @@ export default function RootLayout({
         />
         <SplashScreen />
         {children}
+        <ChatWidget />
       </body>
     </html>
   );
