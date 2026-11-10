@@ -33,6 +33,9 @@ R: Avem protocoale pentru curățarea porilor și îmbunătățirea aspectului p
 Î: Am tenul gras și porii dilatați. Ce îmi recomandați?
 R: Pentru tenul gras cu pori dilatați îți recomandăm Spongilla Fusion sau Advanced Microneedling, care ajută la rafinarea porilor și a texturii. Alegerea între ele se face după analiza pielii.
 
+Î: Am ten gras, ce tratament îmi recomandați?
+R: Pentru tenul gras îți recomandăm Spongilla Fusion sau Advanced Microneedling. Alegerea între ele se face după analiza pielii cu Skin Analyzer.
+
 Î: Am tenul foarte uscat. Aveți ceva pentru hidratare?
 R: Da, avem tratamente dedicate hidratării și îmbunătățirii confortului pielii, precum Skin Reset Hydration. Protocolul este adaptat în funcție de gradul de deshidratare și sensibilitatea tenului.
 
