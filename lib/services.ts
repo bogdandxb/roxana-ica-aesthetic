@@ -236,7 +236,7 @@ export const pricesData: Record<string, { single?: PriceItem[]; packages?: Price
         name: '6 ședințe',
         discount: '25% discount',
         items: [
-          { name: 'Față / Flancuri', price: '450 lei' },
+          { name: 'Față / Flancuri', price: '675 lei' },
           { name: 'Fese / Spate', price: '900 lei' },
           { name: 'Abdomen', price: '1125 lei' },
           { name: 'Picioare', price: '1800 lei' },
