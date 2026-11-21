@@ -51,7 +51,7 @@ export default function Contact() {
               </p>
               <div className="mt-2 overflow-hidden border border-[#E8E1D8]" style={{ borderRadius: 0 }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.0!2d25.6048!3d45.6427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35ca3e3e3e3e3%3A0x0!2sStrada+Dihamului+16A%2C+Bra%C8%99ov+500353%2C+Romania!5e0!3m2!1sro!2sro!4v1714000000000!5m2!1sro!2sro"
+                  src="https://www.google.com/maps?q=Strada+Dihamului+16A,+Bra%C8%99ov,+Romania&z=16&hl=ro&output=embed"
                   width="100%"
                   height="200"
                   style={{ border: 0, display: 'block' }}
