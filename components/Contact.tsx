@@ -40,7 +40,7 @@ export default function Contact() {
             <div className="flex flex-col gap-2">
               <span className="text-[#C6A769] text-sm tracking-widest uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>Program</span>
               <p className="text-[#7A6F66] text-base" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
-                Luni – Vineri: 09:00 – 17:00<br />Sâmbătă – Duminică: închis
+                Luni – Vineri: 10:00 – 17:00<br />Sâmbătă – Duminică: închis
               </p>
             </div>
 
