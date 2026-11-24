@@ -121,6 +121,14 @@ export default function Navigation() {
           </div>
 
           <Link
+            href="/video"
+            className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors"
+            style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}
+          >
+            Video
+          </Link>
+
+          <Link
             href="/chestionar"
             className="text-[#4A403A] tracking-[0.12em] text-sm uppercase hover:text-[#C6A769] transition-colors"
             style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}
@@ -191,6 +199,7 @@ export default function Navigation() {
           >
             Blog — The Skin Edit
           </Link>
+          <Link href="/video" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Video</Link>
           <Link href="/chestionar" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Chestionar</Link>
           <a href="#despre" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Despre</a>
           <a href="#recenzii" className="text-[#7A6F66] text-xs uppercase tracking-widest hover:text-[#C6A769] transition-colors" style={{ fontFamily: 'var(--font-montserrat)' }} onClick={() => setMenuOpen(false)}>Recenzii</a>
