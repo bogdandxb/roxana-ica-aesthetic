@@ -17,9 +17,34 @@ export const metadata: Metadata = {
   },
 };
 
+// Date structurate pentru Google: fiecare video ca VideoObject.
+const videoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Video-uri Roxana Ica Aesthetic',
+  itemListElement: videoGroups.flatMap(g => g.videos).map((v, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'VideoObject',
+      name: v.title,
+      description: v.text,
+      thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`,
+      uploadDate: `${v.date}T12:00:00+02:00`,
+      embedUrl: `https://www.youtube.com/embed/${v.id}`,
+      contentUrl: `https://www.youtube.com/shorts/${v.id}`,
+      inLanguage: 'ro',
+    },
+  })),
+};
+
 export default function VideoPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
       <Navigation />
 
       <section className="pt-40 pb-16 px-6 bg-[#F8F6F2]">
