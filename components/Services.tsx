@@ -4,10 +4,10 @@ import { services } from '@/lib/services';
 
 export default function Services() {
   return (
-    <section id="servicii" className="py-28 px-6 bg-[#F8F6F2]">
+    <section id="servicii" className="py-28 px-3 md:px-6 bg-[#F8F6F2]">
       <div className="max-w-7xl mx-auto">
 
-        <div className="flex flex-col items-center text-center gap-5 mb-20">
+        <div className="flex flex-col items-center text-center gap-5 mb-10 md:mb-20">
           <span className="text-[#B8952A] tracking-[0.25em] text-sm uppercase" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
             Ce Oferim
           </span>
@@ -20,16 +20,20 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service) => (
+        {/* Telefon: 3 căsuțe mici pe rând (doar poză + titlu); de la md în sus: cardurile mari */}
+        <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-6">
+          {services.map((service) => {
+            // Pe telefon, Mentorat & Cursuri apare ca bandă pe toată lățimea (poză stânga, text dreapta)
+            const band = service.slug === 'mentorat-cursuri';
+            return (
             <Link
               key={service.id}
               href={`/servicii/${service.slug}`}
-              className="group flex flex-col overflow-hidden bg-[#F8F6F2] border border-[#E8E1D8] hover:border-[#B8952A] transition-all duration-300 cursor-pointer"
+              className={`group flex ${band ? 'col-span-3 flex-row md:col-span-1 md:flex-col' : 'flex-col'} overflow-hidden bg-[#F8F6F2] border border-[#E8E1D8] hover:border-[#B8952A] transition-all duration-300 cursor-pointer`}
               style={{ boxShadow: '0 2px 20px rgba(74,64,58,0.06)' }}
             >
               {/* Poza / Video */}
-              <div className="relative h-64 overflow-hidden">
+              <div className={`relative ${band ? 'w-1/3 shrink-0 md:w-auto' : ''} aspect-square md:aspect-auto md:h-64 overflow-hidden`}>
                 {service.id === 'recuperare-terapie' ? (
                   <div className="flex h-full">
                     <div className="relative flex-1 overflow-hidden">
@@ -61,20 +65,32 @@ export default function Services() {
               </div>
 
               {/* Text */}
-              <div className="p-7 flex flex-col gap-3 flex-1">
-                <h3 className="text-xl text-[#4A403A] group-hover:text-[#B8952A] transition-colors" style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 400 }}>
-                  {service.title}
+              <div className={`${band ? 'p-4 justify-center gap-1.5' : 'p-2 gap-3'} md:p-7 md:justify-start md:gap-3 flex flex-col flex-1 min-w-0`}>
+                <h3 className={`${band ? 'text-xl' : 'text-[13px]'} max-md:leading-tight md:text-xl text-[#4A403A] group-hover:text-[#B8952A] transition-colors break-words`} style={{ fontFamily: 'var(--font-cormorant)', fontWeight: 400 }}>
+                  <span className="md:hidden" style={{ fontWeight: 600 }}>{service.title}</span>
+                  <span className="hidden md:inline">{service.title}</span>
                 </h3>
-                <p className="text-[#7A6F66] text-sm leading-relaxed flex-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+                {band && (
+                  <>
+                    <span className="md:hidden text-[#7A6F66] text-xs leading-snug" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
+                      {service.subtitle}
+                    </span>
+                    <span className="md:hidden text-[#B8952A] text-[11px] tracking-widest uppercase mt-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                      Detalii →
+                    </span>
+                  </>
+                )}
+                <p className="hidden md:block text-[#7A6F66] text-sm leading-relaxed flex-1" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 400 }}>
                   {service.description}
                 </p>
-                <div className="flex items-center gap-2 text-[#B8952A] text-sm tracking-widest uppercase group-hover:gap-4 transition-all mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
+                <div className="hidden md:flex items-center gap-2 text-[#B8952A] text-sm tracking-widest uppercase group-hover:gap-4 transition-all mt-2" style={{ fontFamily: 'var(--font-montserrat)', fontWeight: 500 }}>
                   <span>Detalii & Prețuri</span>
                   <span>→</span>
                 </div>
               </div>
             </Link>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
