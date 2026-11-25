@@ -2,7 +2,6 @@ import { services, pricesData } from '@/lib/services';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import BeforeAfterCarousel from '@/components/BeforeAfterCarousel';
-import MentoratPrezentare from '@/components/MentoratPrezentare';
 import SkinAssessment from '@/components/SkinAssessment';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -522,8 +521,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   Verifică-ți nivelul →
                 </Link>
               </div>
-
-              <MentoratPrezentare />
             </div>
           )}
         </div>
